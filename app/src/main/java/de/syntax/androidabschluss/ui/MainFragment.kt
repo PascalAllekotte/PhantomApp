@@ -46,10 +46,7 @@ class MainFragment : Fragment() {
         (activity as? MainActivity)?.findViewById<Toolbar>(R.id.toolbar)?.visibility = View.GONE
         updateUI()
 
-        binding.messages.setOnClickListener(){
 
-            findNavController().navigate(R.id.action_mainFragment_to_readMessasgeFragment)
-        }
 
         binding.encrypt.setOnClickListener(){
             updateWhenClicked()
@@ -71,9 +68,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        binding.btnAddUser.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_addFragment)
-        }
+
     }
 
     private fun updateUI() {

@@ -32,6 +32,7 @@ private lateinit var binding: FragmentHomeBinding
         (activity as? MainActivity)?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)?.visibility =
             View.GONE
 
+
         binding.btnLogin.setOnClickListener(){
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment2)
 

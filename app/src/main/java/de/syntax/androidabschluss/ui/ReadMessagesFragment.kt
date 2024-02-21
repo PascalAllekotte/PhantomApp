@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.random.data.model.Message1
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentReadMessasgeBinding
 
 class ReadMessagesFragment : Fragment() {
@@ -49,6 +51,13 @@ class ReadMessagesFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnAddUser.setOnClickListener {
+            findNavController().navigate(R.id.action_readMessasgeFragment_to_addFragment)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -1,10 +1,14 @@
 package de.syntax.androidabschluss
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.random.ui.AddFragment
 import de.syntax.androidabschluss.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,15 +21,33 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
+
+        binding.btnBack.setOnClickListener {
+            it.findNavController().navigate(R.id.action_addFragment_to_readMessasgeFragment)
+
+        }
 
         navHost.navController.addOnDestinationChangedListener{_, destination, _ ->
             when (destination.id) {
+                R.id.homeFragment -> binding.toolbar.visibility = View.GONE
+                R.id.homeFragment -> binding.toolbar2.visibility = View.GONE
+
+                R.id.addFragment -> binding.toolbar.visibility = View.VISIBLE
+                R.id.addFragment -> binding.toolbar2.visibility = View.VISIBLE
+
+
+
+                //---------------------------------------------------
                 R.id.homeFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.loginFragment-> binding.bottomNavigationView.visibility = View.GONE
                 R.id.registrationFragment-> binding.bottomNavigationView.visibility = View.GONE
+                R.id.addFragment-> binding.bottomNavigationView.visibility = View.GONE
                 else -> binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }}
+
+
     }

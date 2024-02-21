@@ -9,32 +9,28 @@
     android:label="fragment_add"
     android:background="@drawable/futuristic_background">
 
-
     <View
         android:id="@+id/view2"
-        android:layout_width="522dp"
-        android:layout_height="209dp"
-
+        android:layout_width="487dp"
+        android:layout_height="213dp"
         android:background="@drawable/layerbackground"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="4dp"
         android:text="Username:"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/user_name_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -42,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_edittext"
         android:hint="Enter user name"
@@ -60,7 +56,7 @@
         android:backgroundTint="@color/dark_blue"
         android:text="Add User"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_name_input" />
 

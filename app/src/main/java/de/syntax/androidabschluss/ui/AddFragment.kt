@@ -1,6 +1,8 @@
 package com.example.random.ui
 
 import android.content.ContentValues.TAG
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,11 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentAddBinding
 
 
@@ -32,6 +36,8 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddBinding.inflate(inflater, container, false)
+
+
 
         binding.btnAddUser.setOnClickListener {
             val friendName = binding.userNameInput.text.toString()
