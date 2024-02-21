@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142283823326",
+    "project_id": "android-abschluss",
+    "storage_bucket": "android-abschluss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142283823326:android:3e76369e46eb74da5d0a4f",
+        "android_client_info": {
+          "package_name": "de.syntax.androidabschluss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF75W731Faxh6nwBKonkX64PDPB7nAIS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

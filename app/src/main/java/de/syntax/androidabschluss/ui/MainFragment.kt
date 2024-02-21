@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import com.example.random.data.model.Message1
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -41,6 +42,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity)?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)?.visibility =
+            View.VISIBLE
         (activity as? MainActivity)?.findViewById<Toolbar>(R.id.toolbar)?.visibility = View.GONE
         updateUI()
 

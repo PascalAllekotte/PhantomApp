@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import de.syntax.androidabschluss.MainActivity
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentHomeBinding
 
@@ -26,6 +28,9 @@ private lateinit var binding: FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as? MainActivity)?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)?.visibility =
+            View.GONE
 
         binding.btnLogin.setOnClickListener(){
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment2)
