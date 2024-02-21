@@ -25,10 +25,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
 
-        binding.btnBack.setOnClickListener {
-            it.findNavController().navigate(R.id.action_addFragment_to_readMessasgeFragment)
 
-        }
 
         navHost.navController.addOnDestinationChangedListener{_, destination, _ ->
             when (destination.id) {
