@@ -8,20 +8,28 @@
     android:background="@drawable/futuristic_background">
 
 
+    <View
+        android:id="@+id/view4"
+        android:layout_width="410dp"
+        android:layout_height="294dp"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="188dp"
+        android:background="@drawable/btn_round"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="164dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="132dp"
-        android:backgroundTint="@color/dark_blue"
-        android:text="Send"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/FuturistischerButton"
+        android:layout_width="207dp"
+        android:layout_height="48dp"
+        android:text="Senden"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
-        app:layout_constraintVertical_bias="0.299" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <TextView
         android:id="@+id/textView"

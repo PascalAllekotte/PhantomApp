@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#B375F7"/> <!-- Dunklere Farbe, wenn der Button gedrückt ist -->
+            <corners android:radius="8dp"/> <!-- Abgerundete Ecken -->
+            <stroke android:color="#FFFFFF" android:width="2dp"/> <!-- Weißer Rand -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="#A370F7" android:endColor="#5E239D" android:angle="45"/> <!-- Farbverlauf im Stil des Logos -->
+            <corners android:radius="8dp"/>
+            <stroke android:color="#FFFFFF" android:width="2dp"/>
+        </shape>
+    </item>
+</selector>

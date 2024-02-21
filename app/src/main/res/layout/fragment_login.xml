@@ -35,7 +35,9 @@
         android:layout_marginTop="36dp"
         android:backgroundTint="#5F6179"
         android:text="Einloggen"
+        style="@style/FuturistischerButton"
         android:textStyle="bold"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittxt2" />

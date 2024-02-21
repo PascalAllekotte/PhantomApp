@@ -25,31 +25,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="-5dp"
             android:text="PhantomChat"
-            android:textColor="@color/white"
+            android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold" />
     </Toolbar>
 
 
-    <Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:background="#5F6179"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="-5dp"
-            android:text="PhantomChat"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-    </Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"

@@ -7,4 +7,6 @@
     <color name="prbackground">#0d0a00</color>
     <color name="greypurple">#5F6179</color>
     <color name="transparent">#00000000</color>
+    <color name="futuristic_blue">#A370F7</color>
+    <color name="futuristic_purple">#5E239D</color>
 </resources>

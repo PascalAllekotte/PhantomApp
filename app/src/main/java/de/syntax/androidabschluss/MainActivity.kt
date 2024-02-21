@@ -29,11 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         navHost.navController.addOnDestinationChangedListener{_, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> binding.toolbar.visibility = View.GONE
-                R.id.homeFragment -> binding.toolbar2.visibility = View.GONE
 
-                R.id.addFragment -> binding.toolbar.visibility = View.VISIBLE
-                R.id.addFragment -> binding.toolbar2.visibility = View.VISIBLE
 
 
 
@@ -42,7 +38,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment-> binding.bottomNavigationView.visibility = View.GONE
                 R.id.registrationFragment-> binding.bottomNavigationView.visibility = View.GONE
                 R.id.addFragment-> binding.bottomNavigationView.visibility = View.GONE
-                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+                else -> {
+                    binding.bottomNavigationView.visibility = View.VISIBLE
+                }
             }
         }}
 
