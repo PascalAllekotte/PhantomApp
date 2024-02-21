@@ -7,20 +7,19 @@
     android:id="@+id/addFragment"
     android:name="com.example.random.ui.addFragment"
     android:label="fragment_add"
-    tools:context=".ui.MainFragment"
     android:background="@drawable/futuristic_background">
 
 
     <View
         android:id="@+id/view2"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_width="522dp"
+        android:layout_height="209dp"
 
         android:background="@drawable/layerbackground"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.03" />
@@ -66,17 +65,28 @@
         app:layout_constraintTop_toBottomOf="@+id/user_name_input" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         android:text="Userlist:"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <View
+        android:id="@+id/userlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <!-- Other UI Elements Remain Unchanged, Just Update Styles -->
 

@@ -7,16 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentLoginBinding
+import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
-    private lateinit var auth: FirebaseAuth
+    // Zugriff auf ViewModel
+    private val viewModel: FirebaseViewModel by activityViewModels()
+
+    private lateinit var binding: FragmentLoginBinding // ViewBinding
+    private lateinit var auth: FirebaseAuth // Firebase authentication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +84,6 @@ class LoginFragment : Fragment() {
             }
             parentFragmentManager.setFragmentResult("requestKey", bundle)
 
-            // Navigate to MainFragment
             findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
         }
     }
