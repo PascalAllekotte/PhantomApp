@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/prbackground"
+    tools:context=".ui.LoginFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="358dp"
+        android:layout_height="398dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/phantom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="504dp"
+        android:layout_marginTop="372dp"
+        android:background="@drawable/layerbackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_loginlog"
+        android:layout_width="223dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#5F6179"
+        android:text="Einloggen"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittxt2" />
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edittext1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="-220dp"
+        app:hintTextColor="@color/white"
+        app:boxBackgroundColor="#5F6179"
+        app:boxStrokeColor="#C285FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/logmail"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:hint="Email"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edittxt2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="-70dp"
+        app:hintTextColor="@color/white"
+        app:boxBackgroundColor="#5F6179"
+        app:boxStrokeColor="#C285FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/logpassword"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:hint="Password"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

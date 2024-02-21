@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_blue">#32357a</color>
+    <color name="light_blue">#f2f1f6</color>
+    <color name="prbackground">#0d0a00</color>
+    <color name="greypurple">#FF5F6179</color>
 </resources>
