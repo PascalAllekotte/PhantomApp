@@ -42,8 +42,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)?.visibility =
-            View.VISIBLE
+       
         (activity as? MainActivity)?.findViewById<Toolbar>(R.id.toolbar)?.visibility = View.GONE
         updateUI()
 

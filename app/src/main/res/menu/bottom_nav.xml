@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/chatsFragment"
+        android:id="@+id/mainFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/icon_notes"
+        android:title="Main" />
+    <item
+        android:id="@+id/readMessasgeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:iconTint="@color/white"
         android:icon="@drawable/icon_chat"
-        android:title="Chats" />
+        android:title="Messages" />
     <item
         android:id="@+id/settingsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_settings"
         android:title="Settings" />
-    <item
-        android:id="@+id/notesFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/icon_notes"
-        android:title="Notes" />
+
 </menu>
