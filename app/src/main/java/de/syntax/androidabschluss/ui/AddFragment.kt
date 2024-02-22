@@ -1,4 +1,4 @@
-package com.example.random.ui
+package de.syntax.androidabschluss.ui
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -34,6 +34,9 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddBinding.inflate(inflater, container, false)
+
+
+
         drehung()
         drehung2()
 

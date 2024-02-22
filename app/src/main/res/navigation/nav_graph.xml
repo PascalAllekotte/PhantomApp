@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.random.ui.MainFragment"
+        android:name="de.syntax.androidabschluss.ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -63,13 +63,19 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.random.ui.AddFragment"
+        android:name="de.syntax.androidabschluss.ui.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_readMessasgeFragment"
             app:destination="@id/readMessasgeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/botFragment"
+        android:name="de.syntax.androidabschluss.ui.BotFragment"
+        android:label="BotFragment"
+        tools:layout="@layout/fragment_bot" />
+
 
 
 </navigation>
