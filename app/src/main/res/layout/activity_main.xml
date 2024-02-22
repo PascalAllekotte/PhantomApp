@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="95dp"
         android:background="@drawable/privn"
-        android:backgroundTint="#5F6179"
+        android:backgroundTint="#6D6F84"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
