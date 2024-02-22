@@ -15,10 +15,13 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+        buildConfigField "String", "OPENAI_API_KEY", "\"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\""
 
+    }
+    buildFeatures {
+        buildConfig = true
+    }
     buildTypes {
 
         release {
@@ -46,9 +49,44 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
+    def open_ai_api_version = "3.2.3"
+    def lifecycle_version = "2.6.1"
+    def view_model_activity_version = "1.7.1"
+    def view_model_fragment_version = "1.5.7"
+
+    implementation "com.aallam.openai:openai-client:$open_ai_api_version"
+    implementation platform("com.aallam.openai:openai-client-bom:$open_ai_api_version")
+    implementation "com.aallam.openai:openai-client"
+    runtimeOnly "io.ktor:ktor-client-okhttp"
+// Coroutine
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.activity:activity-ktx:$view_model_activity_version"
+    implementation "androidx.fragment:fragment-ktx:$view_model_fragment_version"
+
+
+    // Moshi
+    implementation ("com.squareup.moshi:moshi:1.15.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
+
+    // Retrofit und Moshi Konverter
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    // OkHttp für Retrofit
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // JSON
+    implementation ("org.json:json:20210307")
+    implementation platform("com.aallam.openai:openai-client-bom:3.7.0")
+
+    // define dependencies without versions
+    implementation("com.aallam.openai:openai-client")
+    runtimeOnly ("io.ktor:ktor-client-okhttp")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.moshi:moshi:1.15.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")

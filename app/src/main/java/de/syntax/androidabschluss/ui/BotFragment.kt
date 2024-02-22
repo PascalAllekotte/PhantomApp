@@ -1,39 +1,73 @@
 package de.syntax.androidabschluss.ui
 
-
-import BotViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import de.syntax.androidabschluss.databinding.FragmentBotBinding
+import de.syntax.androidabschluss.viewmodel.HomeViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class BotFragment : Fragment() {
 
-    private lateinit var binding: FragmentBotBinding
-    private lateinit var viewModel: BotViewModel
+    private var _binding: FragmentBotBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentBotBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(BotViewModel::class.java)
+    private val viewModel: HomeViewModel by viewModels { HomeViewModel.Factory }
 
-        setupUI()
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentBotBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private fun setupUI() {
-        // Beobachten der Antwort und Aktualisieren der UI
-        viewModel.response.observe(viewLifecycleOwner) { response ->
-            // Hier Code zum Hinzufügen der Antwort zur UI, z.B. in einem TextView
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.sendButton.setOnClickListener {
+            val inputMessage: String = binding.inputText.text.toString()
+
+            if (inputMessage.isNotEmpty()) {
+                makeRequestToChatGpt(inputMessage)
+            } else {
+                Toast.makeText(requireContext(), "Eingabe machen", Toast.LENGTH_SHORT).show()
+            }
         }
 
-        binding.btnSend.setOnClickListener {
-            val userInput = binding.editTextTextPersonName.text.toString()
-            viewModel.getResponse(userInput)
-            binding.editTextTextPersonName.text.clear()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.apiResponse.collect { response ->
+                if (response != null) {
+                    binding.chatView.text = response
+                }
+            }
         }
     }
+
+    private fun makeRequestToChatGpt(message: String){
+        lifecycleScope.launch {
+            viewModel.getApiResponse(message)
+            viewModel.apiResponse.onEach { response ->
+                if (response != null){
+                    binding?.chatView?.text = response
+                }
+            }.launchIn(lifecycleScope)
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
+
+
+
+

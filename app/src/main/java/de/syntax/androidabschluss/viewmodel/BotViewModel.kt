@@ -1,14 +1,20 @@
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import de.syntax.androidabschluss.Repositorys.OpenAIRepository
+import androidx.lifecycle.ViewModel
 
 class BotViewModel : ViewModel() {
-    private val repository = OpenAIRepository()
-    val response = MutableLiveData<String>()
+    val chatMessages = MutableLiveData<MutableList<String>>()
 
-    fun getResponse(prompt: String) {
-        repository.getResponse(prompt) { result ->
-            response.postValue(result)
-        }
+    init {
+        chatMessages.value = mutableListOf()
+    }
+
+    fun getCompletion(userInput: String) {
+        // Hier rufen Sie normalerweise Ihre Repository-Methode auf, um die Antwort von OpenAI zu erhalten.
+        // Zum Vereinfachen fügen wir nur die Benutzereingabe und eine simulierte Antwort direkt hinzu.
+        val updatedMessages = chatMessages.value ?: mutableListOf()
+        updatedMessages.add("You: $userInput")
+        updatedMessages.add("Bot: Antwort auf '$userInput'")
+        chatMessages.value = updatedMessages
     }
 }
+
