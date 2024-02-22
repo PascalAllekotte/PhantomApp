@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentBotBinding
 import de.syntax.androidabschluss.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collect
@@ -30,6 +32,9 @@ class BotFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnBack.setOnClickListener{
+            findNavController().navigate(R.id.action_botFragment_to_mainFragment)
+        }
         binding.sendButton.setOnClickListener {
             val inputMessage: String = binding.inputText.text.toString()
 

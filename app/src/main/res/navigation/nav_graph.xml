@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_mainFragment_to_readMessasgeFragment"
             app:destination="@id/readMessasgeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_botFragment"
+            app:destination="@id/botFragment" />
     </fragment>
     <fragment
         android:id="@+id/readMessasgeFragment"
@@ -74,7 +77,11 @@
         android:id="@+id/botFragment"
         android:name="de.syntax.androidabschluss.ui.BotFragment"
         android:label="BotFragment"
-        tools:layout="@layout/fragment_bot" />
+        tools:layout="@layout/fragment_bot" >
+        <action
+            android:id="@+id/action_botFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 
 
