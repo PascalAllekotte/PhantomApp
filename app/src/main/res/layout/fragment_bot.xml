@@ -8,27 +8,58 @@ android:orientation="vertical"
 android:padding="16dp"
 android:id="@+id/botFragmentLayout"
 tools:context=".ui.botFragment"
-android:background="@color/white">
+android:background="@drawable/futuristic_background">
 
-<EditText
-    android:id="@+id/inputText"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Type your message"/>
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
 
-<Button
-    android:id="@+id/sendButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Send"
-    android:layout_gravity="end"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000000"
+            android:src="@drawable/backbutton"
+            android:layout_gravity="start"
+    </Toolbar>
 
-<ScrollView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_round"
+            android:hint="Type your message"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/sendButton"
+            style="@style/FuturistischerButton"
+            android:layout_width="76dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:text="Send"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1">
+    android:layout_weight="1"
+    android:background="@drawable/btn_round">
     <TextView
         android:id="@+id/chatView"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:text="Wie kann ich dir behilflich sein? Bin noch nicht perfekt eingestellt!"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </ScrollView>
