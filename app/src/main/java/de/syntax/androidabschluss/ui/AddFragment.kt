@@ -1,8 +1,6 @@
 package com.example.random.ui
 
 import android.content.ContentValues.TAG
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,13 +10,11 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentAddBinding
 
 
@@ -38,13 +34,15 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddBinding.inflate(inflater, container, false)
-        continuouslyRotateImage()
-        continuouslyRotateImage2()
+        drehung()
+        drehung2()
+
 
 
 
 
         binding.btnAddUser.setOnClickListener {
+            drehen3()
             val friendName = binding.userNameInput.text.toString()
             if (friendName.isNotEmpty()) {
                 addFriend(friendName)
@@ -84,26 +82,36 @@ class AddFragment : Fragment() {
             }
         })
     }
-    private fun continuouslyRotateImage() {
+    private fun drehung() {
         val rotateAnimation = RotateAnimation(
             0f, 360f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         )
-        rotateAnimation.duration = 5000 // duration for one complete rotation
-        rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
+        rotateAnimation.duration = 5000
+        rotateAnimation.repeatCount = Animation.INFINITE
         binding.schraube.startAnimation(rotateAnimation)
     }
 
-    private fun continuouslyRotateImage2() {
+    private fun drehung2() {
         val rotateAnimation = RotateAnimation(
             100f, 360f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         )
-        rotateAnimation.duration = 4500 // duration for one complete rotation
-        rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
+        rotateAnimation.duration = 4500
+        rotateAnimation.repeatCount = Animation.INFINITE
         binding.schraube2.startAnimation(rotateAnimation)
+    }
+    private fun drehen3() {
+        val rotateAnimation = RotateAnimation(
+            0f, 360f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+        rotateAnimation.duration = 2000
+        rotateAnimation.repeatCount = Animation.INFINITE
+        binding.btnAddUser.startAnimation(rotateAnimation)
     }
 
 
