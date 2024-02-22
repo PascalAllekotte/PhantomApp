@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -36,6 +38,9 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddBinding.inflate(inflater, container, false)
+        continuouslyRotateImage()
+        continuouslyRotateImage2()
+
 
 
 
@@ -79,4 +84,27 @@ class AddFragment : Fragment() {
             }
         })
     }
+    private fun continuouslyRotateImage() {
+        val rotateAnimation = RotateAnimation(
+            0f, 360f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+        rotateAnimation.duration = 2000 // duration for one complete rotation
+        rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
+        binding.schraube.startAnimation(rotateAnimation)
+    }
+
+    private fun continuouslyRotateImage2() {
+        val rotateAnimation = RotateAnimation(
+            100f, 360f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+        rotateAnimation.duration = 2000 // duration for one complete rotation
+        rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
+        binding.schraube2.startAnimation(rotateAnimation)
+    }
+
+
 }

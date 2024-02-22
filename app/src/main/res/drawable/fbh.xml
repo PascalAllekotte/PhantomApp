@@ -11,7 +11,7 @@
         <shape android:shape="rectangle">
             <gradient android:startColor="#A370F7" android:endColor="#5E239D" android:angle="45"/> <!-- Farbverlauf im Stil des Logos -->
             <corners android:radius="8dp"/>
-            <stroke android:color="#FFFFFF" android:width="2dp"/>
+            <stroke android:color="#FFFFFF" android:width="6dp"/>
         </shape>
     </item>
 </selector>
