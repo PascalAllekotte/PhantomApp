@@ -90,7 +90,7 @@ class AddFragment : Fragment() {
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         )
-        rotateAnimation.duration = 2000 // duration for one complete rotation
+        rotateAnimation.duration = 5000 // duration for one complete rotation
         rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
         binding.schraube.startAnimation(rotateAnimation)
     }
@@ -101,7 +101,7 @@ class AddFragment : Fragment() {
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         )
-        rotateAnimation.duration = 2000 // duration for one complete rotation
+        rotateAnimation.duration = 4500 // duration for one complete rotation
         rotateAnimation.repeatCount = Animation.INFINITE // repeat indefinitely
         binding.schraube2.startAnimation(rotateAnimation)
     }
