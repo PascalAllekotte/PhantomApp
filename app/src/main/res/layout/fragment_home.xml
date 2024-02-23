@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/futuristic_background1"
+    android:background="@drawable/futuristic_background"
     tools:context=".ui.HomeFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-69dp">
@@ -23,43 +23,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="375dp"
-        android:layout_height="146dp"
-        android:layout_marginEnd="68dp"
-        android:background="@drawable/layerbackground"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
-
     <Button
         android:id="@+id/btn_login"
         style="@style/FuturistischerButton"
-        android:layout_width="164dp"
-        android:layout_height="45dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/fbh"
         android:text="Login"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/btn_registration"
-        android:layout_width="164dp"
-        android:layout_height="45dp"
-        android:textSize="14sp"
+        style="@style/FuturistischerButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/fbh"
         android:text="Registration"
         android:textColor="@color/white"
-        style="@style/FuturistischerButton"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

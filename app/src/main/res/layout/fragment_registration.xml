@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/prbackground"
+    android:background="@drawable/futuristic_background"
     tools:context=".ui.RegistrationFragment">
 
 
@@ -12,21 +12,9 @@
         android:id="@+id/imageView"
         android:layout_width="358dp"
         android:layout_height="398dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/phantom"
+        android:layout_marginTop="-40dp"
+        android:src="@drawable/testlogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="557dp"
-        android:layout_marginTop="252dp"
-        android:visibility="visible"
-        android:background="@drawable/layerbackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

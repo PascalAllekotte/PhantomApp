@@ -9,9 +9,23 @@
         <item name="android:background">@drawable/fbh</item>
     </style>
 
-    <style name="FuturistischerButton" parent="Widget.AppCompat.Button">
+    <style name="FuturistischerButton2" parent="Widget.AppCompat.Button">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_background</item>
     </style>
+
+    <!-- Style für TextInputEditText -->
+    <style name="MyTextInputEditTextStyle" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <!-- Weitere Attribute für TextInputEditText -->
+    </style>
+
+    <!-- Style für TextInputLayout -->
+    <style name="MyTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">14sp</item>
+        <!-- Hier können weitere TextInputLayout-spezifische Attribute hinzugefügt werden -->
+    </style>
+
 </resources>
