@@ -3,22 +3,27 @@ package de.syntax.androidabschluss
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import de.syntax.androidabschluss.databinding.ActivityMainBinding
-import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // Setup BottomNavigationView with NavController
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
@@ -27,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         navHost.navController.addOnDestinationChangedListener{_, destination, _ ->
             when (destination.id) {
+                R.id.mainFragment -> binding.bottomNavigationView.visibility = View.VISIBLE
                 //---------------------------------------------------
                 R.id.homeFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.loginFragment-> binding.bottomNavigationView.visibility = View.GONE
@@ -36,7 +42,12 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
             }
-        }}
+        }
 
-
+        // Überprüfen, ob der Benutzer angemeldet ist, und bei Bedarf zur Hauptseite navigieren
+        if (auth.currentUser != null) {
+            // Stelle sicher, dass du im Navigation-Graphen eine Aktion oder einen globalen Übergang hast, die/es dich von der Startdestination zum mainFragment bringt
+            navController.navigate(R.id.loginFragment)
+        }
     }
+}

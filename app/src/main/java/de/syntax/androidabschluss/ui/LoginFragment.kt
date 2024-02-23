@@ -1,91 +1,84 @@
 package com.example.random.ui
 
+
+import LoginViewModel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentLoginBinding
-import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 
 class LoginFragment : Fragment() {
 
-    // Zugriff auf ViewModel
-    private val viewModel: FirebaseViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by viewModels()
+    private val auth = FirebaseAuth.getInstance()
 
-    private lateinit var binding: FragmentLoginBinding // ViewBinding
-    private lateinit var auth: FirebaseAuth // Firebase authentication
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
-    }
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        if (auth.currentUser != null) {
+            // Stelle sicher, dass du im Navigation-Graphen eine Aktion oder einen globalen Übergang hast, die/es dich von der Startdestination zum mainFragment bringt
+            findNavController().navigate(R.id.mainFragment)
+        }
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupObservers()
+        setupLoginButton()
+    }
 
+    private fun setupObservers() {
+        viewModel.userLiveData.observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                anmeldenErfolgreich(user)
+            }
+        }
 
-            binding.btnLoginlog.setOnClickListener {
-                val email = binding.logmail.text.toString()
-                val password = binding.logpassword.text.toString()
+        viewModel.loginState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is LoginViewModel.LoginState.SUCCESS -> {
+                    // Hier könntest du eine Erfolgsmeldung anzeigen oder weitere Aktionen durchführen
+                }
+                is LoginViewModel.LoginState.ERROR -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
 
-                if (binding.logpassword.text.isNullOrEmpty() || binding.logmail.text.isNullOrEmpty()) {
-                    Toast.makeText(context, "Bitte erst Eingabe machen!!!", Toast.LENGTH_SHORT).show()
-                } else {
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d(TAG, "Anmelden erfolgreich!")
-                            val user = auth.currentUser
-                            anmeldenErfolgreich()
-                            updateUI(user)
-                        } else {
-                            Log.w(TAG, "Anmelden fehlgeschlagen!", task.exception)
-                            Toast.makeText(
-                                requireContext(),
-                                "Authentication failed.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            updateUI(null)
-                        }
-                    }
+                else -> {}
             }
         }
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        val userName = user?.displayName
-    }
+    private fun setupLoginButton() {
+        binding.btnLoginlog.setOnClickListener {
+            val email = binding.logmail.text.toString().trim()
+            val password = binding.logpassword.text.toString().trim()
 
-    companion object {
-        private const val TAG = "LoginFragment"
-    }
-
-    fun anmeldenErfolgreich(){
-        auth.currentUser?.let { user ->
-            val bundle = Bundle().apply {
-                putParcelable("user", user)
-            }
-            parentFragmentManager.setFragmentResult("requestKey", bundle)
-
-            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            viewModel.loginUser(email, password)
         }
     }
 
+    private fun anmeldenErfolgreich(user: FirebaseUser) {
+        // Hier könntest du den Benutzer weiterleiten oder andere Aktionen ausführen
+        val bundle = Bundle().apply {
+            putParcelable("user", user)
+        }
+        parentFragmentManager.setFragmentResult("requestKey", bundle)
+        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+    }
 }

@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
+import androidx.fragment.app.activityViewModels
 import com.example.random.data.model.Message1
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import de.syntax.androidabschluss.MainActivity
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
+import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var user: FirebaseUser? = null
+    private val viewModel: FirebaseViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +41,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       
-        (activity as? MainActivity)?.findViewById<Toolbar>(R.id.toolbar)?.visibility = View.GONE
+
         updateUI()
 
 
@@ -48,6 +50,9 @@ class MainFragment : Fragment() {
             updateWhenClicked()
         }
 
+        binding.logout.setOnClickListener{
+            viewModel.logout()
+        }
         binding.btnSend.setOnClickListener(){
             val message = binding.editTextTextMultiLine.text.toString()
             val keyword = if (binding.encrypt.isChecked) binding.keyword.text.toString() else ""

@@ -10,7 +10,6 @@ import de.syntax.androidabschluss.ApiBuilder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val api: ApiBuilder) : ViewModel(){
