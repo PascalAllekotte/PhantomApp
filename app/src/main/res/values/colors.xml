@@ -9,4 +9,12 @@
     <color name="transparent">#00000000</color>
     <color name="futuristic_blue">#A370F7</color>
     <color name="futuristic_purple">#5E239D</color>
+
+    //-------------
+
+
+    <color name="dark_background">#121212</color>
+    <color name="primary">#BB86FC</color>
+    <color name="primary_variant">#3700B3</color>
+    <color name="secondary">#03DAC6</color>
 </resources>

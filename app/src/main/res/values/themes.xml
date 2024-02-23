@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AndroidAbschluss" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#67688A</item>
+        <item name="colorPrimary">#999898</item>
     </style>
 
     <style name="Theme.AndroidAbschluss" parent="Base.Theme.AndroidAbschluss" />
