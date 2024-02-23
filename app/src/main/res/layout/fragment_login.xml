@@ -17,17 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="504dp"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/layerbackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/btn_loginlog"
@@ -64,11 +64,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/logmail"
             android:layout_width="match_parent"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
             android:hint="Email"
-            />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

@@ -2,16 +2,20 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#B375F7"/> <!-- Dunklere Farbe, wenn der Button gedrückt ist -->
-            <corners android:radius="8dp"/> <!-- Abgerundete Ecken -->
-            <stroke android:color="#FFFFFF" android:width="2dp"/> <!-- Weißer Rand -->
+            <!-- Leicht aufgehellte Farbe bei gedrücktem Zustand für visuelles Feedback -->
+            <solid android:color="#6E7089"/> <!-- Angepasst an den dunklen Graublau-Hintergrund -->
+            <corners android:radius="8dp"/>
+            <!-- Subtiler Rand, der mit dem dunklen Design harmoniert -->
+            <stroke android:color="#8A8B9A" android:width="2dp"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <gradient android:startColor="#A370F7" android:endColor="#5E239D" android:angle="45"/> <!-- Farbverlauf im Stil des Logos -->
+            <!-- Farbverlauf, der besser zum dunklen Graublau-Hintergrund passt -->
+            <gradient android:startColor="#67688A" android:endColor="#5F6179" android:angle="45"/>
             <corners android:radius="8dp"/>
-            <stroke android:color="#FFFFFF" android:width="6dp"/>
+            <!-- Angepasster Rand, der mit dem Design harmoniert -->
+            <stroke android:color="#7A7B8A" android:width="2dp"/>
         </shape>
     </item>
 </selector>

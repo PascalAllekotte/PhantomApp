@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 
 const val TAG = "FirebaseViewModel"
@@ -20,15 +21,6 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    fun signup(email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { user ->
-            if (user.isSuccessful) {
-                login(email, password)
-            } else {
-                Log.e(TAG, "Signup failed: ${user.exception}")
-            }
-        }
-    }
 
 
     fun login(email: String, password: String) {
@@ -38,6 +30,27 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
             }else {
                 Log.e(TAG, "Login failed: ${it.exception}")
             }
+        }
+    }
+
+    fun register(email: String, password: String, name: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val user = firebaseAuth.currentUser
+                _currentUser.value = user
+                user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())
+                saveUsernameToFirestore(user?.uid, name)
+            } else {
+                Log.e(TAG, "Registration failed: ${it.exception}")
+            }
+        }
+    }
+
+    private fun saveUsernameToFirestore(userId: String?, name: String) {
+        if (userId != null) {
+            db.collection("users").document(userId).set(mapOf("username" to name))
+                .addOnSuccessListener { Log.d(TAG, "Username saved to Firestore") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error saving username", e) }
         }
     }
 
