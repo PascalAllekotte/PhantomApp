@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -40,6 +41,9 @@ class BotFragment : Fragment() {
 
             if (inputMessage.isNotEmpty()) {
                 makeRequestToChatGpt(inputMessage)
+                val vibrationAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.anima)
+                it.startAnimation(vibrationAnimation)
+
             } else {
                 Toast.makeText(requireContext(), "Eingabe machen", Toast.LENGTH_SHORT).show()
             }
