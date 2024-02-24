@@ -63,7 +63,7 @@
     </style>
 
 
-    <style name="Widget.Neumorph.Button" parent="Widget.AppCompat.Button">
+    <style name="buttonfinal" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
         <item name="android:minHeight">72dip</item>
         <item name="android:minWidth">112dip</item>
@@ -76,10 +76,16 @@
         <item name="android:clickable">true</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="neumorph_inset">@dimen/design_default_inset</item>
-        <item name="neumorph_shadowElevation">2dp</item>
-        <item name="neumorph_shadowColorLight">?colorShadowLight</item>
-        <item name="neumorph_shadowColorDark">?colorShadowDark</item>
+        <item name="neumorph_shadowElevation">3dp</item>
+        <!-- Angepasste Schattenfarben für bessere Sichtbarkeit auf dunklem Hintergrund -->
+        <item name="neumorph_shadowColorLight">#B3727272</item> <!-- Hellerer Schatten -->
+        <item name="neumorph_shadowColorDark">#B3000000</item> <!-- Dunklerer Schatten, aber weniger intensiv -->
         <item name="neumorph_shapeType">flat</item>
+        <!-- Textfarbe zu Weiß angepasst für bessere Sichtbarkeit -->
+        <item name="android:textColor">@color/white</item>
         <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.Button</item>
+        <!-- Optional: Hintergrund des Buttons leicht transparent machen -->
+        <item name="android:background">#33FFFFFF</item> <!-- Leichte Transparenz, änderbar je nach Bedarf -->
     </style>
+
 </resources>

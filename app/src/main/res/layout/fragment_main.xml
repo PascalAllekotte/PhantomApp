@@ -130,7 +130,7 @@
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/logout"
-        style="@style/Widget.Neumorph.Button"
+        style="@style/buttonfinal"
         android:layout_width="150dp"
         android:layout_height="65dp"
         android:layout_marginBottom="156dp"
