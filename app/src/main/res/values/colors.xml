@@ -20,4 +20,7 @@
 
     <color name="dark_background">#5D6786</color>
     <color name="primary">#BB86FC</color>
+
+    <color name="bottom_nav_item_color">#FFFFFF</color>
+
 </resources>

@@ -58,6 +58,8 @@ dependencies {
     def view_model_activity_version = "1.7.1"
     def view_model_fragment_version = "1.5.7"
 
+
+    implementation ("com.github.fornewid:neumorphism:0.3.2")
     implementation "com.aallam.openai:openai-client:$open_ai_api_version"
     implementation platform("com.aallam.openai:openai-client-bom:$open_ai_api_version")
     implementation "com.aallam.openai:openai-client"

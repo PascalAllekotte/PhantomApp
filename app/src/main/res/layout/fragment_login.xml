@@ -18,11 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_loginlog"
         style="@style/FuturistischerButton"
         android:layout_width="223dp"
-        android:layout_height="49dp"
+        android:layout_height="65dp"
         android:layout_marginTop="60dp"
         android:backgroundTint="#5F6179"
         android:text="Einloggen"
@@ -46,7 +46,7 @@
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="@color/primary"
+        app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="3dp"
         app:endIconMode="clear_text"
@@ -78,7 +78,7 @@
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="@color/primary"
+        app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="3dp"
         app:endIconMode="clear_text"
