@@ -13,13 +13,13 @@
         android:layout_height="388dp"
         android:layout_marginBottom="-170dp"
         android:backgroundTint="@color/black"
-        android:src="@drawable/waszum3"
+        android:src="@drawable/waszum4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintVertical_bias="0.995" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -54,7 +54,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="14dp"
-        android:hint="Username"
+        android:hint="Email"
         app:boxBackgroundColor="#A65D6786"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -86,7 +86,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="25dp"
-        android:hint="Username"
+        android:hint="Password"
         app:boxBackgroundColor="#A65D6786"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"

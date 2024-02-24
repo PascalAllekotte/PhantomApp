@@ -26,7 +26,7 @@
     <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_login"
         style="@style/buttonfinal"
-        android:layout_width="200dp"
+        android:layout_width="210dp"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
         android:text="Login"
@@ -40,7 +40,7 @@
     <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_registration"
         style="@style/buttonfinal"
-        android:layout_width="200dp"
+        android:layout_width="210dp"
         android:layout_height="70dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/fbh"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="624dp"
         android:layout_height="388dp"
         android:layout_marginBottom="-170dp"
