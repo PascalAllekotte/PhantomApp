@@ -128,18 +128,6 @@
     </soup.neumorphism.NeumorphCardView>
 
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/logout"
-        style="@style/buttonfinal"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="156dp"
-        android:gravity="center"
-        android:text="logout"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

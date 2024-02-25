@@ -51,10 +51,6 @@ class MainFragment : Fragment() {
             updateWhenClicked()
         }
 
-        binding.logout.setOnClickListener{
-            viewModel.logout()
-            findNavController().navigate(R.id.homeFragment)
-        }
         binding.btnSend.setOnClickListener(){
             val message = binding.editTextTextMultiLine.text.toString()
             val keyword = if (binding.encrypt.isChecked) binding.keyword.text.toString() else ""

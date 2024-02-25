@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentLoginBinding
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
@@ -28,7 +29,14 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+        binding.logout.setOnClickListener{
+            viewmodel.logout()
+            findNavController().navigate(R.id.homeFragment)
+
+        }
         return binding.root
+
 
     }
 

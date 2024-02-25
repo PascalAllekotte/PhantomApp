@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_mainFragment_to_botFragment"
             app:destination="@id/botFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/readMessasgeFragment"
@@ -82,7 +85,15 @@
             android:id="@+id/action_botFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="de.syntax.androidabschluss.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 
 </navigation>
