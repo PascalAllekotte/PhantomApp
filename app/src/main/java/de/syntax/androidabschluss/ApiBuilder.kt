@@ -16,7 +16,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class ApiBuilder {
 
-    private val apikey = "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"
+    private val apikey = "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"
     private val config = OpenAIConfig(token = apikey, timeout = Timeout(60.seconds))
     private val openAiApi = OpenAI(config)
 
