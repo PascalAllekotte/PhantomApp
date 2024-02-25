@@ -7,6 +7,37 @@
     android:background="@drawable/futuristic_background"
     tools:context=".ui.LoginFragment">
 
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/textview"
+        style="@style/textneu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="#5D6786"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/image_button"
+        style="@style/imagebuttonneu"
+        android:layout_width="73dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="-30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="21dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/back2"
+        app:layout_constraintEnd_toStartOf="@+id/textview"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="624dp"
@@ -21,16 +52,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.995" />
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="358dp"
         android:layout_height="398dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/testlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_loginlog"
@@ -53,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="-45dp"
         android:hint="Email"
         app:boxBackgroundColor="#A65D6786"
         app:boxCornerRadiusBottomEnd="16dp"
