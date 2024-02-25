@@ -88,4 +88,9 @@
         <item name="android:background">#33FFFFFF</item> <!-- Leichte Transparenz, änderbar je nach Bedarf -->
     </style>
 
+    <style name="textneu" parent="android:Widget">
+        <item name="neumorph_shadowElevation">2dp</item>
+        <item name="neumorph_shadowColorLight">#848DA9</item>
+        <item name="neumorph_shadowColorDark">#373E56</item>
+    </style>
 </resources>
