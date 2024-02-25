@@ -52,9 +52,9 @@
         <item name="android:stateListAnimator">@animator/button_state_list_anim_neumorph</item>
         <item name="neumorph_inset">@dimen/design_default_inset</item>
         <item name="neumorph_shadowElevation">6dp</item>
-        <item name="neumorph_shadowColorLight">#3A4053</item>
-        <item name="neumorph_shadowColorDark">#181B25</item>
-        <item name="neumorph_shapeType">basin</item>
+        <item name="neumorph_shadowColorLight">#A62E2E45</item>
+        <item name="neumorph_shadowColorDark">#E6000000</item>
+        <item name="neumorph_shapeType">flat</item>
         <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
     </style>
 
