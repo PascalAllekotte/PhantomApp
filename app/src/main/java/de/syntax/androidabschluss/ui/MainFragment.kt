@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.random.data.model.Message1
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -52,6 +53,7 @@ class MainFragment : Fragment() {
 
         binding.logout.setOnClickListener{
             viewModel.logout()
+            findNavController().navigate(R.id.homeFragment)
         }
         binding.btnSend.setOnClickListener(){
             val message = binding.editTextTextMultiLine.text.toString()

@@ -8,7 +8,7 @@
     tools:context=".ui.RegistrationFragment">
 
     <soup.neumorphism.NeumorphImageButton
-        android:id="@+id/image_button"
+        android:id="@+id/backbutton"
         style="@style/imagebuttonneu"
         android:layout_width="73dp"
         android:layout_height="70dp"

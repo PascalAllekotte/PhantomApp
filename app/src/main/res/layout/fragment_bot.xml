@@ -1,70 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-android:padding="16dp"
 android:id="@+id/botFragmentLayout"
 tools:context=".ui.botFragment"
 android:background="@drawable/futuristic_background">
 
-    <Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:src="@drawable/backbutton"
-            android:visibility="invisible"
-            android:layout_gravity="start"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assistant"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="@color/white"/>
-    </Toolbar>
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/sendButton"
+        style="@style/buttonbot"
+        android:layout_width="100dp"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="#5F6179"
+        android:text="Send"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/edittext_card"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/textview"
+        style="@style/textneu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
+        android:text="Assistant"
+        android:layout_marginTop="10dp"
+        android:textColor="#5D6786"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
+
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/edittext_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="330dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview">
 
         <EditText
             android:id="@+id/inputText"
-            android:layout_width="0dp"
-            android:padding="4dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_round"
-            android:hint="Type your message"
-            android:textColor="@color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/white"
+            android:hint="Enter something"
+            android:singleLine="true" />
 
-        <Button
-            android:id="@+id/sendButton"
-            style="@style/FuturistischerButton"
-            android:layout_width="76dp"
-            android:layout_height="37dp"
-            android:layout_gravity="center"
-            android:gravity="end"
-            android:text="Send"
-            android:textSize="11sp" />
-    </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
 
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="541dp"
+        android:layout_height="585dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        android:background="@drawable/btn_round">
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_card"
+        app:layout_constraintVertical_bias="0.072"
+        tools:layout_editor_absoluteX="16dp">
 
         <TextView
             android:id="@+id/chatView"
@@ -75,4 +92,4 @@ android:background="@drawable/futuristic_background">
             android:textColor="@color/white"
             android:textSize="20sp" />
     </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,9 +33,7 @@ class BotFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnClickListener{
-            findNavController().navigate(R.id.action_botFragment_to_mainFragment)
-        }
+
         binding.sendButton.setOnClickListener {
             val inputMessage: String = binding.inputText.text.toString()
 

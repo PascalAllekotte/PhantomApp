@@ -36,6 +36,11 @@ class RegistrationFragment : Fragment() {
     ): View? {
         binding = FragmentRegistrationBinding.inflate(inflater, container, false)
 
+
+        binding.backbutton.setOnClickListener{
+            findNavController().popBackStack()
+        }
+
         binding.button.setOnClickListener {
             val email = binding.regmail.text.toString()
             val password = binding.regpassword.text.toString()
