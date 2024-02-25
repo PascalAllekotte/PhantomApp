@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -72,7 +73,8 @@ class LoginFragment : Fragment() {
         binding.btnLoginlog.setOnClickListener {
             val email = binding.logmail.text.toString().trim()
             val password = binding.logpassword.text.toString().trim()
-
+            val vibrationAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.anima)
+            it.startAnimation(vibrationAnimation)
             viewModel.loginUser(email, password)
         }
     }
