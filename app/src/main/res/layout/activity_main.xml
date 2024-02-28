@@ -25,19 +25,22 @@
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/neumorphCardView"
+        style="@style/bottomview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/bottomview"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             style="@style/NeumorphicButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="70dp"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
             android:background="#00000000"
+            app:itemActiveIndicatorStyle="@style/activated"
             app:itemIconTint="@color/bottom_nav_item_color"
             app:itemTextColor="@color/bottom_nav_item_color"
             app:labelVisibilityMode="labeled"

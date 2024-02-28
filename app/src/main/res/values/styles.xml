@@ -171,4 +171,10 @@
         <item name="neumorph_shapeType">flat</item>
         <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.ImageButton</item>
     </style>
+
+
+    <style name="activated" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@drawable/active_indicator_shape</item>
+    </style>
+
 </resources>
