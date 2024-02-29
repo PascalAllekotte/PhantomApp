@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss
+package de.syntax.androidabschluss.data.remote
 
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.ChatCompletionChunk

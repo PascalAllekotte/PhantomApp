@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/icon_notes"
+        android:iconTint="#5D6786"
+        android:title="Main" />
+    <item
+        android:id="@+id/readMessasgeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconTint="#5D6786"
+        android:icon="@drawable/icon_chat"
+        android:title="Messages" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconTint="#5D6786"
+        android:icon="@drawable/icon_settings"
+        android:title="Settings" />
+
+    <item
+        android:id="@+id/botFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconTint="#5D6786"
+        android:icon="@drawable/assistant"
+        android:title="Assistant" />
+
+
+</menu>

@@ -1,6 +1,6 @@
 
-import de.syntax.androidabschluss.model.CompletionRequest
-import de.syntax.androidabschluss.model.CompletionResponse
+import de.syntax.androidabschluss.data.model.open.CompletionRequest
+import de.syntax.androidabschluss.data.model.open.CompletionResponse
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST

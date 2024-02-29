@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.model
+package de.syntax.androidabschluss.data.model.open
 
 data class CompletionRequest(
     val prompt: String,

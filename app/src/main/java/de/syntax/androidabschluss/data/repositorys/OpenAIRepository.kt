@@ -1,8 +1,7 @@
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.Response
 import de.syntax.androidabschluss.BuildConfig
-import de.syntax.androidabschluss.model.CompletionRequest
+import de.syntax.androidabschluss.data.model.open.CompletionRequest
 
 
 class OpenAIRepository {

@@ -79,7 +79,6 @@ class BotFragment : Fragment() {
                 }
             }.launchIn(lifecycleScope)
         }
-
     }
 
     override fun onDestroyView() {
