@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_readMessasgeFragment"
-            app:destination="@id/readMessasgeFragment" />
+            app:destination="@id/translationFragment" />
         <action
             android:id="@+id/action_mainFragment_to_botFragment"
             app:destination="@id/botFragment" />
@@ -59,12 +59,12 @@
             app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/readMessasgeFragment"
-        android:name="com.example.random.ui.ReadMessagesFragment"
+        android:id="@+id/translationFragment"
+        android:name="com.example.random.ui.TranslationFragment"
         android:label="fragment_read_messasge"
-        tools:layout="@layout/fragment_read_messasge" >
+        tools:layout="@layout/fragment_translation" >
         <action
-            android:id="@+id/action_readMessasgeFragment_to_addFragment"
+            android:id="@+id/action_translationFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
     <fragment
@@ -74,7 +74,7 @@
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_readMessasgeFragment"
-            app:destination="@id/readMessasgeFragment" />
+            app:destination="@id/translationFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
