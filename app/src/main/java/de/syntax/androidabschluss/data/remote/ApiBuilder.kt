@@ -21,7 +21,6 @@ class ApiBuilder {
     private val openAiApi = OpenAI(config)
 
 
-@OptIn(BetaOpenAI::class)
     fun senMessageRequestToApi(messages: String): Flow<ChatCompletionChunk> {
         val chatCompletionRequest = ChatCompletionRequest(
             model = ModelId("gpt-3.5-turbo"),
