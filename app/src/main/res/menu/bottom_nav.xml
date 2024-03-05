@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:iconTint="#5D6786"
         android:icon="@drawable/icon_chat"
-        android:title="Messages" />
+        android:title="Vokabeln" />
     <item
         android:id="@+id/settingsFragment"
         android:layout_width="wrap_content"

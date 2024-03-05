@@ -17,5 +17,8 @@ interface VokabelDataBaseDao {
     @Update
     suspend fun update(vokabeln: VocabItem)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(vokabelnList: List<VocabItem>)
+
 
 }

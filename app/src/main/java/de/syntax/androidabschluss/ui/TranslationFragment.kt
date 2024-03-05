@@ -47,7 +47,11 @@ class TranslationFragment : Fragment() {
 
         val vocabularyList = mutableListOf(
             VocabItem("Englisch", "Apple"),
-            VocabItem("Haus", "House")
+            VocabItem("Englisch", "House"),
+            VocabItem("Englisch", "Kenan")
+
+
+
             // Weitere Vokabeln hinzufügen...
         )
 
