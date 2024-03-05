@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import de.syntax.androidabschluss.adapter.VocableAdapter
+import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.FragmentTranslationBinding
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -43,6 +45,16 @@ class TranslationFragment : Fragment() {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.vocabularyRecyclerView)
 
+        val vocabularyList = mutableListOf(
+            VocabItem("Englisch", "Apple"),
+            VocabItem("Haus", "House")
+            // Weitere Vokabeln hinzufügen...
+        )
+
+        val adapter = VocableAdapter(vocabularyList)
+        binding.vocabularyRecyclerView.adapter = adapter
+    }
+
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -57,5 +69,5 @@ class TranslationFragment : Fragment() {
         }
     }
 
-    }
+
 
