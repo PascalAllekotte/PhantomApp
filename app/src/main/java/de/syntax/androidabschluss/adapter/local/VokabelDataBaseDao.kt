@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import de.syntax.androidabschluss.data.model.open.VocabItem
 
 
-//
+//tes
 @Dao
 interface {
 
