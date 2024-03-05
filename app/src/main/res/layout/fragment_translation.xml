@@ -7,78 +7,18 @@
     tools:context=".ui.TranslationFragment"
     android:background="@drawable/futuristic_background">
 
-
-    <soup.neumorphism.NeumorphCardView
-        android:id="@+id/cardViewTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vocabularyRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/wordTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Apfel"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/translationTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="Apple"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </soup.neumorphism.NeumorphCardView>
-
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/revealButton"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cardViewTop"
-        android:layout_centerHorizontal="true"
-        android:text="Aufdecken"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewTop" />
+        tools:listitem="@layout/vokabelcard_item"/>
 
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/cardViewBottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:visibility="gone"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp"
-            android:layout_below="@id/revealButton"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:id="@+id/exampleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ich esse gerne einen Apfel am Tag."
-                android:textSize="16sp"
-                android:padding="16dp"/>
-        </soup.neumorphism.NeumorphCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,15 @@
 package com.example.random.ui
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import de.syntax.androidabschluss.databinding.FragmentTranslationBinding
@@ -17,68 +22,40 @@ class TranslationFragment : Fragment() {
 
     private lateinit var binding: FragmentTranslationBinding
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTranslationBinding.inflate(inflater, container, false)
 
-      //  binding.buttonTranslate.setOnClickListener {
-//        }
 
         return binding.root
     }
 
-    private fun translateText(text: String) {
-        val client = OkHttpClient()
-        val mediaType = "application/json; charset=utf-8".toMediaType()
-        val requestBody = "{\"text\":\"$text\",\"target_lang\":\"DE\"}"
-            .toRequestBody(mediaType)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        binding.vocabularyRecyclerView.layoutManager = layoutManager
 
-        val request = Request.Builder()
-            .url("https://api-free.deepl.com/v2/translate")
-            .post(requestBody)
-            .addHeader("Authorization", "DeepL-Auth-Key 48329d96-cd7d-4bc4-ac7f-f9d0e666f2f9:fx")
-            .build()
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.vocabularyRecyclerView)
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                // Error handling here
-                activity?.runOnUiThread {
-             //       binding.textViewResult.text = "Error:safdjlsfvd $e"
-                }
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
             }
 
-            override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful) {
-                    // Error handling here
-                    activity?.runOnUiThread {
-                    //    binding.textViewResult.text = "Error:sfDA ${response.message}"
-                    }
-                    return
-                }
-
-                val responseBody = response.body?.string()
-                if (responseBody.isNullOrBlank()) {
-                    // Error handling here
-                    activity?.runOnUiThread {
-              //          binding.textViewResult.text = "Error: Empty response body"
-                    }
-                    return
-                }
-
-                val jsonObject = JsonParser.parseString(responseBody).asJsonObject
-                val translations = jsonObject["translations"].asJsonArray
-                val translatedText = if (translations.size() > 0) {
-                    translations[0].asJsonObject["text"].asString
-                } else {
-                    "Translation not available"
-                }
-
-                activity?.runOnUiThread {
-          //          binding.textViewResult.text = translatedText
-                }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             }
-        })
+        }
     }
-}
+
+    }
+
