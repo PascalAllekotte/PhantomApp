@@ -19,12 +19,7 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Register a FragmentResultListener
-        parentFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
-            if (requestKey == "requestKey") {
-                user = bundle.getParcelable("user")
-                updateUI()
-            }
-        }
+
     }
 
     override fun onCreateView(
@@ -38,38 +33,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateUI()
 
 
 
-        binding.encrypt.setOnClickListener(){
-            updateWhenClicked()
-        }
 
 
 
 
     }
 
-    private fun updateUI() {
-        user?.let {
-            binding.username.text = it.displayName
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    fun setUser(user: FirebaseUser) {
-        this.user = user
-        updateUI()
-    }
-    fun updateWhenClicked() {
-        binding.keyword.visibility = if (binding.encrypt.isChecked) View.VISIBLE else View.GONE
-
-
-
-    }
 }
