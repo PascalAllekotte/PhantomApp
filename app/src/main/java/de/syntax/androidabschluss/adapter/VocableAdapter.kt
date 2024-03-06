@@ -43,4 +43,10 @@ class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : Recyc
         vocabularyList.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun updateList(newItems: List<VocabItem>) {
+        vocabularyList.clear()
+        vocabularyList.addAll(newItems)
+        notifyDataSetChanged()
+    }
 }
