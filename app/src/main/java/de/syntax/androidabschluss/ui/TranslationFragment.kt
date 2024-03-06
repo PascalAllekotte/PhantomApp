@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.adapter.local.VokabelDataBase
 import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
@@ -35,6 +37,11 @@ class TranslationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btAdd.setOnClickListener{
+            findNavController().navigate(R.id.addVokabelFragment)
+
+        }
 
         // LayoutManager und SnapHelper Setup
         setupRecyclerView()

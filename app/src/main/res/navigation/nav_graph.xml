@@ -64,17 +64,8 @@
         android:label="fragment_read_messasge"
         tools:layout="@layout/fragment_translation" >
         <action
-            android:id="@+id/action_translationFragment_to_addFragment"
-            app:destination="@id/addFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/addFragment"
-        android:name="de.syntax.androidabschluss.ui.AddFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
-        <action
-            android:id="@+id/action_addFragment_to_readMessasgeFragment"
-            app:destination="@id/translationFragment" />
+            android:id="@+id/action_translationFragment_to_addVokabelFragment"
+            app:destination="@id/addVokabelFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -93,6 +84,15 @@
         <action
             android:id="@+id/action_settingsFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVokabelFragment"
+        android:name="de.syntax.androidabschluss.ui.AddVokabelFragment"
+        android:label="fragment_add_vokabel"
+        tools:layout="@layout/fragment_add_vokabel" >
+        <action
+            android:id="@+id/action_addVokabelFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
     </fragment>
 
 
