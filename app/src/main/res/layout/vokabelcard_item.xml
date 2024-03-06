@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/outerCardView"
         style="@style/cardview"
@@ -25,6 +27,7 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/cardViewTop"
+                style="@style/buttonfinal"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 android:layout_width="match_parent"
@@ -82,6 +85,7 @@
                 android:id="@+id/loesungCard"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                style="@style/buttonfinal"
                 app:neumorph_strokeWidth="1dp"
                 app:neumorph_strokeColor="@color/secondary"
                 android:layout_marginStart="-30dp"
@@ -119,4 +123,5 @@
 
         </LinearLayout>
     </soup.neumorphism.NeumorphCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
