@@ -25,7 +25,7 @@ fun getDatabase(context: Context): VokabelDataBase {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 VokabelDataBase::class.java,
-                "vokabel_database"
+                "vokabela_database"
             ).build()
             Log.d("DatabaseInit", "Datenbank initialisiert")
         }

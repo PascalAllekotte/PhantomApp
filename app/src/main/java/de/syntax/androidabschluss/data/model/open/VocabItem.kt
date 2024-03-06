@@ -8,6 +8,8 @@ data class VocabItem(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val word: String,       // Das Wort in der Ausgangssprache
-    val translation: String // Die Übersetzung des Wortes
+    val language: String,
+    val language2: String,
+    val translation: String,
+    val translation2: String
 )

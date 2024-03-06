@@ -7,43 +7,50 @@ import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.VokabelcardItemBinding
 
-
 class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : RecyclerView.Adapter<VocableAdapter.VocabViewHolder>() {
 
-    // Der ViewHolder für unser RecyclerView-Item
+    // Corrected the ViewHolder for our RecyclerView item
     class VocabViewHolder(val binding: VokabelcardItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(vocabItem: VocabItem) {
-            binding.wordTextView.text = vocabItem.word
-            binding.translationTextView.text = vocabItem.translation
+            // Set the text for the first language and its translation
+            binding.language.text = vocabItem.language
+            binding.vokabel.text = vocabItem.translation
+
+            // When the reveal button is clicked, show or hide the second language and its translation
             binding.revealButton.setOnClickListener {
-                // Toggle zwischen Anzeigen und Verstecken der Lösung
-                binding.loesungCard.visibility = if (binding.loesungCard.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-                binding.loesung.text = vocabItem.translation // oder irgendein anderer Text, der hier erscheinen soll
+                if (binding.loesungCard.visibility == View.VISIBLE) {
+                    binding.loesungCard.visibility = View.GONE
+                } else {
+                    binding.loesungCard.visibility = View.VISIBLE
+                    binding.language2.text = vocabItem.language2
+                    binding.vokabel2.text = vocabItem.translation2
+                }
             }
         }
     }
 
-    // Diese Methode erstellt neue Views (wird vom LayoutManager aufgerufen)
+    // This method creates new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VocabViewHolder {
-        // Erstellen des ViewBindings für unser RecyclerView-Item
+        // Create the ViewBinding for our RecyclerView item
         val binding = VokabelcardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VocabViewHolder(binding)
     }
 
-    // Ersetzt den Inhalt eines Views (wird vom LayoutManager aufgerufen)
+    // Replaces the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: VocabViewHolder, position: Int) {
         holder.bind(vocabularyList[position])
     }
 
-    // Gibt die Größe der Datenliste zurück
+    // Returns the size of the data list
     override fun getItemCount() = vocabularyList.size
 
-    // Funktion, um Items zu entfernen (nützlich für Swipe-Aktionen)
+    // Function to remove items (useful for swipe actions)
     fun removeAt(position: Int) {
         vocabularyList.removeAt(position)
         notifyItemRemoved(position)
     }
 
+    // Function to update the list of items
     fun updateList(newItems: List<VocabItem>) {
         vocabularyList.clear()
         vocabularyList.addAll(newItems)
