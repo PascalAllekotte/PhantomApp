@@ -1,12 +1,12 @@
 package de.syntax.androidabschluss.adapter.local
 
+
 import androidx.room.Database
 import androidx.room.Room
 import android.content.Context  // Corrected import
 import android.util.Log
 import androidx.room.RoomDatabase
 import de.syntax.androidabschluss.data.model.open.VocabItem
-
 
 
 @Database(entities = [VocabItem::class], version = 1)

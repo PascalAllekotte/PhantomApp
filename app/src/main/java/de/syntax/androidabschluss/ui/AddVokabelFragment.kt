@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -47,10 +48,28 @@ private lateinit var binding: FragmentAddVokabelBinding
 
 
         binding.btnAdd.setOnClickListener {
-            addVocabItem()
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Bestätigung")
+            builder.setMessage("Möchten Sie diesen Eintrag wirklich hinzufügen?")
+
+            // Hinzufügen der Bestätigungsaktion
+            builder.setPositiveButton("Bestätigen") { dialog, which ->
+                addVocabItem()
+                reset()
+            }
+
+            // Hinzufügen einer Aktion zum Abbrechen
+            builder.setNegativeButton("Abbrechen") { dialog, which ->
+                // Aktion, wenn der Benutzer den Vorgang abbricht
+                dialog.dismiss()
+            }
+
+            // Erstellen und Anzeigen des Dialogs
+            builder.create().show()
+        }
         }
 
-    }
+
 
 
 
@@ -77,5 +96,12 @@ private lateinit var binding: FragmentAddVokabelBinding
         } else {
             // Handle error, show message to user
         }
+    }
+
+    fun reset(){
+        binding.etLanguage.text = null
+        binding.etVokabel.text = null
+        binding.etLanguage2.text = null
+        binding.etVokabel2.text = null
     }
 }

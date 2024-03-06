@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="381dp"
-        android:layout_height="423dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
         <LinearLayout
@@ -58,6 +58,14 @@
                 </LinearLayout>
             </soup.neumorphism.NeumorphCardView>
 
+            <CheckBox
+                android:id="@+id/cb_favorite"
+                android:layout_width="114dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:text="Favorit"
+                android:textColor="@color/white" />
+
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/revealButton"
                 style="@style/buttonCardview"
@@ -70,6 +78,7 @@
                 android:id="@+id/loesungCard"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                android:layout_marginStart="-30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
