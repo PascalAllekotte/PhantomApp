@@ -15,6 +15,9 @@ class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : Recyc
             // Set the text for the first language and its translation
             binding.language.text = vocabItem.language
             binding.vokabel.text = vocabItem.translation
+            binding.cbFavorite.isChecked = vocabItem.favorite
+
+
 
             // When the reveal button is clicked, show or hide the second language and its translation
             binding.revealButton.setOnClickListener {

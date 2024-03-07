@@ -38,15 +38,18 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun addTestVocabItem() {
+
+   private fun addTestVocabItem() {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val dao: VokabelDataBaseDao = dataBase.vokabelDataBaseDao()
             val testItem = VocabItem(
                 language = "Englisch",
                 language2 = "Deutsch",
-                translation = "Hello",
-                translation2 = "Hallo"
+                translation = "Hellooo",
+                translation2 = "Hallo",
+                favorite = false
+
             )
             dao.insert(testItem)
         }

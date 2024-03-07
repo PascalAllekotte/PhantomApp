@@ -84,7 +84,8 @@ private lateinit var binding: FragmentAddVokabelBinding
                 language = language,
                 language2 = language2,
                 translation = vokabel,
-                translation2 = vokabel2
+                translation2 = vokabel2,
+                favorite = false
             )
 
             // Using Coroutine to perform database operation on a background thread
