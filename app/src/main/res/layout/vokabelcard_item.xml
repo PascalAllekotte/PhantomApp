@@ -74,8 +74,6 @@
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/revealButton"
                 style="@style/buttonCardview"
-                app:neumorph_strokeWidth="0.7dp"
-                app:neumorph_strokeColor="@color/primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

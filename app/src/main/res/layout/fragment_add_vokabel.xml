@@ -221,6 +221,7 @@
         app:boxCornerRadiusTopStart="16dp"
         app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"
+        android:inputType="textMultiLine"
         app:boxStrokeWidthFocused="3dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
