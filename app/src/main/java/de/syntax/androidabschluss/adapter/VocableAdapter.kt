@@ -4,18 +4,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.VokabelcardItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : RecyclerView.Adapter<VocableAdapter.VocabViewHolder>() {
+class VocableAdapter(private val vocabularyList: MutableList<VocabItem>, private val dao: VokabelDataBaseDao) : RecyclerView.Adapter<VocableAdapter.VocabViewHolder>() {
+
+
 
     // Corrected the ViewHolder for our RecyclerView item
-    class VocabViewHolder(val binding: VokabelcardItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class VocabViewHolder(val binding: VokabelcardItemBinding, private val dao: VokabelDataBaseDao) : RecyclerView.ViewHolder(binding.root) {
         fun bind(vocabItem: VocabItem) {
             // Set the text for the first language and its translation
             binding.language.text = vocabItem.language
             binding.vokabel.text = vocabItem.translation
             binding.cbFavorite.isChecked = vocabItem.favorite
+
 
 
 
@@ -29,6 +36,15 @@ class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : Recyc
                     binding.vokabel2.text = vocabItem.translation2
                 }
             }
+
+            binding.cbFavorite.setOnCheckedChangeListener { _, isChecked ->
+                if (vocabItem.favorite != isChecked) {
+                    vocabItem.favorite = isChecked
+                    CoroutineScope(Dispatchers.IO).launch {
+                        dao.update(vocabItem) // Aktualisieren des Objekts in der Datenbank
+                    }
+                }
+            }
         }
     }
 
@@ -36,7 +52,7 @@ class VocableAdapter(private val vocabularyList: MutableList<VocabItem>) : Recyc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VocabViewHolder {
         // Create the ViewBinding for our RecyclerView item
         val binding = VokabelcardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VocabViewHolder(binding)
+        return VocabViewHolder(binding, dao)
     }
 
     // Replaces the contents of a view (invoked by the layout manager)

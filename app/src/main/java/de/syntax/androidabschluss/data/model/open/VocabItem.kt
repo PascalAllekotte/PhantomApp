@@ -12,5 +12,5 @@ data class VocabItem(
     val language2: String,
     val translation: String,
     val translation2: String,
-    val favorite: Boolean
+    var favorite: Boolean
 )

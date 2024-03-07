@@ -50,7 +50,7 @@ class TranslationFragment : Fragment() {
         initializeDatabase()
 
         // Adapter mit einer leeren Liste initialisieren
-        vocableAdapter = VocableAdapter(mutableListOf())
+        vocableAdapter = VocableAdapter(mutableListOf(), dataBase)
         binding.vocabularyRecyclerView.adapter = vocableAdapter
 
         // Daten laden und in den Adapter einfügen
