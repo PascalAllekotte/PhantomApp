@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class AddVokabelFragment : Fragment() {
 
-private lateinit var binding: FragmentAddVokabelBinding
+    private lateinit var binding: FragmentAddVokabelBinding
     lateinit var database: VokabelDataBase
 
 
@@ -78,6 +78,7 @@ private lateinit var binding: FragmentAddVokabelBinding
         val vokabel = binding.etVokabel.text.toString()
         val language2 = binding.etLanguage2.text.toString()
         val vokabel2 = binding.etVokabel2.text.toString()
+        val block = binding.etBlock.text.toString()
 
         if (language.isNotEmpty() && vokabel.isNotEmpty() && language2.isNotEmpty() && vokabel2.isNotEmpty()) {
             val newItem = VocabItem(
@@ -85,7 +86,8 @@ private lateinit var binding: FragmentAddVokabelBinding
                 language2 = language2,
                 translation = vokabel,
                 translation2 = vokabel2,
-                favorite = false
+                favorite = false,
+                block = ""
             )
 
             // Using Coroutine to perform database operation on a background thread

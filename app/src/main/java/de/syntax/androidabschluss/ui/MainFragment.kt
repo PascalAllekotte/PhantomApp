@@ -48,7 +48,8 @@ class MainFragment : Fragment() {
                 language2 = "Deutsch",
                 translation = "Hellooo",
                 translation2 = "Hallo",
-                favorite = false
+                favorite = false,
+                block = "Testblock"
 
             )
             dao.insert(testItem)

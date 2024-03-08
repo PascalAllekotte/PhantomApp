@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_translationFragment_to_addVokabelFragment"
             app:destination="@id/addVokabelFragment" />
+        <action
+            android:id="@+id/action_translationFragment_to_learningFragment"
+            app:destination="@id/learningFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -92,6 +95,15 @@
         tools:layout="@layout/fragment_add_vokabel" >
         <action
             android:id="@+id/action_addVokabelFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/learningFragment"
+        android:name="de.syntax.androidabschluss.ui.LearningFragment"
+        android:label="fragment_learning"
+        tools:layout="@layout/fragment_learning" >
+        <action
+            android:id="@+id/action_learningFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
     </fragment>
 

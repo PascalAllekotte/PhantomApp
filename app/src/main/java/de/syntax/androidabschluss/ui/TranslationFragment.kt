@@ -38,6 +38,12 @@ class TranslationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.btLearning.setOnClickListener{
+            findNavController().navigate(R.id.learningFragment)
+
+
+        }
         binding.btAdd.setOnClickListener{
             findNavController().navigate(R.id.addVokabelFragment)
 
@@ -75,7 +81,6 @@ class TranslationFragment : Fragment() {
 
     private fun loadVocabulariesIntoAdapter() {
         CoroutineScope(Dispatchers.IO).launch {
-            // Annahme, dass die Methode `getAllVocabItems()` existiert und eine Liste von VocabItem zurückgibt
             val vocabularyList = dataBase.getAllVocabItems()
             CoroutineScope(Dispatchers.Main).launch {
                 vocableAdapter.updateList(vocabularyList)
