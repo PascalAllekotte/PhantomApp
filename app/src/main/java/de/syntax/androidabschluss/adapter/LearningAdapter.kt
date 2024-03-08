@@ -2,11 +2,15 @@ package de.syntax.androidabschluss.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.LearningItemBinding
 import de.syntax.androidabschluss.databinding.VokabelcardItemBinding
+import de.syntax.androidabschluss.ui.LearningFragment
 
 
 class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, private val dao: VokabelDataBaseDao) : RecyclerView.Adapter<LearningAdapter.LearnViewHolder>() {
@@ -18,8 +22,6 @@ class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, privat
         fun bind(vocabItem: VocabItem) {
 
             binding.blockname.text = vocabItem.block
-
-
 
 
 
@@ -36,6 +38,11 @@ class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, privat
     // Replaces the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: LearnViewHolder, position: Int) {
         holder.bind(vocabularyList[position])
+
+        holder.binding.blockCardView.setOnClickListener{
+            val action = LearningFragmentDirections.actionLearningFragmentToLearningDetailFragment()
+            it.findNavController().navigate(action)
+        }
     }
 
     // Returns the size of the data list
@@ -54,4 +61,6 @@ class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, privat
         notifyDataSetChanged()
 
     }
+
+
 }

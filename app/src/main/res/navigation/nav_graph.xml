@@ -105,6 +105,18 @@
         <action
             android:id="@+id/action_learningFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+        <action
+            android:id="@+id/action_learningFragment_to_learningDetailFragment"
+            app:destination="@id/learningDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/learningDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.LearningDetailFragment"
+        android:label="fragment_learning_detail"
+        tools:layout="@layout/fragment_learning_detail" >
+        <action
+            android:id="@+id/action_learningDetailFragment_to_learningFragment"
+            app:destination="@id/learningFragment" />
     </fragment>
 
 
