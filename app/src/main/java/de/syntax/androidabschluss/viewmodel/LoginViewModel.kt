@@ -1,3 +1,5 @@
+package de.syntax.androidabschluss.viewmodel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +28,8 @@ class LoginViewModel : ViewModel() {
                     _loginState.value = LoginState.SUCCESS
                     _userLiveData.value = auth.currentUser
                 } else {
-                    _loginState.value = LoginState.ERROR(task.exception?.message ?: "Anmeldung fehlgeschlagen")
+                    _loginState.value =
+                        LoginState.ERROR(task.exception?.message ?: "Anmeldung fehlgeschlagen")
                 }
             }
     }
