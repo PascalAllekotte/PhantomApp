@@ -8,7 +8,14 @@ import de.syntax.androidabschluss.data.model.open.VocabItem
 const val TAG = "VokabelRepository"
 class VokabelRepository(private val database: VokabelDataBase) {
 
+    private val vokabelDataBaseDao = database.vokabelDataBaseDao()
+
     val vokabelListe: LiveData<List<VocabItem>> = database.vokabelDataBaseDao().getAllVocabItems()
+
+    val uniqueBlockList: LiveData<List<String>> = vokabelDataBaseDao.getUniqueBlocks()
+
+
+
 
     suspend fun insert(vokabeln: VocabItem) {
         try {

@@ -6,67 +6,55 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.adapter.LearningAdapter
-import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.adapter.local.getDatabase
 import de.syntax.androidabschluss.databinding.FragmentLearningBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
+import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 class LearningFragment : Fragment() {
 
     private lateinit var binding: FragmentLearningBinding
-    private lateinit var dataBase: VokabelDataBaseDao
     private lateinit var learningAdapter: LearningAdapter
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private val viewModel: VokabelViewModel by lazy {
+        ViewModelProvider(this).get(VokabelViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentLearningBinding.inflate(inflater,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentLearningBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadVocabulariesIntoAdapter()
+        initializeAdapter()
         initializeDatabase()
         setupRecyclerView()
-        learningAdapter = LearningAdapter(mutableListOf(), dataBase, viewLifecycleOwner)
-        binding.blockRecyclerView.adapter = learningAdapter
+        loadVocabulariesIntoAdapter()
 
-
-        binding.backbutton.setOnClickListener{
+        binding.backbutton.setOnClickListener {
             findNavController().popBackStack()
-
         }
-
-
     }
+
+    private fun initializeAdapter() {
+        learningAdapter = LearningAdapter(mutableListOf(), viewLifecycleOwner)
+        binding.blockRecyclerView.adapter = learningAdapter
+    }
+
 
     private fun loadVocabulariesIntoAdapter() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val vocabularyList = dataBase.getAllVocabItems()
-            CoroutineScope(Dispatchers.Main).launch {
-                learningAdapter.updateList(vocabularyList)
-            }
+        viewModel.uniqueBlockList.observe(viewLifecycleOwner) { blocks ->
+            // Stelle sicher, dass `blocks` den erwarteten Typ hat, den dein Adapter erwartet
+            learningAdapter.updateList(blocks)
         }
     }
+
     private fun initializeDatabase() {
-        context?.let {
-            dataBase = getDatabase(it).vokabelDataBaseDao()
-        }
+        // Diese Methode scheint in deinem aktuellen Code redundant zu sein, da die Datenbankinitialisierung bereits in `initializeAdapter` erfolgt.
     }
 
     private fun setupRecyclerView() {
@@ -75,8 +63,4 @@ class LearningFragment : Fragment() {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.blockRecyclerView)
     }
-
-
-
-
 }

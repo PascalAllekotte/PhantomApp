@@ -12,60 +12,31 @@ import de.syntax.androidabschluss.databinding.LearningItemBinding
 
 
 class LearningAdapter(
-    private val vocabularyList: MutableList<VocabItem>,
-    private val dao: VokabelDataBaseDao,
+    private val blockList: MutableList<String>,
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<LearningAdapter.LearnViewHolder>() {
 
-
-
-    class LearnViewHolder(val binding: LearningItemBinding, private val dao: VokabelDataBaseDao) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(vocabItem: VocabItem) {
-
-            binding.blockname.text = vocabItem.block
-
+    class LearnViewHolder(val binding: LearningItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(blockName: String) {
+            binding.blockname.text = blockName
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnViewHolder {
         val binding = LearningItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LearnViewHolder(binding, dao)
+        return LearnViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: LearnViewHolder, position: Int) {
-        holder.bind(vocabularyList[position])
-
-        holder.binding.blockCardView.setOnClickListener{
-
-
-        }
+        holder.bind(blockList[position])
     }
 
+    override fun getItemCount() = blockList.size
 
-
-    override fun getItemCount() = vocabularyList.size
-
-    // Function to remove items (useful for swipe actions)
-    fun removeAt(position: Int) {
-        vocabularyList.removeAt(position)
-        notifyItemRemoved(position)
+    // Funktion zum Aktualisieren der Liste
+    fun updateList(newItems: List<String>) {
+        blockList.clear()
+        blockList.addAll(newItems)
+        notifyDataSetChanged()
     }
-
-
-
-    // Function to update the list of items
-    fun updateList(newItems: LiveData<List<VocabItem>>) {
-
-        newItems.observe(lifecycleOwner, Observer { items ->
-            vocabularyList.clear()
-            vocabularyList.addAll(items)
-            notifyDataSetChanged()
-
-    })
-
-
-    }
-
-
-
 }

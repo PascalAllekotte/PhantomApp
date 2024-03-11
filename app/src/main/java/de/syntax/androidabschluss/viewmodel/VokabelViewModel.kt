@@ -16,6 +16,8 @@ class VokabelViewModel(application: Application) : AndroidViewModel(application)
     private val repository = VokabelRepository(database)
 
     val vokabelList = repository.vokabelListe
+    val uniqueBlockList = repository.uniqueBlockList
+
 
     private val _complete = MutableLiveData<Boolean>()
     val complete: LiveData<Boolean>
@@ -45,4 +47,6 @@ class VokabelViewModel(application: Application) : AndroidViewModel(application)
     fun unsetOperationComplete() {
         _complete.value = false
     }
+
+
 }
