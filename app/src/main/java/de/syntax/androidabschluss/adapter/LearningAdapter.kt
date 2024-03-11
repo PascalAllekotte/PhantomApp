@@ -24,8 +24,6 @@ class LearningAdapter(
 
             binding.blockname.text = vocabItem.block
 
-
-
         }
     }
 
