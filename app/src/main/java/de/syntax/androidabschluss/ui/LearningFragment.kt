@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.LearningAdapter
-import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.adapter.local.getDatabase
-import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.FragmentLearningBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +43,7 @@ class LearningFragment : Fragment() {
         loadVocabulariesIntoAdapter()
         initializeDatabase()
         setupRecyclerView()
-        learningAdapter = LearningAdapter(mutableListOf(), dataBase)
+        learningAdapter = LearningAdapter(mutableListOf(), dataBase, viewLifecycleOwner)
         binding.blockRecyclerView.adapter = learningAdapter
 
 

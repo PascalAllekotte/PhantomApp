@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.adapter.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,7 +23,7 @@ interface VokabelDataBaseDao {
     suspend fun insertAll(vokabelnList: List<VocabItem>)
 
     @Query("SELECT * FROM VocabItem")
-    suspend fun getAllVocabItems(): List<VocabItem>
+    fun getAllVocabItems(): LiveData<List<VocabItem>>
 
 
 

@@ -80,13 +80,11 @@ class TranslationFragment : Fragment() {
     }
 
     private fun loadVocabulariesIntoAdapter() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val vocabularyList = dataBase.getAllVocabItems()
-            CoroutineScope(Dispatchers.Main).launch {
-                vocableAdapter.updateList(vocabularyList)
-            }
+        dataBase.getAllVocabItems().observe(viewLifecycleOwner) { vocabularyList ->
+            vocableAdapter.updateList(vocabularyList)
         }
     }
+
 
     private fun setupItemTouchHelper() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {

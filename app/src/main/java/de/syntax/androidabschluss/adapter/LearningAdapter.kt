@@ -2,17 +2,20 @@ package de.syntax.androidabschluss.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.LearningItemBinding
-import de.syntax.androidabschluss.databinding.VokabelcardItemBinding
-import de.syntax.androidabschluss.ui.LearningFragment
 
 
-class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, private val dao: VokabelDataBaseDao) : RecyclerView.Adapter<LearningAdapter.LearnViewHolder>() {
+class LearningAdapter(
+    private val vocabularyList: MutableList<VocabItem>,
+    private val dao: VokabelDataBaseDao,
+    private val lifecycleOwner: LifecycleOwner
+) : RecyclerView.Adapter<LearningAdapter.LearnViewHolder>() {
 
 
 
@@ -53,12 +56,18 @@ class LearningAdapter(private val vocabularyList: MutableList<VocabItem>, privat
 
 
     // Function to update the list of items
-    fun updateList(newItems: List<VocabItem>) {
-        vocabularyList.clear()
-        vocabularyList.addAll(newItems)
-        notifyDataSetChanged()
+    fun updateList(newItems: LiveData<List<VocabItem>>) {
+
+        newItems.observe(lifecycleOwner, Observer { items ->
+            vocabularyList.clear()
+            vocabularyList.addAll(items)
+            notifyDataSetChanged()
+
+    })
+
 
     }
+
 
 
 }
