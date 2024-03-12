@@ -24,11 +24,6 @@ class AddVokabelFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,14 +75,14 @@ class AddVokabelFragment : Fragment() {
         val vokabel2 = binding.etVokabel2.text.toString()
         val block = binding.etBlock.text.toString()
 
-        if (language.isNotEmpty() && vokabel.isNotEmpty() && language2.isNotEmpty() && vokabel2.isNotEmpty()) {
+        if (language.isNotEmpty() && vokabel.isNotEmpty() && language2.isNotEmpty() && vokabel2.isNotEmpty() &&block.isNotEmpty()) {
             val newItem = VocabItem(
                 language = language,
                 language2 = language2,
                 translation = vokabel,
                 translation2 = vokabel2,
                 favorite = false,
-                block = ""
+                block = block
             )
 
             // Using Coroutine to perform database operation on a background thread

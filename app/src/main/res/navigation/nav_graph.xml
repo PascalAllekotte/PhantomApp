@@ -107,7 +107,13 @@
             app:destination="@id/translationFragment" />
         <action
             android:id="@+id/action_learningFragment_to_learningDetailFragment"
-            app:destination="@id/learningDetailFragment" />
+            app:destination="@id/learningDetailFragment">
+            <argument
+                android:name="blockName"
+                app:argType="string" />
+        </action>
+
+
     </fragment>
     <fragment
         android:id="@+id/learningDetailFragment"

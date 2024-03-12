@@ -13,18 +13,27 @@ import de.syntax.androidabschluss.databinding.LearningItemBinding
 
 class LearningAdapter(
     private val blockList: MutableList<String>,
-    private val lifecycleOwner: LifecycleOwner
+    private val lifecycleOwner: LifecycleOwner,
+    private val onItemCklicked: (String) -> Unit
+
 ) : RecyclerView.Adapter<LearningAdapter.LearnViewHolder>() {
 
-    class LearnViewHolder(val binding: LearningItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LearnViewHolder(val binding: LearningItemBinding, private val onItemCklicked: (String) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(blockName: String) {
             binding.blockname.text = blockName
+
+            binding.blockCardView.setOnClickListener{
+
+            onItemCklicked(blockName)
+
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnViewHolder {
         val binding = LearningItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LearnViewHolder(binding)
+        return LearnViewHolder(binding, onItemCklicked)
     }
 
     override fun onBindViewHolder(holder: LearnViewHolder, position: Int) {
