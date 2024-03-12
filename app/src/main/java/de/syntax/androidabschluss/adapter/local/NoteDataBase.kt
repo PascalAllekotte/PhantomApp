@@ -1,31 +1,28 @@
-package de.syntax.androidabschluss.adapter.local
-
-
 import androidx.room.Database
 import androidx.room.Room
-import android.content.Context  // Corrected import
+import android.content.Context
 import android.util.Log
 import androidx.room.RoomDatabase
-import de.syntax.androidabschluss.data.model.open.VocabItem
+import de.syntax.androidabschluss.adapter.local.NoteDataBaseDao
+import de.syntax.androidabschluss.data.model.open.NoteItem
 
+@Database(entities = [NoteItem::class], version = 1)
+abstract class NoteDataBase : RoomDatabase() {
 
-@Database(entities = [VocabItem::class], version = 1)
-abstract class VokabelDataBase : RoomDatabase(){
-
-    abstract fun vokabelDataBaseDao(): VokabelDataBaseDao
+    abstract fun noteDataBaseDao(): NoteDataBaseDao
 }
 
-private lateinit var INSTANCE: VokabelDataBase
+private lateinit var INSTANCE: NoteDataBase
 
-fun getDatabase(context: Context): VokabelDataBase {
+fun getDatabase(context: Context): NoteDataBase {
 
-    synchronized(VokabelDataBase::class.java){
-        if(!::INSTANCE.isInitialized){
-            Log.d("DatabaseInitialization", "Initialisiere die Vokabel-Datenbank")
+    synchronized(NoteDataBase::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            Log.d("DatabaseInitialization", "Initialisiere die Notiz-Datenbank")
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
-                VokabelDataBase::class.java,
-                "vokabelc_database"
+                NoteDataBase::class.java,
+                "note_database"
             ).build()
             Log.d("DatabaseInit", "Datenbank initialisiert")
         }
