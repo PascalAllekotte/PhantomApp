@@ -7,9 +7,6 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel : ViewModel() {
 
-    fun addNote(title: String, content: String) {
-        viewModelScope.launch {
-            NoteRepository.addNote(title, content)
-        }
-    }
+
+
 }

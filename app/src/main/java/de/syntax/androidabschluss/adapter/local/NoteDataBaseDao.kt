@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import de.syntax.androidabschluss.data.model.open.NoteItem
+import de.syntax.androidabschluss.data.model.open.VocabItem
 
 @Dao
 interface NoteDataBaseDao {
@@ -19,6 +20,9 @@ interface NoteDataBaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(noteList: List<NoteItem>)
+
+    @Query("SELECT * FROM NoteItem")
+    fun getAllNoteItems(): LiveData<List<NoteItem>>
 
 
 
