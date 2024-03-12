@@ -9,6 +9,18 @@
 
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vocabularyRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="488dp"
+        android:layout_marginBottom="64dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/vokabelcard_item" />
 
 
 
