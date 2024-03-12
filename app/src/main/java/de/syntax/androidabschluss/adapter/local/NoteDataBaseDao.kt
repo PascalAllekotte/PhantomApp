@@ -1,0 +1,32 @@
+package de.syntax.androidabschluss.adapter.local
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import de.syntax.androidabschluss.data.model.open.VocabItem
+
+
+//tes
+@Dao
+interface NoteDataBaseDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(vokabeln: VocabItem)
+
+    @Update
+    suspend fun update(vokabeln: VocabItem)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(vokabelnList: List<VocabItem>)
+
+    @Query("SELECT * FROM VocabItem")
+    fun getAllVocabItems(): LiveData<List<VocabItem>>
+
+    @Query("SELECT DISTINCT block FROM VocabItem")
+    fun getUniqueBlocks(): LiveData<List<String>>
+
+
+}
