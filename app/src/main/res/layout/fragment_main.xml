@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment"
     android:background="@drawable/futuristic_background">
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/textview"
+        style="@style/textneu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Main"
+        android:textColor="#5D6786"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,6 +32,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
 
             <TextView
                 android:id="@+id/textView"
@@ -59,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/vocabularyRecyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/noterecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:scrollbars="vertical"

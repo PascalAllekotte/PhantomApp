@@ -31,5 +31,9 @@ class NoteAdapter(
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
     holder.bind(noteList[position])
     }
-
+    fun updateList(noteItem: List<NoteItem>) {
+        noteList.clear()
+        noteList.addAll(noteItem)
+        notifyDataSetChanged()
+    }
 }
