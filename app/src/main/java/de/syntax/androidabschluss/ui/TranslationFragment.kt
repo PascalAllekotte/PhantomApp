@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.VocableAdapter
+import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.databinding.FragmentTranslationBinding
+import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 class TranslationFragment : Fragment() {
@@ -21,6 +23,8 @@ class TranslationFragment : Fragment() {
     private lateinit var binding: FragmentTranslationBinding
     private lateinit var vocableAdapter: VocableAdapter
     private lateinit var viewModel: VokabelViewModel
+    private lateinit var noteViewModel: NoteViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTranslationBinding.inflate(inflater, container, false)
@@ -31,6 +35,10 @@ class TranslationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(VokabelViewModel::class.java)
+
+        noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
+        val newNote = NoteItem(title = "Mein neuer Titel", content = "Mein neuer Inhalt")
+        noteViewModel.insertNoteItem(newNote)
 
 
         //Navigation----------------------------
