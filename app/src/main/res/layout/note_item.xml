@@ -51,6 +51,8 @@
                 <soup.neumorphism.NeumorphButton
                     android:id="@+id/deleteNoteButton"
                     style="@style/buttonCardview"
+                    app:neumorph_strokeWidth="1dp"
+                    app:neumorph_strokeColor="@color/löschenbtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_gravity="center"

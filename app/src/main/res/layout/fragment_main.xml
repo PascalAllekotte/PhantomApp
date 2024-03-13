@@ -6,28 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment"
     android:background="@drawable/futuristic_background">
-    <soup.neumorphism.NeumorphTextView
-        android:id="@+id/textview"
-        style="@style/textneu"
-        android:layout_width="wrap_content"
+
+
+    <ImageView
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Main"
-        android:textColor="#5D6786"
-        android:textSize="35sp"
-        android:textStyle="bold"
+        android:src="@drawable/tooltest"
+        android:layout_marginTop="-120dp"
+        android:layout_marginStart="70dp"
+        android:backgroundTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/textview"
+            style="@style/textneu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Main"
+            android:textColor="#5D6786"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </Toolbar>
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="1dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:layout_editor_absoluteX="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="12dp"
                 android:text="Favoriten:"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -50,8 +78,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/vocabularyRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +112,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/notes"
                 tools:listitem="@layout/vokabelcard_item" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

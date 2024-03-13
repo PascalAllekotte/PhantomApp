@@ -180,7 +180,7 @@
 
     <style name="textneu" parent="android:Widget">
         <item name="neumorph_shadowElevation">2dp</item>
-        <item name="neumorph_shadowColorLight">#757E9B</item>
+        <item name="neumorph_shadowColorLight">#4B63AE</item>
         <item name="neumorph_shadowColorDark">#30374C</item>
     </style>
 
