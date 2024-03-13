@@ -30,7 +30,13 @@ class NoteRepository(private val database: NoteDataBase){
         }
     }
 
-
+    suspend fun insertAll(noteItemList: List<NoteItem>) {
+        try {
+            database.noteDataBaseDao().insertAll(noteItemList)
+        } catch (e: Exception) {
+            Log.e(V_TAG, "Error inserting list into database: $e")
+        }
+    }
     suspend fun insertAllNoteItems(noteList: List<NoteItem>){
         try {
             database.noteDataBaseDao().insertAll(noteList)
