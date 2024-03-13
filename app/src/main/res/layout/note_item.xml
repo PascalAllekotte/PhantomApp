@@ -43,25 +43,18 @@
                 android:background="@android:color/transparent"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:layout_gravity="right"
+                android:orientation="horizontal">
 
                 <soup.neumorphism.NeumorphButton
-                    style="@style/buttonCardview"
-
-                    android:id="@+id/saveNoteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Speichern"/>
-
-                <soup.neumorphism.NeumorphButton
-                    style="@style/buttonCardview"
                     android:id="@+id/deleteNoteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Löschen"/>
+                    style="@style/buttonCardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:text="Löschen" />
             </LinearLayout>
         </LinearLayout>
     </soup.neumorphism.NeumorphCardView>
