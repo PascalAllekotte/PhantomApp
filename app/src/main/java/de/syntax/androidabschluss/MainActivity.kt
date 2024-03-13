@@ -1,19 +1,13 @@
 package de.syntax.androidabschluss
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import de.syntax.androidabschluss.adapter.local.VokabelDataBase
-import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
-import de.syntax.androidabschluss.adapter.local.getDatabase
-import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,7 +1,8 @@
-import androidx.room.Database
-import androidx.room.Room
+
 import android.content.Context
 import android.util.Log
+import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import de.syntax.androidabschluss.adapter.local.NoteDataBaseDao
 import de.syntax.androidabschluss.data.model.open.NoteItem
@@ -14,7 +15,7 @@ abstract class NoteDataBase : RoomDatabase() {
 
 private lateinit var INSTANCE: NoteDataBase
 
-fun getDatabase(context: Context): NoteDataBase {
+fun getDatabaseNote(context: Context): NoteDataBase {
 
     synchronized(NoteDataBase::class.java) {
         if (!::INSTANCE.isInitialized) {
