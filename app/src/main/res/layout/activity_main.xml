@@ -22,6 +22,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
+    <ImageView
+        android:id="@+id/imgk"
+        android:layout_width="624dp"
+        android:layout_height="388dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginBottom="-205dp"
+        android:backgroundTint="@color/black"
+        android:src="@drawable/zuzu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
+
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/neumorphCardView"
