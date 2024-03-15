@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.registrationFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.addVokabelFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.noteDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.learningDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.learningFragment -> binding.bottomNavigationView.visibility = View.GONE
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }

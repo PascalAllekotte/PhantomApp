@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_translationFragment_to_learningFragment"
             app:destination="@id/learningFragment" />
+        <action
+            android:id="@+id/action_translationFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -123,6 +126,15 @@
         <action
             android:id="@+id/action_learningDetailFragment_to_learningFragment"
             app:destination="@id/learningFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.NoteDetailFragment"
+        android:label="fragment_note_detail"
+        tools:layout="@layout/fragment_note_detail" >
+        <action
+            android:id="@+id/action_noteDetailFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
     </fragment>
 
 
