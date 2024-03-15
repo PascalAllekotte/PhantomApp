@@ -41,7 +41,7 @@
         android:id="@+id/imageView2"
         android:layout_width="484dp"
         android:layout_height="388dp"
-        android:layout_marginBottom="-170dp"
+        android:layout_marginBottom="-190dp"
         android:backgroundTint="@color/black"
         android:src="@drawable/waszum6"
         app:layout_constraintBottom_toBottomOf="parent"

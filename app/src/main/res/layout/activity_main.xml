@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/mainactivityz"
-    android:background="@color/prbackground">
+    android:background="@drawable/futuristic_background">
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -15,27 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/neumorphCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
-
-    <ImageView
-        android:id="@+id/imgk"
-        android:layout_width="624dp"
-        android:layout_height="388dp"
-        android:layout_marginLeft="49dp"
-        android:layout_marginBottom="-205dp"
-        android:backgroundTint="@color/black"
-        android:src="@drawable/zuzu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995" />
 
 
 
@@ -54,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
             android:background="#00000000"
             app:itemActiveIndicatorStyle="@style/activated"
             app:itemIconTint="@color/bottom_nav_item_color"
