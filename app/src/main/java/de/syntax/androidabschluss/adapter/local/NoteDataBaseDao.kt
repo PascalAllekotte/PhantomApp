@@ -2,6 +2,7 @@ package de.syntax.androidabschluss.adapter.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -19,6 +20,10 @@ interface NoteDataBaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(noteList: List<NoteItem>)
+
+
+    @Delete
+    suspend fun deleteNote(note: NoteItem)
 
     @Query("SELECT * FROM NoteItem")
     fun getAllNoteItems(): LiveData<List<NoteItem>>

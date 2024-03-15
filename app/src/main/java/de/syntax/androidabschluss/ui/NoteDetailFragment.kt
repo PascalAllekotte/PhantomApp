@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.adapter.local.NoteDataBase
 import de.syntax.androidabschluss.adapter.local.getDatabaseNote
 import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.databinding.FragmentNoteDetailBinding
+import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import kotlinx.coroutines.launch
 
 
@@ -18,6 +20,9 @@ class NoteDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteDetailBinding
     lateinit var database: NoteDataBase
+    private val viewModel: NoteViewModel by lazy {
+        ViewModelProvider(this).get(NoteViewModel::class.java)
+    }
 
 
     override fun onCreateView(
@@ -68,4 +73,8 @@ class NoteDetailFragment : Fragment() {
 
         }
     }
+
+
+
+
 }

@@ -28,6 +28,12 @@ class NoteViewModel(application: Application) : AndroidViewModel(application){
             _noteComplete.value = true
         }
     }
+    fun delete(noteItem: NoteItem){
+        viewModelScope.launch {
+            repository.delete(noteItem)
+            _noteComplete.value = true
+        }
+    }
 
     fun updateNoteItem(noteItem: NoteItem){
         viewModelScope.launch {

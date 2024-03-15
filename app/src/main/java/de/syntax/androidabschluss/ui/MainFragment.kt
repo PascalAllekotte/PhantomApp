@@ -9,17 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.adapter.NoteAdapter
-import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
-import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var vocableAdapter: VocableAdapter
-    private lateinit var vokabelViewModel: VokabelViewModel
 
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var noteViewModel: NoteViewModel
@@ -35,36 +30,21 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vokabelViewModel = ViewModelProvider(this).get(VokabelViewModel::class.java)
-        setupRecyclerView()
-
-        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
         setupRecyclerViewNote()
-
-        vokabelViewModel.vokabelList.observe(viewLifecycleOwner) { vocabularyList ->
-            val favorite = vocabularyList.filter { it.favorite }
-            vocableAdapter.updateList(favorite)
-        }
 
         noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
             noteAdapter.updateList(noteList)
         }
     }
 
-    private fun setupRecyclerView() {
-        vocableAdapter = VocableAdapter(mutableListOf()) { vocabItem ->
-            // Handle vocab item click
+    private fun setupRecyclerViewNote() {
+        noteAdapter = NoteAdapter(mutableListOf()) { noteItem ->
+            // Löschoperation, wenn auf den Lösch-Button geklickt wird
+            noteViewModel.delete(noteItem)
         }
 
-        binding.vocabularyRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.vocabularyRecyclerView.adapter = vocableAdapter
-        LinearSnapHelper().attachToRecyclerView(binding.vocabularyRecyclerView)
-    }
-
-    private fun setupRecyclerViewNote() {
-        noteAdapter = NoteAdapter(mutableListOf())
-
-        binding.noterecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.noterecyclerView.layoutManager = LinearLayoutManager(context)
         binding.noterecyclerView.adapter = noteAdapter
         LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
     }

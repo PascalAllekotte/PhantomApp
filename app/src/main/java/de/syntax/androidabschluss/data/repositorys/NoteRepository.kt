@@ -21,6 +21,13 @@ class NoteRepository(private val database: NoteDataBase){
             Log.e(TAG, "Error inserting into DatabaseNote: $e")
         }
     }
+    suspend fun delete(note: NoteItem) {
+        try {
+            database.noteDataBaseDao().deleteNote(note)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error updating database: $e")
+        }
+    }
 
     suspend fun update(note: NoteItem) {
         try {
