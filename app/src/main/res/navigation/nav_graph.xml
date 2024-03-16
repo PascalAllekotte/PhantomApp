@@ -81,6 +81,12 @@
         <action
             android:id="@+id/action_botFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_botFragment_to_pictureGeneratorFragment"
+            app:destination="@id/pictureGeneratorFragment" />
+        <action
+            android:id="@+id/action_botFragment_to_assistantDetailFragment"
+            app:destination="@id/assistantDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -135,6 +141,24 @@
         <action
             android:id="@+id/action_noteDetailFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/assistantDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.AssistantDetailFragment"
+        android:label="fragment_assistant_detail"
+        tools:layout="@layout/fragment_assistant_detail" >
+        <action
+            android:id="@+id/action_assistantDetailFragment_to_botFragment"
+            app:destination="@id/botFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureGeneratorFragment"
+        android:name="de.syntax.androidabschluss.ui.PictureGeneratorFragment"
+        android:label="fragment_picture_generator"
+        tools:layout="@layout/fragment_picture_generator" >
+        <action
+            android:id="@+id/action_pictureGeneratorFragment_to_botFragment"
+            app:destination="@id/botFragment" />
     </fragment>
 
 

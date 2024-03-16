@@ -1,25 +1,13 @@
 package de.syntax.androidabschluss.ui
 
-import android.content.ClipData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentBotBinding
-import de.syntax.androidabschluss.viewmodel.HomeViewModel
-import io.grpc.Context
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import android.content.ClipboardManager
-import androidx.core.content.ContextCompat
 
 
 class BotFragment : Fragment() {
@@ -27,64 +15,24 @@ class BotFragment : Fragment() {
     private var _binding: FragmentBotBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeViewModel by viewModels { HomeViewModel.Factory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBotBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.chatView.setOnLongClickListener {
-            val textToString = binding.chatView.text.toString() // Assuming textView is the correct view to copy text from
-            val clipboard = ContextCompat.getSystemService(it.context, ClipboardManager::class.java) as ClipboardManager
-            val clip = ClipData.newPlainText("Copied Text", textToString)
-            clipboard.setPrimaryClip(clip)
-            Toast.makeText(it.context, "Text copied to clipboard", Toast.LENGTH_SHORT).show()
-            true
+        binding.btnGenerate.setOnClickListener {
+            findNavController().navigate(R.id.action_botFragment_to_pictureGeneratorFragment)
         }
-
-        binding.sendButton.setOnClickListener {
-            val inputMessage: String = binding.inputText.text.toString()
-            val vibrationAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.anima)
-            it.startAnimation(vibrationAnimation)
-            if (inputMessage.isNotEmpty()) {
-                makeRequestToChatGpt(inputMessage)
-                val vibrationAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.anima)
-                it.startAnimation(vibrationAnimation)
-
-            } else {
-                Toast.makeText(requireContext(), "Eingabe machen", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.apiResponse.collect { response ->
-                if (response != null) {
-                    binding.chatView.text = response
-                }
-            }
+        binding.btnAssistant.setOnClickListener {
+            findNavController().navigate(R.id.action_botFragment_to_assistantDetailFragment)
         }
     }
 
-    private fun makeRequestToChatGpt(message: String){
-        lifecycleScope.launch {
-            viewModel.getApiResponse(message)
-            viewModel.apiResponse.onEach { response ->
-                if (response != null){
-                    binding?.chatView?.text = response
-                }
-            }.launchIn(lifecycleScope)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
 
 

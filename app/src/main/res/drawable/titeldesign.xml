@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <stroke android:width="0.4dp" android:color="@color/black"/>
-            <!-- Replace #FFFFFF with the desired fill color -->
-            <solid android:color="#FFFFFF"/>
-            <!-- Set only the topRight and bottomRight corners to have rounded corners -->
-            <corners android:topRightRadius="18dp"
-                android:bottomRightRadius="18dp"/>
-        </shape>
-    </item>
-</selector>
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="#00FFFFFF"/> <!-- Hintergrundfarbe -->
+        <corners android:radius="30dp"/> <!-- Radius für die Abrundung -->
+    </shape>
+
