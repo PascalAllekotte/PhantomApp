@@ -31,7 +31,11 @@ class ImageGenerationViewModel : ViewModel() {
         val jsonBody = JSONObject().apply {
             put("prompt", prompt)
             put("size", "1024x1024")
+            put("style", "natural")
             put("quality", "hd")
+
+
+
         }
         val requestBody: RequestBody = RequestBody.create(JSON, jsonBody.toString())
         val request: Request = Request.Builder()
