@@ -103,6 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <soup.neumorphism.NeumorphTextView
         android:id="@+id/textview"
         style="@style/textneu"
