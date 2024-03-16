@@ -93,34 +93,33 @@
     </ScrollView>
 
 
+
     <ImageView
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/test6"
+        android:src="@drawable/test10"
         android:layout_marginStart="3dp"
         android:backgroundTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <soup.neumorphism.NeumorphTextView
         android:id="@+id/textview"
         style="@style/textneu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="110dp"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="16dp"
-        android:rotation="-7"
+        android:rotation="-6"
         android:text="Main"
         android:textColor="#5D6786"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
