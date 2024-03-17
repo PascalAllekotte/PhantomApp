@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginVertical="4dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="24dp"
         android:layout_gravity="end"
         android:background="@drawable/bg_sender">
 
@@ -33,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
-            android:textAlignment="textStart"
             android:textStyle="bold"
             tools:text="Mar 10, 2024 6:00pm"
             android:textSize="12sp"

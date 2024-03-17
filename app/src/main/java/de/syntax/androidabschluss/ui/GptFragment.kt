@@ -5,15 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.adapter.ChatAdapter
 import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.databinding.FragmentGptBinding
+import de.syntax.androidabschluss.viewmodel.ChatViewModel
 import java.util.Date
 
 
 class GptFragment : Fragment() {
    private lateinit var binding: FragmentGptBinding
+   private val chatViewModel : ChatViewModel by lazy {
+       ViewModelProvider(this)[ChatViewModel::class.java]
+   }
 
     private val chatList = arrayListOf(
         Chat(
@@ -116,6 +121,21 @@ class GptFragment : Fragment() {
         val chatAdapter = ChatAdapter()
         binding.chatRv.adapter = chatAdapter
         chatAdapter.submitList(chatList)
+
+        var counter = -1
+        binding.sendButton.setOnClickListener{
+            counter += 1
+            if (counter >= chatList.size){
+                return@setOnClickListener
+            }
+            chatViewModel.insertChat(chatList[counter])
+        }
+
+        chatViewModel.chatList.observe(viewLifecycleOwner){
+            chatAdapter.submitList(it)
+            binding.chatRv.smoothScrollToPosition(it.size)//runter scollen automatishc
+
+        }
     }
 
 }
