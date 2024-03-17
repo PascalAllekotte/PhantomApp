@@ -1,6 +1,7 @@
 package de.syntax.androidabschluss.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +12,9 @@ import de.syntax.androidabschluss.databinding.SenderItemBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ChatAdapter :
+class ChatAdapter(
+    private val onClickCallback: (message : String, view: View) -> Unit
+) :
 ListAdapter<Chat, RecyclerView.ViewHolder>(DiffCallback()){
 
 class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
@@ -59,8 +62,7 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
 
                     )
                 )
-
-                )
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -72,7 +74,12 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
             (holder as ReceiverViewHolder).bind(chat)
 
         }
-
+        holder.itemView.setOnClickListener {
+            if (holder.adapterPosition != -1) {
+                onClickCallback(chat.message, holder.itemView)
+            }
+            true
+        }
     }
 
 

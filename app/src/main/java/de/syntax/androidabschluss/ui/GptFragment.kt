@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ChatAdapter
 import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.databinding.FragmentGptBinding
@@ -118,7 +120,48 @@ class GptFragment : Fragment() {
 
         }
 
-        val chatAdapter = ChatAdapter()
+        val chatAdapter = ChatAdapter(){ message, textView ->
+
+            val popup = PopupMenu(context, textView)
+            try {
+                val fields = popup.javaClass.declaredFields
+                for (field in fields) {
+                    if ("mPopup" == field.name) {
+                        field.isAccessible = true
+                        val menuPopupHelper = field.get(popup)
+                        val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
+                        val setForceIcons = classPopupHelper.getMethod(
+                            "setForceShowIcon",
+                            Boolean::class.javaPrimitiveType
+                        )
+                        setForceIcons.invoke(menuPopupHelper, true)
+                        break
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            popup.menuInflater.inflate(R.menu.option_menu, popup.menu)
+
+            popup.setOnMenuItemClickListener {item ->
+                when(item.itemId){
+                    R.id.copyMenu -> {
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.slectTxtMenu -> {
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.shareTextMenu -> {
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+            }
+            popup.show()
+
+        }
         binding.chatRv.adapter = chatAdapter
         chatAdapter.submitList(chatList)
 
