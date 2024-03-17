@@ -69,6 +69,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:paddingTop="?actionBarSize"
+        app:layout_constraintBottom_toTopOf="@+id/block"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/block"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
