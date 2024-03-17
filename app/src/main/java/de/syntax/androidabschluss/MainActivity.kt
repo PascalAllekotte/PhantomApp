@@ -1,13 +1,18 @@
 package de.syntax.androidabschluss
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import de.syntax.androidabschluss.adapter.local.VokabelDataBase
 import de.syntax.androidabschluss.databinding.ActivityMainBinding
+import de.syntax.androidabschluss.utils.NetworkConnectivityObserver
+import de.syntax.androidabschluss.utils.NetworkStatus
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +21,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dataBase: VokabelDataBase
 
     private val auth = FirebaseAuth.getInstance()
+
+    private val networkConnectivityObserver: NetworkConnectivityObserver by lazy {
+        NetworkConnectivityObserver(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +75,26 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        val snackbar = Snackbar.make(
+            findViewById(android.R.id.content),
+            "No Internet Connection",
+            Snackbar.LENGTH_INDEFINITE
+        ).setAction("Wifi") {
+            startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+        }
 
+        networkConnectivityObserver.observe(this) {
+            when (it) {
+                NetworkStatus.Available -> {
+                    if (snackbar.isShown) {
+                        snackbar.dismiss()
+                    }
+                }
+                else -> {
+                    snackbar.show()
+                }
+            }
+        }
     }
 
 }
