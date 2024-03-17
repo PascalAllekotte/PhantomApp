@@ -171,15 +171,17 @@ class GptFragment : Fragment() {
         binding.chatRv.adapter = chatAdapter
         chatAdapter.submitList(chatList)
 
-        var counter = -1
+     //   var counter = -1
                 binding.sendButton.setOnClickListener {
                     view.context.hideKeyBoard(it)
                     if (binding.etBlock.text.toString().trim().isNotEmpty()) {
-                        counter += 1
-                        if (counter >= chatList.size) {
-                            return@setOnClickListener
-                        }
-                        chatViewModel.insertChat(chatList[counter])
+                //        counter += 1
+                //        if (counter >= chatList.size) {
+                //            return@setOnClickListener
+                //        }
+                //        chatViewModel.insertChat(chatList[counter])
+
+                        chatViewModel.createChatCompletion(binding.etBlock.text.toString().trim())
                     }else{
                         view.context.longToastShow("Message is Required")
                     }

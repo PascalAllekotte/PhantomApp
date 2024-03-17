@@ -4,8 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import de.syntax.androidabschluss.data.model.open.Chat
+import de.syntax.androidabschluss.data.repositorys.ChatRepository
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val chatRepository = ChatRepository()
 
     var chatList = MutableLiveData<List<Chat>>(arrayListOf())
         private set
@@ -19,5 +22,9 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             chatList.postValue(modifiedChatList)
 
         }
+
+    fun createChatCompletion(message: String){
+        chatRepository.createChatCompletion(message)
+    }
 
 }

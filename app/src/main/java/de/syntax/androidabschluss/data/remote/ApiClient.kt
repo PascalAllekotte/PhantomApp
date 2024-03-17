@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.data.remote
 
+import de.syntax.androidabschluss.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
