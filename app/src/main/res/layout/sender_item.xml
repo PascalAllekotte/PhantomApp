@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_receiver">
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -37,6 +37,7 @@
             android:textStyle="bold"
             tools:text="Mar 10, 2024 6:00pm"
             android:textSize="12sp"
+            android:layout_gravity="end"
             android:textColor="@color/white"
             android:layout_height="wrap_content"/>
 
