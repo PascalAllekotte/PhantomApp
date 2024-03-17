@@ -12,6 +12,10 @@ import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ChatAdapter
 import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.databinding.FragmentGptBinding
+import de.syntax.androidabschluss.utils.copyToClipBoard
+import de.syntax.androidabschluss.utils.hideKeyBoard
+import de.syntax.androidabschluss.utils.longToastShow
+import de.syntax.androidabschluss.utils.shareMsg
 import de.syntax.androidabschluss.viewmodel.ChatViewModel
 import java.util.Date
 
@@ -146,12 +150,14 @@ class GptFragment : Fragment() {
             popup.setOnMenuItemClickListener {item ->
                 when(item.itemId){
                     R.id.copyMenu -> {
+                        view.context.copyToClipBoard(message)
                         return@setOnMenuItemClickListener true
                     }
                     R.id.slectTxtMenu -> {
                         return@setOnMenuItemClickListener true
                     }
                     R.id.shareTextMenu -> {
+                        view.context.shareMsg(message)
                         return@setOnMenuItemClickListener true
                     }
                     else -> {
@@ -166,13 +172,18 @@ class GptFragment : Fragment() {
         chatAdapter.submitList(chatList)
 
         var counter = -1
-        binding.sendButton.setOnClickListener{
-            counter += 1
-            if (counter >= chatList.size){
-                return@setOnClickListener
-            }
-            chatViewModel.insertChat(chatList[counter])
-        }
+                binding.sendButton.setOnClickListener {
+                    view.context.hideKeyBoard(it)
+                    if (binding.etBlock.text.toString().trim().isNotEmpty()) {
+                        counter += 1
+                        if (counter >= chatList.size) {
+                            return@setOnClickListener
+                        }
+                        chatViewModel.insertChat(chatList[counter])
+                    }else{
+                        view.context.longToastShow("Message is Required")
+                    }
+                }
 
         chatViewModel.chatList.observe(viewLifecycleOwner){
             chatAdapter.submitList(it)
