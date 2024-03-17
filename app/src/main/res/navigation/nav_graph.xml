@@ -87,6 +87,9 @@
         <action
             android:id="@+id/action_botFragment_to_assistantDetailFragment"
             app:destination="@id/assistantDetailFragment" />
+        <action
+            android:id="@+id/action_botFragment_to_gptFragment"
+            app:destination="@id/gptFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -158,6 +161,15 @@
         tools:layout="@layout/fragment_picture_generator" >
         <action
             android:id="@+id/action_pictureGeneratorFragment_to_botFragment"
+            app:destination="@id/botFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gptFragment"
+        android:name="de.syntax.androidabschluss.ui.GptFragment"
+        android:label="fragment_gpt"
+        tools:layout="@layout/fragment_gpt" >
+        <action
+            android:id="@+id/action_gptFragment_to_botFragment"
             app:destination="@id/botFragment" />
     </fragment>
 
