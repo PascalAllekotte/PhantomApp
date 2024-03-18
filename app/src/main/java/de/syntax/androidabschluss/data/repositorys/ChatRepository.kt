@@ -78,7 +78,7 @@ class ChatRepository(application: Application) {
                 if(messageList.size == 1){
                     messageList.add(
                         0,
-                        Message("Stell dich vor lo?",
+                        Message("Ich bin Pascal dein persönlicher Sprachassistant",
                         "system"
                         )
                     )
@@ -88,8 +88,8 @@ class ChatRepository(application: Application) {
                         Chat(
                             receiverId,
                             Message(
-                                "",
-                                "assistant"
+                                "Ich helfe dir Sprachen zu lernen",
+                                "Pascal"
                             ),
                             Date()
                         )

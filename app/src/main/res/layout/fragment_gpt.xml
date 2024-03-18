@@ -9,23 +9,10 @@
 
 
 
-    <soup.neumorphism.NeumorphImageButton
-        android:id="@+id/backbutton"
-        style="@style/imagebuttonneu"
-        android:layout_width="73dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerInside"
-        android:src="@drawable/back2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="454dp"
-        android:layout_height="40dp"
+        android:layout_height="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -122,6 +109,19 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/backbutton"
+        style="@style/imagebuttonneu"
+        android:layout_width="73dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside"
+        android:src="@drawable/back2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
