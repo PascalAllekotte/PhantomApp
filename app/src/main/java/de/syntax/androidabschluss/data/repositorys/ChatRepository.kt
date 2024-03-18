@@ -20,7 +20,7 @@ class ChatRepository {
                 val chatRequest = ChatRequest(
                     arrayListOf(
                         Message(
-                            "Was geht bro",
+                            "bitte beantworte nur mathe fragen alles andere beneinst du freundlich",
                             "system"
                         ),
                         Message(
