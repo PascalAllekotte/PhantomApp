@@ -10,4 +10,13 @@ class TypeConverter {
         return Date(value)
 
     }
+
+
+    @TypeConverter
+    fun deleteTimestamp(date : Date) : Long {
+        return date.time
+
+    }
+
+
 }
