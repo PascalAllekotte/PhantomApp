@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import de.syntax.androidabschluss.converters.TypeConverter
 import de.syntax.androidabschluss.data.model.open.Chat
 
 

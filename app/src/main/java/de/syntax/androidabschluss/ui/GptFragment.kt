@@ -8,14 +8,20 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ChatAdapter
 import de.syntax.androidabschluss.databinding.FragmentGptBinding
+import de.syntax.androidabschluss.utils.Status
 import de.syntax.androidabschluss.utils.copyToClipBoard
 import de.syntax.androidabschluss.utils.hideKeyBoard
 import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.utils.shareMsg
 import de.syntax.androidabschluss.viewmodel.ChatViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class GptFragment : Fragment() {
@@ -93,23 +99,56 @@ class GptFragment : Fragment() {
 
         }
         binding.chatRv.adapter = chatAdapter
+        chatAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                binding.chatRv.smoothScrollToPosition(positionStart)
+            }
+        })
 
                 binding.sendButton.setOnClickListener {
                     view.context.hideKeyBoard(it)
                     if (binding.etBlock.text.toString().trim().isNotEmpty()) {
-
-
                         chatViewModel.createChatCompletion(binding.etBlock.text.toString().trim())
+                        binding.etBlock.text = null
                     }else{
                         view.context.longToastShow("Message is Required")
                     }
                 }
 
-        chatViewModel.chatList.observe(viewLifecycleOwner){
-            chatAdapter.submitList(it)
-            binding.chatRv.smoothScrollToPosition(it.size)//runter scollen automatishc
+        callGetChatList(binding.chatRv,chatAdapter)
+        chatViewModel.getChatList()
+
+
+    }
+
+    private fun callGetChatList(chatRV: RecyclerView, chatAdapter: ChatAdapter) {
+        CoroutineScope(Dispatchers.Main).launch {
+            chatViewModel
+                .chatStateFlow
+                .collectLatest {
+                    when (it.status) {
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {
+
+                            it.data?.collect { chatlist ->
+                                chatAdapter.submitList(chatlist)
+
+
+                            }
+                        }
+
+                        Status.ERROR -> {
+
+                            it.message?.let { it1 -> chatRV.context.longToastShow(it1) }
+                        }
+
+                    }
+                }
 
         }
+
     }
+
 
 }

@@ -95,7 +95,7 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).message.content == "user"){
+        return if (getItem(position).message.role == "user"){
             0 // senderitem
         }else{
             1 // receiveritem

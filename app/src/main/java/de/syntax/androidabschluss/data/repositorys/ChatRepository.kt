@@ -14,6 +14,7 @@ import de.syntax.androidabschluss.utils.CHATGPT_MODEL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +23,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Date
+import java.util.UUID
 
 class ChatRepository(application: Application) {
 
@@ -49,20 +52,52 @@ class ChatRepository(application: Application) {
 
     }
 
-    fun createChatCompletion(message: String){
-
+    fun createChatCompletion(message: String) {
+        val receiverId = UUID.randomUUID().toString()
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(200)
+            val senderId = UUID.randomUUID().toString()
             try {
-                val chatRequest = ChatRequest(
-                    arrayListOf(
-                        Message(
-                            "bitte beantworte nur mathe fragen alles andere beneinst du freundlich",
-                            "system"
-                        ),
-                        Message(
-                            message,
-                            "user"
+                async {
+                    chatGPTDao.insertChat(
+                        Chat(
+                            senderId,
+                            Message(
+                                message,
+                                "user"
+                            ),
+                            Date()
+                        )
                     )
-                    ),
+                }.await()
+
+                val messageList = chatGPTDao.getChatListFlow().map {
+                    it.message
+                }.reversed().toMutableList()
+
+                if(messageList.size == 1){
+                    messageList.add(
+                        0,
+                        Message("Stell dich vor lo?",
+                        "system"
+                        )
+                    )
+                }
+                async {
+                    chatGPTDao.insertChat(
+                        Chat(
+                            receiverId,
+                            Message(
+                                "",
+                                "assistant"
+                            ),
+                            Date()
+                        )
+                    )
+                }.await()
+
+                val chatRequest = ChatRequest(
+                    messageList,
                     CHATGPT_MODEL
                 )
                 apiClient.createChatCompletion(chatRequest).enqueue(object :
@@ -72,24 +107,50 @@ class ChatRepository(application: Application) {
                         response: Response<ChatResponse>
                     ) {
                         val code = response.code()
-                        if (code == 200){
-                            response.body()?.choices?.get(0)?.message?.let {
-                                Log.d("message", it.toString())
+                        if (code == 200) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                response.body()?.choices?.get(0)?.message?.let {
+                                    Log.d("message", it.toString())
+                                    chatGPTDao.updateChatPaticularField(
+                                        receiverId,
+                                        it.content,
+                                        it.role,
+                                        Date()
+                                    )
+                                }
                             }
-                        }else{
+                        } else {
                             Log.d("error", response.errorBody().toString())
+                            deleteChatIfApiFailure(receiverId, senderId)
                         }
                     }
 
+
+
                     override fun onFailure(call: Call<ChatResponse>, t: Throwable) {
-                    t.printStackTrace()
+                        t.printStackTrace()
+                        deleteChatIfApiFailure(receiverId, senderId)
+
                     }
 
 
                 })
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
+                deleteChatIfApiFailure(receiverId, senderId)
+
             }
         }
+    }
+    private fun deleteChatIfApiFailure(receiverId: String, senderId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            listOf(
+                async { chatGPTDao.deleteChatUsingChatId(receiverId) },
+                async { chatGPTDao.deleteChatUsingChatId(senderId) }
+            ).awaitAll()
+            _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
+        }
+
+    }
 
 }

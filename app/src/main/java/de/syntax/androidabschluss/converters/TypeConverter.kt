@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.converters
 
 import androidx.room.TypeConverter
 import java.util.Date
@@ -6,7 +6,7 @@ import java.util.Date
 class TypeConverter {
 
     @TypeConverter
-    fun fromTimestamp(value : String) : Date {
+    fun fromTimestamp(value : Long) : Date {
         return Date(value)
 
     }
