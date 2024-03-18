@@ -16,20 +16,20 @@ import de.syntax.androidabschluss.data.model.open.Chat
 )
 
 @TypeConverters(TypeConverter::class)
-abstract class GhatGPTDatabase : RoomDatabase() {
+abstract class ChatGPTDatabase : RoomDatabase() {
     abstract val chatGptDao : ChatGPTDao
 
 
     companion object {
 
         @Volatile
-        private var INSTANCE : GhatGPTDatabase? = null
+        private var INSTANCE : ChatGPTDatabase? = null
 
-        fun getInstance(context: Context) : GhatGPTDatabase {
+        fun getInstance(context: Context) : ChatGPTDatabase {
             synchronized(this){
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
-                    GhatGPTDatabase::class.java,
+                    ChatGPTDatabase::class.java,
                     "chat_gpt_db"
                 ).build()
                     .also {
