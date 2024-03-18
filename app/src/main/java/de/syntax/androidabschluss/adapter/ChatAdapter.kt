@@ -22,8 +22,8 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
 
         fun bind(chat : Chat){
 
-            senderItemBinding.txtMessage.text = chat.message
-            val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm a", Locale.getDefault())
+            senderItemBinding.txtMessage.text = chat.message.content
+            val dateFormat = SimpleDateFormat("dd-MMM-yyyy hh:mm a", Locale.getDefault())
             senderItemBinding.txtDate.text = dateFormat.format(chat.date)
 
         }
@@ -33,12 +33,23 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
     class ReceiverViewHolder(private val receiverItemBinding: ReceiverItemBinding):
         RecyclerView.ViewHolder(receiverItemBinding.root){
 
-        fun bind(chat : Chat){
+        fun bind(chat : Chat) {
+            if (chat.message.content.isNotEmpty()) {
+                receiverItemBinding.txtMessage.text = chat.message.content
+                val dateFormat = SimpleDateFormat("dd-MMM-yyyy hh:mm a", Locale.getDefault())
+                receiverItemBinding.txtDate.text = dateFormat.format(chat.date)
 
-            receiverItemBinding.txtMessage.text = chat.message
-            val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm a", Locale.getDefault())
-            receiverItemBinding.txtDate.text = dateFormat.format(chat.date)
+                receiverItemBinding.typingLAV.visibility = View.GONE
+                receiverItemBinding.txtDate.visibility = View.VISIBLE
+                receiverItemBinding.txtMessage.visibility = View.VISIBLE
 
+            } else {
+
+                receiverItemBinding.typingLAV.visibility = View.VISIBLE
+                receiverItemBinding.txtDate.visibility = View.GONE
+                receiverItemBinding.txtMessage.visibility = View.GONE
+
+            }
         }
 
     }
@@ -68,7 +79,7 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val chat = getItem(position)
 
-        if (chat.messageType.equals("sender", true)){
+        if (chat.message.role == "user"){
             (holder as SenderViewHolder).bind(chat)
         }else{
             (holder as ReceiverViewHolder).bind(chat)
@@ -76,7 +87,7 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
         }
         holder.itemView.setOnClickListener {
             if (holder.adapterPosition != -1) {
-                onClickCallback(chat.message, holder.itemView)
+                onClickCallback(chat.message.content, holder.itemView)
             }
             true
         }
@@ -84,7 +95,7 @@ class SenderViewHolder(private val senderItemBinding: SenderItemBinding):
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).messageType.equals("sender", true)){
+        return if (getItem(position).message.content == "user"){
             0 // senderitem
         }else{
             1 // receiveritem
