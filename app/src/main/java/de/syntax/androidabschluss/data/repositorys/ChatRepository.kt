@@ -11,6 +11,7 @@ import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
 import de.syntax.androidabschluss.response.Message
 import de.syntax.androidabschluss.utils.CHATGPT_MODEL
+import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -20,13 +21,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.Date
 import java.util.UUID
 
-class ChatRepository(application: Application) {
+class ChatRepository(val application: Application) {
 
     private val chatGPTDao = ChatGPTDatabase.getInstance(application).chatGptDao
     private val apiClient = ApiClient.getInstance()
@@ -88,7 +90,7 @@ class ChatRepository(application: Application) {
                         Chat(
                             receiverId,
                             Message(
-                                "Ich helfe dir Sprachen zu lernen",
+                                "",
                                 "Pascal"
                             ),
                             Date()
@@ -148,7 +150,10 @@ class ChatRepository(application: Application) {
                 async { chatGPTDao.deleteChatUsingChatId(receiverId) },
                 async { chatGPTDao.deleteChatUsingChatId(senderId) }
             ).awaitAll()
-            _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
+            withContext(Dispatchers.Main){
+                application.longToastShow("Irgendwas ist falsch gelaufen")
+            }
+      //      _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
         }
 
     }

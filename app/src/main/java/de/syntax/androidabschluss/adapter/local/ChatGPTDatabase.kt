@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import de.syntax.androidabschluss.converters.TypeConverter
+import de.syntax.androidabschluss.data.model.open.Assistant
 import de.syntax.androidabschluss.data.model.open.Chat
 
 
 @Database(
-    entities = [Chat::class],
+    entities = [Chat::class, Assistant::class],
     version = 1,
     exportSchema = false
 )
@@ -18,6 +19,7 @@ import de.syntax.androidabschluss.data.model.open.Chat
 @TypeConverters(TypeConverter::class)
 abstract class ChatGPTDatabase : RoomDatabase() {
     abstract val chatGptDao : ChatGPTDao
+    abstract val assistantDao : AssistantDao
 
 
     companion object {

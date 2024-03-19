@@ -21,7 +21,9 @@ enum class NetworkStatus{
     Available,Unavailable
 }
 
-
+enum class  StatusResult {
+    Added
+}
 
 fun Context.hideKeyBoard(it: View) {
     try {
