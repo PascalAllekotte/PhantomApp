@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.pictureGeneratorFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.assistantDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.gptFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.assistantsFragment -> binding.bottomNavigationView.visibility = View.GONE
 
 
                 else -> {
