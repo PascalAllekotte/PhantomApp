@@ -10,6 +10,23 @@ android:id="@+id/botFragmentLayout"
 tools:context=".ui.botFragment"
 android:background="@drawable/futuristic_background">
 
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/black"
+        android:text="Add Robot"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gpt" />
     <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_assistant"
         style="@style/buttonfinal"
@@ -56,6 +73,20 @@ android:background="@drawable/futuristic_background">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_generate" />
 
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/btn_bots"
+        style="@style/buttonfinal"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:background="@drawable/fbh"
+        android:text="PicGenerator"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gpt" />
+
     <ImageView
         android:layout_width="600dp"
         android:layout_height="wrap_content"
@@ -83,6 +114,8 @@ android:background="@drawable/futuristic_background">
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
