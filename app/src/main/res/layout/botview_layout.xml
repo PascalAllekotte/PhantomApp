@@ -63,11 +63,13 @@
             android:orientation="vertical">
 
             <View
+                android:id="@+id/editview"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="#000000" />
 
             <View
+                android:id="@+id/deleteview"
                 android:layout_width="20dp"
                 android:layout_height="54dp"
                 android:background="#0090FF" />
