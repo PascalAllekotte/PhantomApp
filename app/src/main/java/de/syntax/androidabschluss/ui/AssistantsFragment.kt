@@ -1,6 +1,7 @@
 package de.syntax.androidabschluss.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import de.syntax.androidabschluss.adapter.local.Resource
 import de.syntax.androidabschluss.data.model.open.Assistant
 import de.syntax.androidabschluss.databinding.FragmentAssistantsBinding
+import de.syntax.androidabschluss.utils.Status
+import de.syntax.androidabschluss.utils.StatusResult
 import de.syntax.androidabschluss.utils.assistantImageList
 import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.viewmodel.AssistantViewModel
@@ -36,25 +40,49 @@ class AssistantsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      binding = FragmentAssistantsBinding.inflate(inflater,container,false)
+        binding = FragmentAssistantsBinding.inflate(inflater,container,false)
         return binding.root
-
-
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
 
         binding.addbutton.setOnClickListener{
             addAssistant(it)
+            statusCallback(view)
 
         }
 
     }
+
+    private fun statusCallback(view: View) {
+        assistantViewModel
+            .statusLiveData
+            .observe(viewLifecycleOwner) { it: Resource<StatusResult> ->
+                when (it.status) {
+                    Status.LOADING -> { }
+                    Status.SUCCESS -> {
+                        when (it.data as StatusResult) {
+                            StatusResult.Added -> {
+                                Log.d("StatusResult", "Added")
+                            }
+                        }
+                        it.message?.let { it1 -> view.context.longToastShow(it1) }
+                    }
+                    Status.ERROR -> {
+
+                        it.message?.let { it1 -> view.context.longToastShow(it1) }
+
+                    }
+                }
+            }
+    }
+
 
     private fun addAssistant(view: View){
         val edAssistantName = EditText(view.context)
