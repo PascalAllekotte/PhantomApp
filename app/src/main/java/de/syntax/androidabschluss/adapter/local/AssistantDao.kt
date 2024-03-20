@@ -21,4 +21,12 @@ interface AssistantDao {
 
     @Update()
     suspend fun updateAssistant(assistant : Assistant) : Int
+
+    @Query("DELETE FROM Assistant WHERE assistantId == :assistantId ")
+    fun deleteAssistantUsingId(assistantId : String) : Int
+
+    @Query("DELETE FROM Chat WHERE assistantId == :assistantId ")
+    fun deleteChatUsingAssistantId(assistantId : String)
+
+
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soup.neumorphism.NeumorphCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="10dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp">
+
+
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/botImageLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:backgroundTint="#00000000">
+
+            <ImageView
+                android:id="@+id/botImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/katze"/>
+
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <TextView
+            android:id="@+id/botTitle"
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toStartOf="@+id/editDeleteLL"
+            android:layout_toEndOf="@+id/botImageLL"
+            android:singleLine="true"
+            android:text="Notiztitel"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/editDeleteLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="241dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/botImageLL"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="54dp"
+                android:background="#0090FF" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</soup.neumorphism.NeumorphCardView>

@@ -71,6 +71,8 @@ class AssistantsFragment : Fragment() {
                             StatusResult.Added -> {
                                 Log.d("StatusResult", "Added")
                             }
+
+                            else -> {}
                         }
                         it.message?.let { it1 -> view.context.longToastShow(it1) }
                     }
@@ -109,7 +111,7 @@ class AssistantsFragment : Fragment() {
             .setPositiveButton("Add"){ dialog, which ->
                 val assistantName = edAssistantName.text.toString().trim()
                 if (assistantName.isNotEmpty()){
-                    assistantViewModel.insertRobot(
+                    assistantViewModel.insertAssistant(
                         Assistant(
                             UUID.randomUUID().toString(),
                             assistantName,

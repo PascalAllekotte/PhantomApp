@@ -35,7 +35,9 @@ enum class NetworkStatus{
 }
 
 enum class  StatusResult {
-    Added
+    Added,
+    Updated,
+    Deleted
 }
 
 fun Context.hideKeyBoard(it: View) {
