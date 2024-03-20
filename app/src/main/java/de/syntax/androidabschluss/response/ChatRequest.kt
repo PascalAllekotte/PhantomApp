@@ -1,6 +1,10 @@
 package de.syntax.androidabschluss.response
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class ChatRequest(
-    val messages: List<Message>,
-    val model: String
+    @Json(name = "messages") val messages: List<Message>,
+    @Json(name = "model") val model: String
 )

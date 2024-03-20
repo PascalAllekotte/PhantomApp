@@ -3,7 +3,7 @@ package de.syntax.androidabschluss.data.remote
 import de.syntax.androidabschluss.utils.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
@@ -22,7 +22,7 @@ object ApiClient {
             return INSTANCE ?: Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(ApiInterface::class.java)
                 .also {

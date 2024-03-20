@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AssistantsFragment">
+    tools:context=".ui.AssistantsFragment"
+    android:background="@drawable/futuristic_background">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -24,10 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="155dp"
         android:layout_marginTop="16dp"
         android:rotation="-6"
-        android:text="Generator"
+        android:text="Your Bots"
         android:textColor="#5D6786"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -51,8 +52,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <soup.neumorphism.NeumorphButton
         android:id="@+id/addbutton"
+        style="@style/buttonfinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -60,7 +62,7 @@
         android:layout_margin="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/black"
-        android:text="Add Robot"
+        android:text="Add bot"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
