@@ -3,12 +3,22 @@ package de.syntax.androidabschluss.adapter.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import de.syntax.androidabschluss.data.model.open.Assistant
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface AssistantDao {
 
+    @Query("SELECT * FROM Assistant")
+    fun getAssistantList() : Flow<List<Assistant>>
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAssistant(robot : Assistant) : Long
+    suspend fun insertAssistant(assistant : Assistant) : Long
+
+    @Update()
+    suspend fun updateAssistant(assistant : Assistant) : Int
 }
