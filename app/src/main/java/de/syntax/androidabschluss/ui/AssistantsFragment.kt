@@ -58,6 +58,9 @@ class AssistantsFragment : Fragment() {
         }
          **/
 
+        binding.toolbarLayout.titletext.text = "ChatBots" // :DD
+
+
         binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
 
