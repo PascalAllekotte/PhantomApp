@@ -1,6 +1,7 @@
 package de.syntax.androidabschluss.ui
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,12 +54,15 @@ class GptFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-
+        binding.toolbarLayout.backbutton.setOnClickListener{
+            findNavController().popBackStack()
+        }
         binding.toolbarLayout.titletext.text = gptArgs.assistantName
 
         val chatAdapter = ChatAdapter(){ message, textView ->
 
-            val popup = PopupMenu(context, textView)
+            val contextThemeWrapper = ContextThemeWrapper(context, R.style.YourCustomPopupMenuStyle)
+            val popup = PopupMenu(contextThemeWrapper, textView)
             try {
                 val fields = popup.javaClass.declaredFields
                 for (field in fields) {
@@ -66,10 +70,7 @@ class GptFragment : Fragment() {
                         field.isAccessible = true
                         val menuPopupHelper = field.get(popup)
                         val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
-                        val setForceIcons = classPopupHelper.getMethod(
-                            "setForceShowIcon",
-                            Boolean::class.javaPrimitiveType
-                        )
+                        val setForceIcons = classPopupHelper.getMethod("setForceShowIcon", Boolean::class.javaPrimitiveType)
                         setForceIcons.invoke(menuPopupHelper, true)
                         break
                     }
@@ -77,27 +78,29 @@ class GptFragment : Fragment() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+
             popup.menuInflater.inflate(R.menu.option_menu, popup.menu)
 
-            popup.setOnMenuItemClickListener {item ->
-                when(item.itemId){
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
                     R.id.copyMenu -> {
                         view.context.copyToClipBoard(message)
-                        return@setOnMenuItemClickListener true
+                        true
                     }
                     R.id.slectTxtMenu -> {
-                        return@setOnMenuItemClickListener true
+                        // Fügen Sie hier die gewünschte Funktionalität ein
+                        true
                     }
                     R.id.shareTextMenu -> {
                         view.context.shareMsg(message)
-                        return@setOnMenuItemClickListener true
+                        true
                     }
-                    else -> {
-                        return@setOnMenuItemClickListener true
-                    }
+                    else -> false
                 }
             }
+
             popup.show()
+
 
         }
         binding.chatRv.adapter = chatAdapter

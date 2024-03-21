@@ -57,6 +57,11 @@ class AssistantsFragment : Fragment() {
         findNavController().popBackStack()
         }
          **/
+
+        binding.toolbarLayout.backbutton.setOnClickListener{
+            findNavController().popBackStack()
+
+        }
         binding.addbutton.setOnClickListener {
             addAssistant(it)
         }

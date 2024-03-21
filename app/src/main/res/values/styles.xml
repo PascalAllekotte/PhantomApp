@@ -117,8 +117,8 @@
         <item name="neumorph_inset">@dimen/design_default_inset</item>
         <item name="neumorph_shadowElevation">4dp</item>
         <!-- Angepasste Schattenfarben für bessere Sichtbarkeit auf dunklem Hintergrund -->
-        <item name="neumorph_shadowColorLight">#B3727272</item> <!-- Hellerer Schatten -->
-        <item name="neumorph_shadowColorDark">#B3000000</item> <!-- Dunklerer Schatten, aber weniger intensiv -->
+        <item name="neumorph_shadowColorLight">#80727272</item> <!-- Hellerer Schatten -->
+        <item name="neumorph_shadowColorDark">#80000000</item> <!-- Dunklerer Schatten, aber weniger intensiv -->
         <item name="neumorph_shapeType">flat</item>
         <!-- Textfarbe zu Weiß angepasst für bessere Sichtbarkeit -->
         <item name="android:textColor">@color/white</item>
@@ -126,6 +126,8 @@
         <!-- Optional: Hintergrund des Buttons leicht transparent machen -->
         <item name="android:background">#33FFFFFF</item> <!-- Leichte Transparenz, änderbar je nach Bedarf -->
     </style>
+
+
 
     <style name="bottom" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
@@ -207,7 +209,7 @@
     <style name="textneu" parent="android:Widget">
         <item name="neumorph_shadowElevation">2dp</item>
         <item name="neumorph_shadowColorLight">#4B63AE</item>
-        <item name="neumorph_shadowColorDark">#30374C</item>
+        <item name="neumorph_shadowColorDark">#191C27</item>
     </style>
 
 
@@ -245,7 +247,17 @@
         <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
     </style>
 
-
+    <style name="cardview2" parent="android:Widget">
+        <item name="android:padding">@dimen/design_default_padding</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_anim_neumorph</item>
+        <item name="neumorph_inset">@dimen/design_default_inset</item>
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">#9951586F</item>
+        <item name="neumorph_shadowColorDark">#66000000</item>
+        <item name="neumorph_shapeType">flat</item>
+        <item name="neumorph_backgroundColor">#0A616161</item>
+        <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
+    </style>
     <style name="buttonCardview" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
         <item name="android:minHeight">72dip</item>
@@ -270,6 +282,14 @@
         <!-- Optional: Hintergrund des Buttons leicht transparent machen -->
         <item name="android:background">#33FFFFFF</item> <!-- Leichte Transparenz, änderbar je nach Bedarf -->
     </style>
+
+    <style name="YourCustomPopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/rounded_menu_background</item>
+        <item name="android:textColor">#000000</item>
+        <item name="background">@color/greypurple</item>
+        <!-- Fügen Sie hier weitere Stil-Attribute hinzu -->
+    </style>
+
 
     <style name="buttonCardview2" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>

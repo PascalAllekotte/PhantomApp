@@ -2,7 +2,9 @@
 <soup.neumorphism.NeumorphCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/CardView.Dark"
+    style="@style/cardview2"
+    app:neumorph_strokeWidth="1dp"
+    app:neumorph_strokeColor="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -40,9 +42,10 @@
 
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
+
         <TextView
             android:id="@+id/botTitle"
-            android:layout_width="233dp"
+            android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
@@ -50,35 +53,40 @@
             android:layout_toEndOf="@+id/botImageLL"
             android:singleLine="true"
             android:text="Notiztitel"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.246"
             app:layout_constraintStart_toEndOf="@+id/botImageLL"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <View
+        <ImageView
             android:id="@+id/editview"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="#000000"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00000000"
+            android:src="@drawable/deletebutton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.925"
             app:layout_constraintStart_toEndOf="@+id/botTitle"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.166" />
+            app:layout_constraintVertical_bias="0.0" />
 
-        <View
+        <ImageView
             android:id="@+id/deleteview"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="#0090FF"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00000000"
+            android:src="@drawable/editbutton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toEndOf="@+id/botTitle"
-            app:layout_constraintTop_toBottomOf="@+id/editview" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

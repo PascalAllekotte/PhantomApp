@@ -10,7 +10,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,38 +30,16 @@
         android:layout_height="0dp"
         android:layout_below="@id/toolbarLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
         android:clipToPadding="true"
         android:orientation="vertical"
         android:overScrollMode="never"
         android:paddingBottom="100dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/addbutton"
         tools:listitem="@layout/botview_layout" />
-
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/addbutton"
-        style="@style/imagebuttonneu"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/black"
-        android:text="+"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
 
     <include
         android:id="@+id/toolbarLayout"
@@ -69,6 +47,19 @@
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/addbutton"
+        style="@style/imagebuttonneu"
+        android:layout_width="68dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/addbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="600dp"
@@ -78,4 +69,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
