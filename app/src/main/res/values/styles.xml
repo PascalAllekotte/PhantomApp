@@ -243,7 +243,7 @@
         <item name="neumorph_shadowColorLight">#51586F</item>
         <item name="neumorph_shadowColorDark">#99000000</item>
         <item name="neumorph_shapeType">flat</item>
-        <item name="neumorph_backgroundColor">#661C2533</item>
+        <item name="neumorph_backgroundColor">#3329384F</item>
         <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
     </style>
 

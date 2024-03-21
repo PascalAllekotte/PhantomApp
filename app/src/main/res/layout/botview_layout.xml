@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/cardview2"
-    app:neumorph_strokeWidth="1dp"
+    app:neumorph_strokeWidth="0.7dp"
     app:neumorph_strokeColor="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
