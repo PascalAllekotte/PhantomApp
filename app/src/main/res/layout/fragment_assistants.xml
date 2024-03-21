@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AssistantsFragment"
-    android:background="@drawable/futuristic_background">
+    android:background="@drawable/futuristic_background"
+    tools:context=".ui.AssistantsFragment">
 
     <View
         android:id="@+id/view"
@@ -25,11 +25,12 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/robotRV"
+        android:id="@+id/assistant_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@id/toolbarLayout"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
         android:clipToPadding="true"
         android:orientation="vertical"
         android:overScrollMode="never"
@@ -44,27 +45,29 @@
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/addbutton"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/imagebuttonneu"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/black"
-        android:text="Add bot"
+        android:text="+"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
 
     <include
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar_layout"
-        />
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <ImageView
         android:id="@+id/imageView5"

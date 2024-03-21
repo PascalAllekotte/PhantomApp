@@ -12,14 +12,11 @@ import android.widget.Toast
 import de.syntax.androidabschluss.R
 
 val assistantImageList = listOf(
-    R.drawable.robot_1,
-    R.drawable.robot_2,
-    R.drawable.robot_3,
-    R.drawable.robot_4,
-    R.drawable.robot_5,
-    R.drawable.robot_6,
-    R.drawable.robot_7,
-    R.drawable.robot_8,
+    R.drawable.katze,
+    R.drawable.pascal,
+    R.drawable.phantom,
+    R.drawable.testlogo,
+
 
 
 

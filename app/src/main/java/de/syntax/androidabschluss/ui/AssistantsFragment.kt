@@ -84,13 +84,13 @@ class AssistantsFragment : Fragment() {
                 }
             }
         }
-        binding.robotRV.adapter = assistantAdapter
+        binding.assistantRv.adapter = assistantAdapter
         assistantAdapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
 
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
-                binding.robotRV.smoothScrollToPosition(positionStart)
+                binding.assistantRv.smoothScrollToPosition(positionStart)
             }
 
         })
@@ -184,7 +184,7 @@ class AssistantsFragment : Fragment() {
         container.addView(textInputLayout)
 
         MaterialAlertDialogBuilder(view.context)
-            .setTitle("updated robot")
+            .setTitle("updated assistant")
             .setView(container)
             .setCancelable(false)
             .setPositiveButton("Update"){ dialog, which ->
@@ -229,7 +229,7 @@ class AssistantsFragment : Fragment() {
         container.addView(textInputLayout)
 
         MaterialAlertDialogBuilder(view.context)
-            .setTitle("Add a new robot")
+            .setTitle("Add a new assistant")
             .setView(container)
             .setCancelable(false)
             .setPositiveButton("Add"){ dialog, which ->

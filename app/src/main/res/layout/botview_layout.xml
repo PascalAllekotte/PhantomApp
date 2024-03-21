@@ -1,81 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <soup.neumorphism.NeumorphCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/cardview"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardView.Dark"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="4dp"
+    android:layout_marginStart="-30dp"
+    android:layout_marginEnd="-30dp"
+
     app:cardBackgroundColor="@color/white"
     app:cardElevation="10dp"
     android:foreground="?android:attr/selectableItemBackground">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp">
 
 
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:id="@+id/botImageLL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:backgroundTint="#00000000">
+            android:backgroundTint="#00000000"
+            app:cardCornerRadius="50dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/botImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/katze"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/katze" />
 
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
         <TextView
             android:id="@+id/botTitle"
-            android:layout_width="335dp"
-            android:layout_height="wrap_content"
+            android:layout_width="233dp"
+            android:layout_height="34dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toStartOf="@+id/editDeleteLL"
             android:layout_toEndOf="@+id/botImageLL"
             android:singleLine="true"
             android:text="Notiztitel"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:id="@+id/editDeleteLL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="241dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_toEndOf="@+id/botImageLL"
-            android:orientation="vertical">
-
-            <View
-                android:id="@+id/editview"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="#000000" />
-
-            <View
-                android:id="@+id/deleteview"
-                android:layout_width="20dp"
-                android:layout_height="54dp"
-                android:background="#0090FF" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/botImageLL"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
-    </RelativeLayout>
+        <View
+            android:id="@+id/editview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/botTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.166" />
+
+        <View
+            android:id="@+id/deleteview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="#0090FF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/botTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </soup.neumorphism.NeumorphCardView>

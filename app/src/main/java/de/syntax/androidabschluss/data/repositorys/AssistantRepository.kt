@@ -82,7 +82,7 @@ class AssistantRepository(application: Application) {
             _statusLiveData.postValue(Resource.Loading())
             CoroutineScope(Dispatchers.IO).launch {
                 val result = assistantDao.updateAssistant(assistant)
-                handleResult(result, "Updated Robot Successfully", StatusResult.Updated)
+                handleResult(result, "Updated Assistant Successfully", StatusResult.Updated)
             }
         } catch (e: Exception) {
             e.printStackTrace()
