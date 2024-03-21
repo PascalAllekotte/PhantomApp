@@ -17,6 +17,11 @@ class AssistantViewModel(application: Application) : AndroidViewModel(applicatio
         assistantRepository.getAssistantList()
     }
 
+    fun clearStatusLiveData(){
+        assistantRepository.clearStatusLiveData()
+
+    }
+
     fun insertAssistant(assistant: Assistant){
         assistantRepository.insertAssistant(assistant)
     }

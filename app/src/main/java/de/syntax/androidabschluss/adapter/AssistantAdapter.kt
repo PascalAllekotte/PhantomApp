@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.data.model.open.Assistant
 import de.syntax.androidabschluss.databinding.BotviewLayoutBinding
+import de.syntax.androidabschluss.utils.assistantImageList
 
 class AssistantAdapter(
     private val onClickdeleteUpdateCallback : (type: String, position: Int, assistant: Assistant) -> Unit
@@ -41,7 +42,7 @@ class AssistantAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val assistant = getItem(position)
         holder.botviewLayoutBinding.botTitle.text = assistant.assistantName
-        holder.botviewLayoutBinding.botImage.setImageResource(assistant.assistantImg)
+        holder.botviewLayoutBinding.botImage.setImageResource(assistantImageList[assistant.assistantImg])
 
         holder.itemView.setOnClickListener {
             if (holder.adapterPosition != -1) {

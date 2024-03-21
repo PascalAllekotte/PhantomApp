@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import de.syntax.androidabschluss.adapter.AssistantAdapter
-import de.syntax.androidabschluss.adapter.local.Resource
 import de.syntax.androidabschluss.data.model.open.Assistant
 import de.syntax.androidabschluss.databinding.FragmentAssistantsBinding
 import de.syntax.androidabschluss.utils.Status
@@ -101,7 +100,7 @@ class AssistantsFragment : Fragment() {
     }
 
     private fun callGetAssistantList(assistantAdapter: AssistantAdapter, view: View) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             assistantViewModel
                 .assistantStatusFlow
                 .collectLatest {
@@ -131,7 +130,8 @@ class AssistantsFragment : Fragment() {
     private fun statusCallback(view: View) {
         assistantViewModel
             .statusLiveData
-            .observe(viewLifecycleOwner) { it: Resource<StatusResult> ->
+            .observe(viewLifecycleOwner) {
+                if (it != null){
                 when (it.status) {
                     Status.LOADING -> { }
                     Status.SUCCESS -> {
@@ -153,13 +153,17 @@ class AssistantsFragment : Fragment() {
                     }
                     Status.ERROR -> {
 
-                        it.message?.let { it1 -> view.context.longToastShow(it1) }
-
+                            it.message?.let { it1 -> view.context.longToastShow(it1) }
+                        }
                     }
                 }
             }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        assistantViewModel.clearStatusLiveData()
+    }
 
     private fun updateAssistant(view: View, assistant: Assistant){
         val edAssistantName = EditText(view.context)
@@ -183,7 +187,7 @@ class AssistantsFragment : Fragment() {
             .setTitle("updated robot")
             .setView(container)
             .setCancelable(false)
-            .setPositiveButton("Add"){ dialog, which ->
+            .setPositiveButton("Update"){ dialog, which ->
                 val assistantName = edAssistantName.text.toString().trim()
                 if (assistantName.isNotEmpty()){
                     assistantViewModel.updateAssistant(
@@ -235,7 +239,7 @@ class AssistantsFragment : Fragment() {
                         Assistant(
                             UUID.randomUUID().toString(),
                             assistantName,
-                            assistantImageList.random()
+                            (assistantImageList.indices).random()
 
 
                         )

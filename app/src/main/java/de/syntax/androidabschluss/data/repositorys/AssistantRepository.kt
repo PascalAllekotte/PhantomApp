@@ -24,10 +24,15 @@ class AssistantRepository(application: Application) {
 
 
 
-    private val _statusLiveData = MutableLiveData<Resource<StatusResult>>()
-    val statusLiveData : LiveData<Resource<StatusResult>>
+    private val _statusLiveData = MutableLiveData<Resource<StatusResult>?>()
+    val statusLiveData : LiveData<Resource<StatusResult>?>
         get() = _statusLiveData
 
+
+    fun clearStatusLiveData(){
+        _statusLiveData.value = null
+
+    }
 
     fun getAssistantList() {
         CoroutineScope(Dispatchers.IO).launch {

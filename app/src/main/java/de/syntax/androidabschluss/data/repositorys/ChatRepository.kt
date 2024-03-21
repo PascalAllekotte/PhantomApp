@@ -37,13 +37,13 @@ class ChatRepository(val application: Application) {
     val chatStateFlow : StateFlow<Resource<Flow<List<Chat>>>>
         get() = _chatStateFlow
 
-    fun getChatList(){
+    fun getChatList(assistantId: String){
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 _chatStateFlow.emit(Resource.Loading())
                 val result = async {
                     delay(300)
-                    chatGPTDao.getChatList()
+                    chatGPTDao.getChatList(assistantId)
                 }.await()
                 _chatStateFlow.emit(Resource.Success(result))
             } catch (e:Exception){
@@ -54,7 +54,7 @@ class ChatRepository(val application: Application) {
 
     }
 
-    fun createChatCompletion(message: String) {
+    fun createChatCompletion(message: String, assistantId: String) {
         val receiverId = UUID.randomUUID().toString()
         CoroutineScope(Dispatchers.IO).launch {
             delay(200)
@@ -68,12 +68,13 @@ class ChatRepository(val application: Application) {
                                 message,
                                 "user"
                             ),
+                            assistantId,
                             Date()
                         )
                     )
                 }.await()
 
-                val messageList = chatGPTDao.getChatListFlow().map {
+                val messageList = chatGPTDao.getChatListFlow(assistantId).map {
                     it.message
                 }.reversed().toMutableList()
 
@@ -93,6 +94,7 @@ class ChatRepository(val application: Application) {
                                 "",
                                 "Pascal"
                             ),
+                            assistantId,
                             Date()
                         )
                     )

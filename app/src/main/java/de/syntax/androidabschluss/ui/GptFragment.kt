@@ -8,6 +8,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ChatAdapter
@@ -30,7 +31,7 @@ class GptFragment : Fragment() {
        ViewModelProvider(this)[ChatViewModel::class.java]
    }
 
-
+    private val gptArgs : GptFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +43,18 @@ class GptFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGptBinding.inflate(inflater,container,false)
-
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backbutton.setOnClickListener{
+        binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
-
         }
+
+
+        binding.toolbarLayout.titletext.text = gptArgs.assistantName
 
         val chatAdapter = ChatAdapter(){ message, textView ->
 
@@ -109,7 +111,7 @@ class GptFragment : Fragment() {
                 binding.sendButton.setOnClickListener {
                     view.context.hideKeyBoard(it)
                     if (binding.etBlock.text.toString().trim().isNotEmpty()) {
-                        chatViewModel.createChatCompletion(binding.etBlock.text.toString().trim())
+                        chatViewModel.createChatCompletion(binding.etBlock.text.toString().trim(), gptArgs.assistantId)
                         binding.etBlock.text = null
                     }else{
                         view.context.longToastShow("Message is Required")
@@ -117,7 +119,7 @@ class GptFragment : Fragment() {
                 }
 
         callGetChatList(binding.chatRv,chatAdapter)
-        chatViewModel.getChatList()
+        chatViewModel.getChatList(gptArgs.assistantId)
 
 
     }
