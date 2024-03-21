@@ -13,7 +13,7 @@ class AssistantViewModel(application: Application) : AndroidViewModel(applicatio
     val statusLiveData get() = assistantRepository.statusLiveData
 
 
-    fun getAssistantList(assistant: Assistant){
+    fun getAssistantList(){
         assistantRepository.getAssistantList()
     }
 
