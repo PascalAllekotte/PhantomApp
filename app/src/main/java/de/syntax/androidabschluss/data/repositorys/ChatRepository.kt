@@ -9,6 +9,9 @@ import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.data.remote.ApiClient
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
+import de.syntax.androidabschluss.response.CreateImageRequest
+import de.syntax.androidabschluss.response.CreateImageResponse
+import de.syntax.androidabschluss.response.Data
 import de.syntax.androidabschluss.response.Message
 import de.syntax.androidabschluss.utils.CHATGPT_MODEL
 import de.syntax.androidabschluss.utils.longToastShow
@@ -36,6 +39,14 @@ class ChatRepository(val application: Application) {
     private val _chatStateFlow = MutableStateFlow<Resource<Flow<List<Chat>>>>(Resource.Loading())
     val chatStateFlow : StateFlow<Resource<Flow<List<Chat>>>>
         get() = _chatStateFlow
+
+    private val _imageStateFlow = MutableStateFlow<Resource<CreateImageResponse>>(Resource.Success())
+    val imageStateFlow : StateFlow<Resource<CreateImageResponse>>
+        get() = _imageStateFlow
+
+    private val imageList = ArrayList<Data>()
+
+
 
     fun getChatList(assistantId: String){
         CoroutineScope(Dispatchers.IO).launch {
@@ -157,7 +168,54 @@ class ChatRepository(val application: Application) {
             }
       //      _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
         }
-
     }
+
+    val key = "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"
+    fun createImage(body: CreateImageRequest) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                _imageStateFlow.emit(Resource.Loading())
+                apiClient.createImage(
+                    body,
+                    authorization = "Bearer $key}"
+                ).enqueue(object : Callback<CreateImageResponse> {
+                    override fun onResponse(
+                        call: Call<CreateImageResponse>,
+                        response: Response<CreateImageResponse>
+                    ) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val responseBody = response.body()
+                            if (responseBody != null){
+                                imageList.addAll(responseBody.data)
+                                val modifiedDataList = ArrayList<Data>().apply {
+                                    addAll(imageList)
+                                }
+                                val createImageResponse = CreateImageResponse(
+                                    responseBody.created,
+                                    modifiedDataList
+                                )
+                                _imageStateFlow.emit(Resource.Success(createImageResponse))
+                            } else{
+                                _imageStateFlow.emit(Resource.Success(null))
+
+
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<CreateImageResponse>, t: Throwable) {
+                        t.printStackTrace()
+                        CoroutineScope(Dispatchers.IO).launch {
+                            _imageStateFlow.emit(Resource.Error(t.message.toString()))
+                        }
+                    }
+                })
+            } catch(e: Exception) {
+                e.printStackTrace()
+                _imageStateFlow.emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
 
 }

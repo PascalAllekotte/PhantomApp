@@ -53,29 +53,30 @@ class PictureGeneratorFragment : Fragment() {
 
         binding.btGenerate.setOnClickListener {
             view.context.hideKeyBoard(it)
-
             if (binding.etInput.text.toString().trim().isNotEmpty()) {
-                if (binding.etInput.text.toString().trim().isNotEmpty()){
+                if (binding.etInput.text.toString().trim().length < 1000) {
+                    Log.d("etinput", binding.etInput.text.toString().trim())
+                    Log.d("anzahlListe", binding.anzahlListe.text.toString().trim())
 
-                    if (binding.etInput.text.toString().trim().length < 1000 ){
-                        Log.d("etinput", binding.etInput.text.toString().trim())
-                        Log.d("anzahlListe", binding.anzahlListe.text.toString().trim())
+                    val selectedSizeRB = binding.imageGrE.checkedRadioButtonId
+                    Log.d("selectedSizeRB",
+                        binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString()
+                            .trim()
+                    )
 
-                        val selectedSizeRB = binding.imageGrE.checkedRadioButtonId
-                        Log.d( "selectedSizeRB", binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString().trim())
 
+                    //      binding.etInput.text = null
 
-                        //      binding.etInput.text = null
+                } else {
+                    view.context.longToastShow("auswahl machen")
 
-                    }else{
-                        view.context.longToastShow("auswahl machen")
-
-                    }
                 }
+
             } else {
                 view.context.longToastShow("auswahl machen")
             }
         }
+
 
 
         binding.backbutton.setOnClickListener {
