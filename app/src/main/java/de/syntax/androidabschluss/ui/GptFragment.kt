@@ -1,11 +1,17 @@
 package de.syntax.androidabschluss.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.PopupMenu
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,10 +30,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 
 class GptFragment : Fragment() {
-   private lateinit var binding: FragmentGptBinding
+    private lateinit var textToSpeech: TextToSpeech
+    private lateinit var binding: FragmentGptBinding
+    private lateinit var edMessage : EditText
    private val chatViewModel : ChatViewModel by lazy {
        ViewModelProvider(this)[ChatViewModel::class.java]
    }
@@ -44,12 +53,27 @@ class GptFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGptBinding.inflate(inflater,container,false)
+
+
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        textToSpeech = TextToSpeech(view.context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = textToSpeech.setLanguage(Locale.getDefault())
+                if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED
+                ) {
+                    view.context.longToastShow("language is not supported")
+                }
+            }
+        }
+
+
         binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
@@ -84,14 +108,29 @@ class GptFragment : Fragment() {
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.copyMenu -> {
+                        textToSpeech.stop()
                         view.context.copyToClipBoard(message)
                         true
                     }
+
+                    R.id.textToVoiceMenu -> {
+                        textToSpeech.speak(
+                            message,
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            null
+                        )
+                        true
+                    }
+
+
                     R.id.slectTxtMenu -> {
+                        textToSpeech.stop()
                         // Fügen Sie hier die gewünschte Funktionalität ein
                         true
                     }
                     R.id.shareTextMenu -> {
+                        textToSpeech.stop()
                         view.context.shareMsg(message)
                         true
                     }
@@ -111,7 +150,30 @@ class GptFragment : Fragment() {
             }
         })
 
+
+        binding.speechButton.setOnClickListener {
+            binding.etBlock.text = null
+            try {
+                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE,
+                    Locale.getDefault()
+                )
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Say something")
+                result.launch(intent)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
+
+
                 binding.sendButton.setOnClickListener {
+                    textToSpeech.stop()
                     view.context.hideKeyBoard(it)
                     if (binding.etBlock.text.toString().trim().isNotEmpty()) {
                         chatViewModel.createChatCompletion(binding.etBlock.text.toString().trim(), gptArgs.assistantId)
@@ -155,5 +217,18 @@ class GptFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        textToSpeech.stop()
+    }
+    private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result->
+        if (result.resultCode == Activity.RESULT_OK){
+            val results = result.data?.getStringArrayListExtra(
+                RecognizerIntent.EXTRA_RESULTS
+            ) as ArrayList<String>
 
+            binding.etBlock.setText(results[0])
+        }
+    }
 }

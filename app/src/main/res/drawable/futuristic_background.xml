@@ -3,6 +3,6 @@
     <gradient
         android:startColor="#000000"
         android:endColor="#5B6CA2"
-        android:angle="45"/> <!-- Adjust the angle as needed -->
-    <corners android:radius="0dp"/> <!-- Keeping corners flat for the background -->
+        android:angle="45"/>
+    <corners android:radius="0dp"/>
 </shape>

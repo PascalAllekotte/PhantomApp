@@ -8,6 +8,10 @@
         android:title="Select Text"
         android:icon="@drawable/ic_select_all"
      />
+    <item android:id="@+id/textToVoiceMenu"
+        android:title="Speech text"
+        android:icon="@drawable/ic_select_all"
+        />
     <item android:id="@+id/shareTextMenu"
         android:title="Share"
         android:icon="@drawable/ic_share"

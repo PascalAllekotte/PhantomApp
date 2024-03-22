@@ -1,16 +1,19 @@
 package de.syntax.androidabschluss.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.fragment.app.activityViewModels
-
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import de.syntax.androidabschluss.databinding.FragmentPictureGeneratorBinding
+import de.syntax.androidabschluss.utils.hideKeyBoard
+import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.viewmodel.ImageGenerationViewModel
 
 
@@ -39,6 +42,40 @@ class PictureGeneratorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.anzahlListe.setAdapter(
+            ArrayAdapter(
+                view.context,
+                android.R.layout.simple_list_item_1,
+                (1..10).toList()
+            )
+        )
+
+        binding.btGenerate.setOnClickListener {
+            view.context.hideKeyBoard(it)
+
+            if (binding.etInput.text.toString().trim().isNotEmpty()) {
+                if (binding.etInput.text.toString().trim().isNotEmpty()){
+
+                    if (binding.etInput.text.toString().trim().length < 1000 ){
+                        Log.d("etinput", binding.etInput.text.toString().trim())
+                        Log.d("anzahlListe", binding.anzahlListe.text.toString().trim())
+
+                        val selectedSizeRB = binding.imageGrE.checkedRadioButtonId
+                        Log.d( "selectedSizeRB", binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString().trim())
+
+
+                        //      binding.etInput.text = null
+
+                    }else{
+                        view.context.longToastShow("auswahl machen")
+
+                    }
+                }
+            } else {
+                view.context.longToastShow("auswahl machen")
+            }
+        }
 
 
         binding.backbutton.setOnClickListener {
