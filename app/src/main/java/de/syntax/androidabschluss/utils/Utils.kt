@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.utils
 
+import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -8,6 +9,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import de.syntax.androidabschluss.R
 
@@ -65,3 +67,15 @@ fun Context.copyToClipBoard(message: String) {
     startActivity(Intent.createChooser(intent,"Share Message"))
 }
 
+fun Dialog.setupDialog(layoutResId : Int){
+    setContentView(layoutResId)
+    window!!.setLayout(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    )
+    setCancelable(false)
+
+
+
+
+}

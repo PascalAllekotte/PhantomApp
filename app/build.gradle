@@ -108,6 +108,7 @@ dependencies {
     implementation platform("com.aallam.openai:openai-client-bom:3.7.0")
 
     // define dependencies without versions
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.aallam.openai:openai-client")
     runtimeOnly ("io.ktor:ktor-client-okhttp")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")

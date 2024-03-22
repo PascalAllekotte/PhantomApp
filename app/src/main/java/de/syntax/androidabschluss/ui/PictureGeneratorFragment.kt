@@ -1,28 +1,51 @@
 package de.syntax.androidabschluss.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
+import de.syntax.androidabschluss.R
+import de.syntax.androidabschluss.adapter.ImageAdapter
 import de.syntax.androidabschluss.databinding.FragmentPictureGeneratorBinding
+import de.syntax.androidabschluss.response.CreateImageRequest
+import de.syntax.androidabschluss.utils.Status
 import de.syntax.androidabschluss.utils.hideKeyBoard
 import de.syntax.androidabschluss.utils.longToastShow
+import de.syntax.androidabschluss.utils.setupDialog
+import de.syntax.androidabschluss.viewmodel.ChatViewModel
 import de.syntax.androidabschluss.viewmodel.ImageGenerationViewModel
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class PictureGeneratorFragment : Fragment() {
     private lateinit var binding: FragmentPictureGeneratorBinding
     private val imageGenerationViewModel: ImageGenerationViewModel by viewModels()
 
+    private val chatViewModel : ChatViewModel by lazy {
+        ViewModelProvider(this)[ChatViewModel::class.java]
+    }
 
+    private val viewImageDialog : Dialog by lazy {
+        Dialog(requireActivity(),R.style.DialogCustomTheme).apply {
+            setupDialog(R.layout.view_image_dialog)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +65,82 @@ class PictureGeneratorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val loadImg = viewImageDialog.findViewById<ImageView>(R.id.loadImage)
+        val cancelBtn = viewImageDialog.findViewById<Button>(R.id.cancelBtn)
+        val downloadBtn = viewImageDialog.findViewById<Button>(R.id.downloadBtn)
+
+        cancelBtn.setOnClickListener{
+            viewImageDialog.dismiss()
+        }
+
+        val imageAdapter = ImageAdapter { position, data ->
+            viewImageDialog.show()
+            Glide.with(loadImg).load(data.url)
+                .placeholder(R.drawable.katze)
+                .into(loadImg)
+            downloadBtn.setOnClickListener {
+
+
+            }
+        }
+
+        binding.imageRv.adapter = imageAdapter
+        binding.downloadAllBtn.setOnClickListener{
+            imageAdapter.currentList.map {
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            chatViewModel.imageStateFlow.collect{
+                when(it.status){
+                    Status.LOADING ->
+                        withContext(Dispatchers.Main){
+                            binding.progressbar.visibility = View.VISIBLE
+                }
+                    Status.SUCCESS ->
+                        withContext(Dispatchers.Main){
+                            binding.progressbar.visibility = View.GONE
+
+                            imageAdapter.submitList(
+                                it.data?.data
+                            )
+
+                            if (imageAdapter.currentList.isNotEmpty()){
+                                binding.downloadAllBtn.visibility = View.VISIBLE
+                            }else{
+                                binding.downloadAllBtn.visibility = View.GONE
+
+
+
+                            }
+
+
+                            }
+
+                }
+                    Status.ERROR ->
+                        withContext(Dispatchers.Main){
+                            binding.progressbar.visibility = View.VISIBLE
+
+        }
+            }
+
+        }
+
+        downloadAllBtn.setOnClickListener {
+            imageAdapter.currentList.map {
+                // Der Code für das Verarbeiten der aktuellen Liste fehlt hier.
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            chatViewModel.imageStateFlow.collect { it: Resource<ImageResponse> ->
+                when(it.status) {
+                    // Der Code für das Status-Handling fehlt hier.
+                }
+            }
+        }
+
 
         binding.anzahlListe.setAdapter(
             ArrayAdapter(
@@ -60,11 +159,18 @@ class PictureGeneratorFragment : Fragment() {
 
                     val selectedSizeRB = binding.imageGrE.checkedRadioButtonId
                     Log.d("selectedSizeRB",
-                        binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString()
-                            .trim()
+                        binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString().trim()
                     )
 
+                    chatViewModel.createImageRequest(
+                        CreateImageRequest(
+                            binding.anzahlListe.text.toString().toInt(),
+                            binding.etInput.text.toString().trim(),
+                            binding.root.findViewById<RadioButton>(selectedSizeRB).text.toString().trim()
 
+                        )
+
+                    )
                     //      binding.etInput.text = null
 
                 } else {
@@ -79,7 +185,7 @@ class PictureGeneratorFragment : Fragment() {
 
 
 
-        binding.backbutton.setOnClickListener {
+        binding.toolbarLayout.backbutton.setOnClickListener {
             findNavController().popBackStack()
 
 
