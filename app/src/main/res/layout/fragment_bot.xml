@@ -11,24 +11,22 @@ tools:context=".ui.botFragment"
 android:background="@drawable/futuristic_background">
 
 
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/btn_assistant"
+        style="@style/buttonfinal"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="236dp"
+        android:background="@drawable/fbh"
+        android:text="Assistant"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <soup.neumorphism.NeumorphButton
-                android:id="@+id/btn_assistant"
-                style="@style/buttonfinal"
-                android:layout_marginTop="180dp"
-                android:layout_width="210dp"
-                android:layout_height="70dp"
-                android:background="@drawable/fbh"
-                android:text="Assistant"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <soup.neumorphism.NeumorphButton
+    <soup.neumorphism.NeumorphButton
                 android:id="@+id/btn_generate"
                 style="@style/buttonfinal"
                 android:layout_width="210dp"
@@ -43,36 +41,21 @@ android:background="@drawable/futuristic_background">
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_assistant" />
 
-            <soup.neumorphism.NeumorphButton
-                android:id="@+id/btn_gpt"
-                style="@style/buttonfinal"
-                android:layout_width="210dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/fbh"
-                android:text="Normal Bot"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_generate" />
 
-            <soup.neumorphism.NeumorphButton
-                android:id="@+id/btn_bots"
-                style="@style/buttonfinal"
-                android:layout_width="210dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/fbh"
-                android:text="Bot Generator"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_gpt" />
-
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/btn_bots"
+        style="@style/buttonfinal"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/fbh"
+        android:text="Bot Generator"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_generate" />
 
     <ImageView
         android:id="@+id/imageView6"

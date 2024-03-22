@@ -33,9 +33,7 @@ class BotFragment : Fragment() {
         binding.btnAssistant.setOnClickListener {
             findNavController().navigate(R.id.action_botFragment_to_assistantDetailFragment)
         }
-        binding.btnGpt.setOnClickListener {
-            findNavController().navigate(R.id.action_botFragment_to_gptFragment)
-        }
+
         binding.btnBots.setOnClickListener {
             findNavController().navigate(R.id.action_botFragment_to_assistantsFragment)
         }

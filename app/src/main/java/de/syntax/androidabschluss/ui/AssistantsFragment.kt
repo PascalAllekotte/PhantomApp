@@ -58,7 +58,7 @@ class AssistantsFragment : Fragment() {
         }
          **/
 
-        binding.toolbarLayout.titletext.text = "ChatBots" // :DD
+        binding.toolbarLayout.titletext.text = "ChatBots" // tool ändern :DD
 
 
         binding.toolbarLayout.backbutton.setOnClickListener{
@@ -192,7 +192,7 @@ class AssistantsFragment : Fragment() {
         container.addView(textInputLayout)
 
         MaterialAlertDialogBuilder(view.context)
-            .setTitle("updated assistant")
+            .setTitle("Name ändern :D")
             .setView(container)
             .setCancelable(false)
             .setPositiveButton("Update"){ dialog, which ->
