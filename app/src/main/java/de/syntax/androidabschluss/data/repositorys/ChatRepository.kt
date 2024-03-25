@@ -6,14 +6,15 @@ import android.util.Log
 import de.syntax.androidabschluss.adapter.local.ChatGPTDatabase
 import de.syntax.androidabschluss.adapter.local.Resource
 import de.syntax.androidabschluss.data.model.open.Chat
+import de.syntax.androidabschluss.data.model.open.Data
 import de.syntax.androidabschluss.data.remote.ApiClient
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
 import de.syntax.androidabschluss.response.CreateImageRequest
-import de.syntax.androidabschluss.response.CreateImageResponse
-import de.syntax.androidabschluss.response.Data
+import de.syntax.androidabschluss.response.ImageResponse
 import de.syntax.androidabschluss.response.Message
 import de.syntax.androidabschluss.utils.CHATGPT_MODEL
+import de.syntax.androidabschluss.utils.OPENAI_API_KEY
 import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,8 +41,8 @@ class ChatRepository(val application: Application) {
     val chatStateFlow : StateFlow<Resource<Flow<List<Chat>>>>
         get() = _chatStateFlow
 
-    private val _imageStateFlow = MutableStateFlow<Resource<CreateImageResponse>>(Resource.Success())
-    val imageStateFlow : StateFlow<Resource<CreateImageResponse>>
+    private val _imageStateFlow = MutableStateFlow<Resource<ImageResponse>>(Resource.Success())
+    val imageStateFlow : StateFlow<Resource<ImageResponse>>
         get() = _imageStateFlow
 
     private val imageList = ArrayList<Data>()
@@ -170,18 +171,17 @@ class ChatRepository(val application: Application) {
         }
     }
 
-    val key = "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"
     fun createImage(body: CreateImageRequest) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 _imageStateFlow.emit(Resource.Loading())
                 apiClient.createImage(
                     body,
-                    authorization = "Bearer $key}"
-                ).enqueue(object : Callback<CreateImageResponse> {
+                    authorization = "Bearer $OPENAI_API_KEY}"
+                ).enqueue(object : Callback<ImageResponse> {
                     override fun onResponse(
-                        call: Call<CreateImageResponse>,
-                        response: Response<CreateImageResponse>
+                        call: Call<ImageResponse>,
+                        response: Response<ImageResponse>,
                     ) {
                         CoroutineScope(Dispatchers.IO).launch {
                             val responseBody = response.body()
@@ -190,11 +190,11 @@ class ChatRepository(val application: Application) {
                                 val modifiedDataList = ArrayList<Data>().apply {
                                     addAll(imageList)
                                 }
-                                val createImageResponse = CreateImageResponse(
+                                val imageResponse = ImageResponse(
                                     responseBody.created,
                                     modifiedDataList
                                 )
-                                _imageStateFlow.emit(Resource.Success(createImageResponse))
+                                _imageStateFlow.emit(Resource.Success(imageResponse))
                             } else{
                                 _imageStateFlow.emit(Resource.Success(null))
 
@@ -203,7 +203,7 @@ class ChatRepository(val application: Application) {
                         }
                     }
 
-                    override fun onFailure(call: Call<CreateImageResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
                         t.printStackTrace()
                         CoroutineScope(Dispatchers.IO).launch {
                             _imageStateFlow.emit(Resource.Error(t.message.toString()))

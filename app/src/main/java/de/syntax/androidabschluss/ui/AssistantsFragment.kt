@@ -58,7 +58,7 @@ class AssistantsFragment : Fragment() {
         }
          **/
 
-        binding.toolbarLayout.titletext.text = "ChatBots" // tool ändern :DD
+        binding.toolbarLayout.titletexttool.text = "ChatBots" // tool ändern :DD
 
 
         binding.toolbarLayout.backbutton.setOnClickListener{

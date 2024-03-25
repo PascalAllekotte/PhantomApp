@@ -3,7 +3,7 @@ package de.syntax.androidabschluss.data.remote
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
 import de.syntax.androidabschluss.response.CreateImageRequest
-import de.syntax.androidabschluss.response.CreateImageResponse
+import de.syntax.androidabschluss.response.ImageResponse
 import de.syntax.androidabschluss.utils.OPENAI_API_KEY
 import retrofit2.Call
 import retrofit2.http.Body
@@ -28,7 +28,7 @@ interface ApiInterface {
         @Header("Authorization") authorization: String = "Bearer $OPENAI_API_KEY",
 
 
-        ): Call<CreateImageResponse>
+        ): Call<ImageResponse>
 
 
 

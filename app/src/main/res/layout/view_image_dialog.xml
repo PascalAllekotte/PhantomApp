@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.cardview.CircularRevealCardView android:layout_width="match_parent"
+<com.google.android.material.circularreveal.cardview.CircularRevealCardView
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/loadImage"
+            android:id="@+id/loadImage3"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:scaleType="centerCrop"

@@ -16,13 +16,13 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbarLayout"
+            android:id="@+id/toolbarLayout2"
             layout="@layout/toolbar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-        android:id="@+id/imageGröße"
+        android:id="@+id/imageSizeRG"
         android:layout_width="356dp"
         android:layout_height="46dp"
         android:background="@drawable/designtextinput"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <RadioButton
-            android:id="@+id/radioBtn"
+            android:id="@+id/radioBtn1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -61,7 +61,6 @@
             android:textStyle="bold" />
 
         <RadioButton
-
             android:id="@+id/radioBtn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +73,6 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
-
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +87,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <AutoCompleteTextView
-            android:id="@+id/anzahlListe"
+            android:id="@+id/numberListACT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -101,7 +99,7 @@
 
 
             <soup.neumorphism.NeumorphButton
-                android:id="@+id/bt_generate"
+                android:id="@+id/generateBtn"
                 style="@style/buttonfinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,10 +131,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageGröße">
+            app:layout_constraintTop_toBottomOf="@+id/imageSizeRG">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_input"
+                android:id="@+id/edPrompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
@@ -145,29 +143,34 @@
         </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
-                android:id="@+id/progressbar"
+                android:id="@+id/loadingPB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminateTint="@color/primary"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_generate" />
+                app:layout_constraintTop_toBottomOf="@+id/generateBtn" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/imageRv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/bt_generate"
-                app:spanCount="2"
-                tools:layout_editor_absoluteX="0dp"
-                tools:listitem="@layout/view_image_layout" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imageRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/generateBtn"
+            app:layout_constraintVertical_bias="1.0"
+            app:spanCount="2"
+            tools:listitem="@layout/view_image_layout" />
 
-            <soup.neumorphism.NeumorphButton
+        <soup.neumorphism.NeumorphButton
                 android:id="@+id/downloadAllBtn"
                 style="@style/buttonfinal"
                 android:layout_width="wrap_content"
@@ -179,15 +182,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:src="@drawable/unten2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -197,7 +191,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_generate" />
+            app:layout_constraintTop_toBottomOf="@+id/generateBtn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

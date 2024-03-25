@@ -8,23 +8,21 @@ import de.syntax.androidabschluss.response.CreateImageRequest
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
     private val chatRepository = ChatRepository(application)
+
     val chatStateFlow get() = chatRepository.chatStateFlow
     val imageStateFlow get() = chatRepository.imageStateFlow
 
-
-
-    fun createChatCompletion(message: String, assistantId: String){
-        chatRepository.createChatCompletion(message, assistantId)
+    fun createChatCompletion(message: String, robotId: String) {
+        chatRepository.createChatCompletion(message, robotId)
     }
 
-
-    fun createImageRequest(body: CreateImageRequest){
+    fun createImage(body: CreateImageRequest) {
         chatRepository.createImage(body)
     }
 
-
-    fun getChatList(assistantId: String){
-        chatRepository.getChatList(assistantId)
+    fun getChatList(robotId: String) {
+        chatRepository.getChatList(robotId)
     }
+
 
 }

@@ -26,10 +26,7 @@ class AssistantDetailFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels { HomeViewModel.Factory }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

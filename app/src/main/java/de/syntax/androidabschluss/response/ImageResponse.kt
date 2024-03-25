@@ -2,15 +2,12 @@ package de.syntax.androidabschluss.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import de.syntax.androidabschluss.data.model.open.Data
 
 @JsonClass(generateAdapter = true)
-data class CreateImageResponse(
+data class ImageResponse(
     val created: Int,
     @Json(name = "data")
     val data: List<Data>
 )
 
-@JsonClass(generateAdapter = true)
-data class Data(
-    val url: String
-)

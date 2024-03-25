@@ -16,7 +16,7 @@
 
 
     <soup.neumorphism.NeumorphTextView
-        android:id="@+id/titletext"
+        android:id="@+id/titletexttool"
         style="@style/textneu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

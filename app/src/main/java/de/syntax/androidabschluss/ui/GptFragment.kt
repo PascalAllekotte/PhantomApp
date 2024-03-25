@@ -81,7 +81,7 @@ class GptFragment : Fragment() {
         binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
-        binding.toolbarLayout.titletext.text = gptArgs.assistantName
+        binding.toolbarLayout.titletexttool.text = gptArgs.assistantName
 
         val chatAdapter = ChatAdapter(){ message, textView ->
 
