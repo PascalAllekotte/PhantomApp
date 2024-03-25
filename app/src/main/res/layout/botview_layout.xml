@@ -38,7 +38,7 @@
                 android:id="@+id/botImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/katze" />
+                android:src="@drawable/deletebutton" />
 
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 

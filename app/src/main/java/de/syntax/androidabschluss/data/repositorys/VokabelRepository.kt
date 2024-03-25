@@ -15,7 +15,9 @@ class VokabelRepository(private val database: VokabelDataBase) {
     val uniqueBlockList: LiveData<List<String>> = vokabelDataBaseDao.getUniqueBlocks()
 
 
-
+    fun getVocabItemsByBlock(blockName: String): LiveData<List<VocabItem>> {
+        return vokabelDataBaseDao.getVocabItemsByBlock(blockName)
+    }
 
     suspend fun insert(vokabeln: VocabItem) {
         try {

@@ -8,6 +8,20 @@
     android:background="@drawable/futuristic_background">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/blockRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="488dp"
+        android:layout_below="@+id/block"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/vokabelcard_item" />
+
     <TextView
         android:id="@+id/block"
         android:layout_width="wrap_content"
@@ -30,11 +44,10 @@
         style="@style/buttonfinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/blockRecyclerView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="524dp"
         android:layout_marginEnd="212dp"
         android:text="Vokabeltest"
         android:textColor="@color/white"

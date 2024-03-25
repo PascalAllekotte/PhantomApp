@@ -1,12 +1,12 @@
 package de.syntax.androidabschluss.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.adapter.LearningAdapter
@@ -42,12 +42,12 @@ class LearningFragment : Fragment() {
 
     private fun initializeAdapter() {
         learningAdapter = LearningAdapter(mutableListOf(), viewLifecycleOwner) { blockName ->
-            // Navigation zum LearningDetailFragment, mit Übergabe des Blocknamens
             val action = LearningFragmentDirections.actionLearningFragmentToLearningDetailFragment(blockName)
             findNavController().navigate(action)
         }
         binding.blockRecyclerView.adapter = learningAdapter
     }
+
 
 
 

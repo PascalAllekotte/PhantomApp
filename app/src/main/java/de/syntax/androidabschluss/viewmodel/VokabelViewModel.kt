@@ -23,6 +23,9 @@ class VokabelViewModel(application: Application) : AndroidViewModel(application)
     val complete: LiveData<Boolean>
         get() = _complete
 
+    fun getVocabItemsByBlock(blockName: String): LiveData<List<VocabItem>> {
+        return repository.getVocabItemsByBlock(blockName)
+    }
     fun insertVocabItem(vocabItem: VocabItem) {
         viewModelScope.launch {
             repository.insert(vocabItem)

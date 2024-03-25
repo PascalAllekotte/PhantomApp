@@ -28,5 +28,7 @@ interface VokabelDataBaseDao {
     @Query("SELECT DISTINCT block FROM VocabItem")
     fun getUniqueBlocks(): LiveData<List<String>>
 
+    @Query("SELECT * FROM VocabItem WHERE block = :blockName")
+    fun getVocabItemsByBlock(blockName: String): LiveData<List<VocabItem>>
 
 }
