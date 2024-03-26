@@ -178,7 +178,7 @@ class ChatRepository(val application: Application) {
                 _imageStateFlow.emit(Resource.Loading())
                 apiClient.createImage(
                     body,
-                    authorization = "Bearer $OPENAI_API_KEY}"
+                    authorization = "Bearer $OPENAI_API_KEY"
                 ).enqueue(object : Callback<ImageResponse> {
                     override fun onResponse(
                         call: Call<ImageResponse>,
