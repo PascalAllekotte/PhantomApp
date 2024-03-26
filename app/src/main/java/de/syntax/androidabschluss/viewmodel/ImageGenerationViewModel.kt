@@ -14,7 +14,7 @@ import okhttp3.RequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
-
+/**
 class ImageGenerationViewModel : ViewModel() {
 
 
@@ -66,3 +66,4 @@ class ImageGenerationViewModel : ViewModel() {
         val JSON: MediaType = "application/json; charset=utf-8".toMediaType()
     }
 }
+**/

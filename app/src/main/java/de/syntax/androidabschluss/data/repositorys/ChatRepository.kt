@@ -3,6 +3,7 @@ package de.syntax.androidabschluss.data.repositorys
  // Angenommen, Message ist unter diesem Pfad.
 import android.app.Application
 import android.util.Log
+import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
 import de.syntax.androidabschluss.adapter.local.ChatGPTDatabase
 import de.syntax.androidabschluss.adapter.local.Resource
 import de.syntax.androidabschluss.data.model.open.Chat
@@ -14,7 +15,6 @@ import de.syntax.androidabschluss.response.CreateImageRequest
 import de.syntax.androidabschluss.response.ImageResponse
 import de.syntax.androidabschluss.response.Message
 import de.syntax.androidabschluss.utils.CHATGPT_MODEL
-import de.syntax.androidabschluss.utils.OPENAI_API_KEY
 import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -174,6 +174,7 @@ class ChatRepository(val application: Application) {
     fun createImage(body: CreateImageRequest) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                Log.d("meet","start")
                 _imageStateFlow.emit(Resource.Loading())
                 apiClient.createImage(
                     body,
@@ -185,6 +186,7 @@ class ChatRepository(val application: Application) {
                     ) {
                         CoroutineScope(Dispatchers.IO).launch {
                             val responseBody = response.body()
+                            Log.d("meet",responseBody.toString())
                             if (responseBody != null){
                                 imageList.addAll(responseBody.data)
                                 val modifiedDataList = ArrayList<Data>().apply {

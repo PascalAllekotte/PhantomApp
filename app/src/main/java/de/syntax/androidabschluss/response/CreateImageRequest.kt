@@ -6,5 +6,6 @@ import com.squareup.moshi.JsonClass
 data class CreateImageRequest(
     val n: Int,
     val prompt: String,
-    val size: String
+    val size: String,
+    val model:String = "dall-e-3"
 )

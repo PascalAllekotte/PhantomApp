@@ -1,10 +1,10 @@
 package de.syntax.androidabschluss.data.remote
 
+import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
 import de.syntax.androidabschluss.response.CreateImageRequest
 import de.syntax.androidabschluss.response.ImageResponse
-import de.syntax.androidabschluss.utils.OPENAI_API_KEY
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -21,7 +21,7 @@ interface ApiInterface {
 
         ): Call<ChatResponse>
 
-    @POST("image/generations")
+    @POST("images/generations")
     fun createImage(
         @Body createImageRequest: CreateImageRequest,
         @Header("Content-Type") contentType: String = "application/json",

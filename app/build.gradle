@@ -19,7 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "OPENAI_API_KEY", "\"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\""
+        buildConfigField "String", "OPENAI_API_KEY", "\"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\""
 
     }
     buildFeatures {
