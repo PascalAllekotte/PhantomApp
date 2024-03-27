@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ImageAdapter
@@ -88,11 +86,15 @@ class PictureGeneratorFragment : Fragment() {
                     val selectedSizeRB = view.findViewById<RadioButton>(binding.imageSizeRG.checkedRadioButtonId)
                     Log.d("selectedSizeRB", selectedSizeRB.text.toString().trim())
 
+                    val qualityValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isActivated) "hq" else "standard"
+
                     chatViewModel.createImage(
                         CreateImageRequest(
                             binding.numberListACT.text.toString().toInt(),
+                            quality = qualityValue,
                             binding.edPrompt.text.toString().trim(),
-                            selectedSizeRB.text.toString().trim()
+                            selectedSizeRB.text.toString().trim(),
+
                         )
 
                     )
@@ -109,9 +111,6 @@ class PictureGeneratorFragment : Fragment() {
 
 
 
-        val imageRV = view.findViewById<RecyclerView>(R.id.imageRv)
-        val loadingPB = view.findViewById<ProgressBar>(R.id.loadingPB)
-        val downloadAllBtn = view.findViewById<Button>(R.id.downloadAllBtn)
 
         val loadImagein = viewImageDialog.findViewById<ImageView>(R.id.loadImage3)
         val cancelBtn = viewImageDialog.findViewById<Button>(R.id.cancelBtn)
@@ -134,9 +133,9 @@ class PictureGeneratorFragment : Fragment() {
             }
         }
 
-        imageRV.adapter = imageAdapter
+        binding.imageRv.adapter = imageAdapter
 
-        downloadAllBtn.setOnClickListener {
+        binding.downloadAllBtn.setOnClickListener {
             imageAdapter.currentList.map {
             }
         }
@@ -146,20 +145,20 @@ class PictureGeneratorFragment : Fragment() {
                 when(it.status){
                     Status.LOADING -> {
                         withContext(Dispatchers.Main) {
-                            loadingPB.visibility = View.VISIBLE
+                            binding.loadingPB.visibility = View.VISIBLE
                         }
                     }
                     Status.SUCCESS -> {
                         withContext(Dispatchers.Main) {
-                            loadingPB.visibility = View.GONE
+                            binding.loadingPB.visibility = View.GONE
 
                             imageAdapter.submitList(
                                 it.data?.data
                             )
                             if (imageAdapter.currentList.isNotEmpty()){
-                                downloadAllBtn.visibility = View.VISIBLE
+                                binding.downloadAllBtn.visibility = View.VISIBLE
                             }else{
-                                downloadAllBtn.visibility = View.GONE
+                                binding.downloadAllBtn.visibility = View.GONE
 
                             }
 
@@ -167,7 +166,7 @@ class PictureGeneratorFragment : Fragment() {
                     }
                     Status.ERROR -> {
                         withContext(Dispatchers.Main){
-                            loadingPB.visibility = View.GONE
+                            binding.loadingPB.visibility = View.GONE
                             it.message?.let { it1 -> view.context.longToastShow(it1) }
                         }
 

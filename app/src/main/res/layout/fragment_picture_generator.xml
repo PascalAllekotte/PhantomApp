@@ -15,6 +15,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <Switch
+            android:id="@+id/hqswitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="Switch"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <include
             android:id="@+id/toolbarLayout2"
             layout="@layout/toolbar_layout"
@@ -192,6 +204,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/generateBtn" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

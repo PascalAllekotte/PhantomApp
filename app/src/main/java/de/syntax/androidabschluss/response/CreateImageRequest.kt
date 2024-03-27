@@ -7,6 +7,8 @@ import com.squareup.moshi.JsonClass
 data class CreateImageRequest(
     @Json(name = "n")
     val n: Int,
+    @Json(name = "quality")
+    val quality: String,
     @Json(name = "prompt")
     val prompt: String,
     @Json(name = "size")
