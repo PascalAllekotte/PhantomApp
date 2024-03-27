@@ -96,6 +96,7 @@ class PictureGeneratorFragment : Fragment() {
 
                     val qualityValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isActivated) "standart" else "hd"
                     val styleValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isChecked && binding.styleswitch.isChecked) "vivid" else "natural"
+                    val modelValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isChecked && binding.styleswitch.isChecked) "dall-e-3" else "dall-e-3"
 
 
                     chatViewModel.createImage(
@@ -104,7 +105,8 @@ class PictureGeneratorFragment : Fragment() {
                             quality = qualityValue,
                             binding.edPrompt.text.toString().trim(),
                             selectedSizeRB.text.toString().trim(),
-                            style = styleValue
+                            style = styleValue,
+                            model = modelValue
 
 
                         )
