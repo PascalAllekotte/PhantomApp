@@ -12,5 +12,7 @@ data class CreateImageRequest(
     @Json(name = "prompt")
     val prompt: String,
     @Json(name = "size")
-    val size: String
+    val size: String,
+    @Json(name = "style")
+    val style: String
 )
