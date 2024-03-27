@@ -7,14 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ImageAdapter
+import de.syntax.androidabschluss.databinding.FragmentPictureGeneratorBinding
 import de.syntax.androidabschluss.response.CreateImageRequest
 import de.syntax.androidabschluss.utils.Status
 import de.syntax.androidabschluss.utils.hideKeyBoard
@@ -36,6 +33,10 @@ import kotlinx.coroutines.withContext
 
 class PictureGeneratorFragment : Fragment() {
 
+    private lateinit var binding: FragmentPictureGeneratorBinding
+
+    //Integrieren des Chatmodels und des Dialoges
+
     private val chatViewModel: ChatViewModel by lazy {
         ViewModelProvider(this)[ChatViewModel::class.java]
     }
@@ -44,8 +45,68 @@ class PictureGeneratorFragment : Fragment() {
             setupDialog(R.layout.view_image_dialog)
         }
     }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentPictureGeneratorBinding.inflate(inflater,container,false)
+        return binding.root
+
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.toolbarLayout2.backbutton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.toolbarLayout2.titletexttool.text = "Picturator"
+
+        binding.numberListACT.setAdapter(
+            ArrayAdapter(
+                view.context,
+                android.R.layout.simple_list_item_1,
+                (1..10).toList()
+            )
+        )
+
+
+        binding.generateBtn.setOnClickListener {
+            view.context.hideKeyBoard(it)
+
+            binding.generateBtn.visibility = View.GONE
+            if (binding.edPrompt.text.toString().trim().isNotEmpty()) {
+                if (binding.edPrompt.text.toString().trim().length < 1000) {
+                    Log.d( "Prompt", binding.edPrompt.text.toString().trim())
+                    Log.d("numberListACT", binding.numberListACT.text.toString().trim())
+
+                    val selectedSizeRB = view.findViewById<RadioButton>(binding.imageSizeRG.checkedRadioButtonId)
+                    Log.d("selectedSizeRB", selectedSizeRB.text.toString().trim())
+
+                    chatViewModel.createImage(
+                        CreateImageRequest(
+                            binding.numberListACT.text.toString().toInt(),
+                            binding.edPrompt.text.toString().trim(),
+                            selectedSizeRB.text.toString().trim()
+                        )
+
+                    )
+
+
+                    binding.edPrompt.text = null
+                } else {
+                    view.context.longToastShow("The maximum length is 1000 characters.")
+                }
+            } else {
+                view.context.longToastShow("Prompt is required")
+            }
+        }
+
 
 
         val imageRV = view.findViewById<RecyclerView>(R.id.imageRv)
@@ -127,69 +188,7 @@ class PictureGeneratorFragment : Fragment() {
 
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_picture_generator, container, false)
-        val toolbarView = view.findViewById<View>(R.id.toolbarLayout2)
 
-
-        val closeImage = toolbarView.findViewById<ImageView>(R.id.backbutton)
-        closeImage.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        val titleTxt = toolbarView.findViewById<TextView>(R.id.titletexttool)
-        titleTxt.text = "ChatGPT App"
-
-        val numberListACT = view.findViewById<AutoCompleteTextView>(R.id.numberListACT)
-        numberListACT.setAdapter(
-            ArrayAdapter(
-                view.context,
-                android.R.layout.simple_list_item_1,
-                (1..10).toList()
-            )
-        )
-
-        val imageSizeRG = view.findViewById<RadioGroup>(R.id.imageSizeRG)
-        val edPrompt = view.findViewById<EditText>(R.id.edPrompt)
-
-        val generateBtn = view.findViewById<Button>(R.id.generateBtn)
-        generateBtn.setOnClickListener {
-            view.context.hideKeyBoard(it)
-
-            if (edPrompt.text.toString().trim().isNotEmpty()) {
-                if (edPrompt.text.toString().trim().length < 1000) {
-                    Log.d( "Prompt", edPrompt.text.toString().trim())
-                    Log.d("numberListACT", numberListACT.text.toString().trim())
-
-                    val selectedSizeRB = view.findViewById<RadioButton>(imageSizeRG.checkedRadioButtonId)
-                    Log.d("selectedSizeRB", selectedSizeRB.text.toString().trim())
-
-                    chatViewModel.createImage(
-                        CreateImageRequest(
-                            numberListACT.text.toString().toInt(),
-                            edPrompt.text.toString().trim(),
-                            selectedSizeRB.text.toString().trim()
-                        )
-                    )
-
-
-                    edPrompt.text = null
-                } else {
-                    view.context.longToastShow("The maximum length is 1000 characters.")
-                }
-            } else {
-                view.context.longToastShow("Prompt is required")
-            }
-        }
-
-
-
-        return view
-    }
 }
 
 
