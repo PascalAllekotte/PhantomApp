@@ -58,6 +58,14 @@ class PictureGeneratorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.imageSizeRG.setOnCheckedChangeListener { group, checkedId ->
+            if (binding.radioBtn3.isChecked) {
+                binding.hqswitch.visibility = View.VISIBLE
+            } else {
+                binding.hqswitch.visibility = View.GONE
+            }
+        }
+
 
         binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().navigateUp()
