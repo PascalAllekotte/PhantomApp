@@ -126,7 +126,6 @@ class GptFragment : Fragment() {
 
                     R.id.slectTxtMenu -> {
                         textToSpeech.stop()
-                        // Fügen Sie hier die gewünschte Funktionalität ein
                         true
                     }
                     R.id.shareTextMenu -> {

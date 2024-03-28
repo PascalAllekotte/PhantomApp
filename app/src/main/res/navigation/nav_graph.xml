@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_translationFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_translationFragment_to_deepLFragment"
+            app:destination="@id/deepLFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -197,6 +200,15 @@
         <action
             android:id="@+id/action_assistantsFragment_to_gptFragment"
             app:destination="@id/gptFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deepLFragment"
+        android:name="de.syntax.androidabschluss.ui.DeepLFragment"
+        android:label="fragment_deep_l"
+        tools:layout="@layout/fragment_deep_l" >
+        <action
+            android:id="@+id/action_deepLFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
     </fragment>
 
 

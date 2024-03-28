@@ -49,7 +49,7 @@ class AssistantDetailFragment : Fragment() {
 
         }
         binding.chatView.setOnLongClickListener {
-            val textToString = binding.chatView.text.toString() // Assuming textView is the correct view to copy text from
+            val textToString = binding.chatView.text.toString()
             val clipboard = ContextCompat.getSystemService(it.context, ClipboardManager::class.java) as ClipboardManager
             val clip = ClipData.newPlainText("Copied Text", textToString)
             clipboard.setPrimaryClip(clip)

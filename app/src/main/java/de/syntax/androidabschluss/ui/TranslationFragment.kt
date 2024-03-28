@@ -37,7 +37,12 @@ class TranslationFragment : Fragment() {
 
         noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
 
+        binding.btTips.setOnClickListener{
+            findNavController().navigate(R.id.deepLFragment)
 
+
+
+        }
 
         //Navigation----------------------------
         binding.btLearning.setOnClickListener {
