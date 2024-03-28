@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,23 +17,29 @@ class TranslationViewModel : ViewModel() {
     private val repository = TranslationRepository(ApiClientDeepL.getInstance())
 
     private val _translation = MutableLiveData<String>()
-    val translation: LiveData<String>
-        get() = _translation
+    val translation: LiveData<String> get() = _translation
 
     fun translateText(text: String) {
-        val request = DeeplRequest(target_lang = "DE", text = listOf(text))
-        repository.translateText(request).enqueue(object : Callback<DeeplResponse> {
-            override fun onResponse(call: Call<DeeplResponse>, response: Response<DeeplResponse>) {
-                if (response.isSuccessful) {
-                    _translation.value = response.body()?.translations?.firstOrNull()?.text ?: ""
-                } else {
-                    _translation.value = "Ein Fehler ist aufgetreten"
+        try {
+            val request = DeeplRequest(target_lang = "DE", text = listOf(text))
+            repository.translateText(request).enqueue(object : Callback<DeeplResponse> {
+                override fun onResponse(call: Call<DeeplResponse>, response: Response<DeeplResponse>) {
+                    if (response.isSuccessful) {
+                        _translation.value = response.body()?.translations?.firstOrNull()?.text ?: ""
+                    } else {
+                        Log.e("TranslationViewModel", "API-Anfragefehler: ${response.errorBody()?.string()}")
+                        _translation.value = "Ein Fehler ist aufgetreten"
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<DeeplResponse>, t: Throwable) {
-                _translation.value = "Netzwerkfehler: ${t.message}"
-            }
-        })
+                override fun onFailure(call: Call<DeeplResponse>, t: Throwable) {
+                    Log.e("TranslationViewModel", "Netzwerkfehler: ${t.message}", t)
+                    _translation.value = "Netzwerkfehler: ${t.message}"
+                }
+            })
+        } catch (e: Exception) {
+            Log.e("TranslationViewModel", "Ausnahme: ${e.message}", e)
+            _translation.value = "Ein Fehler ist aufgetreten"
+        }
     }
 }
