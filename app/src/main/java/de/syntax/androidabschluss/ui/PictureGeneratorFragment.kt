@@ -52,6 +52,7 @@ class PictureGeneratorFragment : Fragment() {
         binding = FragmentPictureGeneratorBinding.inflate(inflater,container,false)
         binding.styleswitch.isChecked = false
         binding.styleswitch.visibility = View.GONE
+
         return binding.root
 
 
@@ -70,6 +71,9 @@ class PictureGeneratorFragment : Fragment() {
         }
 
 **/
+
+        var maxlength = 1000
+
         binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -92,6 +96,8 @@ class PictureGeneratorFragment : Fragment() {
                 binding.radioBtn1.setText("1024x1024")
                 binding.radioBtn2.setText("1792x1024")
                 binding.radioBtn3.setText("1024x1792")
+                maxlength = 4000
+
 
                 binding.styleswitch.isChecked = true
                 binding.styleswitch.visibility = View.VISIBLE
@@ -116,6 +122,7 @@ class PictureGeneratorFragment : Fragment() {
                 binding.radioBtn1.setText("256x256")
                 binding.radioBtn2.setText("512x512")
                 binding.radioBtn3.setText("1024x1024")
+                maxlength = 1000
 
                 binding.styleswitch.isChecked = false
                 binding.styleswitch.visibility = View.GONE
@@ -133,7 +140,7 @@ class PictureGeneratorFragment : Fragment() {
 
             binding.generateBtn.visibility = View.GONE
             if (binding.edPrompt.text.toString().trim().isNotEmpty()) {
-                if (binding.edPrompt.text.toString().trim().length < 1000) {
+                if (binding.edPrompt.text.toString().trim().length < maxlength) {
                     Log.d( "Prompt", binding.edPrompt.text.toString().trim())
                     Log.d("numberListACT", binding.numberListACT.text.toString().trim())
 
@@ -143,6 +150,7 @@ class PictureGeneratorFragment : Fragment() {
                     val qualityValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isActivated) "standart" else "hd"
                     val styleValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isChecked && binding.styleswitch.isChecked) "vivid" else "natural"
                     val modelValue = if (binding.hqswitch.isChecked) "dall-e-3" else "dall-e-2"
+                    maxlength = if (binding.hqswitch.isChecked) 4000 else 1000
 
 
                     chatViewModel.createImage(

@@ -19,9 +19,9 @@ class TranslationViewModel : ViewModel() {
     private val _translation = MutableLiveData<String>()
     val translation: LiveData<String> get() = _translation
 
-    fun translateText(text: String) {
+    fun translateText(targetLanguage: String, text: String) {
         try {
-            val request = DeeplRequest(target_lang = "DE", text = listOf(text))
+            val request = DeeplRequest(target_lang = targetLanguage, text = listOf(text))
             repository.translateText(request).enqueue(object : Callback<DeeplResponse> {
                 override fun onResponse(call: Call<DeeplResponse>, response: Response<DeeplResponse>) {
                     if (response.isSuccessful) {

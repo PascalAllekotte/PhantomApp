@@ -100,11 +100,42 @@ fun Dialog.setupDialog(layoutResId : Int){
         LinearLayout.LayoutParams.WRAP_CONTENT
     )
     setCancelable(false)
-
-
-
-
 }
 
 
-
+val languageFullNames = listOf(
+    "Arabic",
+    "Bulgarian",
+    "Czech",
+    "Danish",
+    "German",
+    "Greek",
+    "English",
+    "English (British)",
+    "English (American)",
+    "Spanish",
+    "Estonian",
+    "Finnish",
+    "French",
+    "Hungarian",
+    "Indonesian",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Lithuanian",
+    "Latvian",
+    "Norwegian (Bokmål)",
+    "Dutch",
+    "Polish",
+    "Portuguese (unspecified variant for backward compatibility; please select PT-BR or PT-PT instead)",
+    "Portuguese (Brazilian)",
+    "Portuguese (all Portuguese varieties excluding Brazilian Portuguese)",
+    "Romanian",
+    "Russian",
+    "Slovak",
+    "Slovenian",
+    "Swedish",
+    "Turkish",
+    "Ukrainian",
+    "Chinese (simplified)"
+)
