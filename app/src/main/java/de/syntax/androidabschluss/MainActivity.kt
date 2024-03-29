@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.gptFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.assistantsFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
 
 
                 else -> {

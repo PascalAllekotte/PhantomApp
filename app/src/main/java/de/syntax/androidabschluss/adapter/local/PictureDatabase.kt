@@ -23,7 +23,7 @@ fun getDatabasePicture(context: Context): PictureDatabase {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 PictureDatabase::class.java,
-                "picture3_database"
+                "picture4_database"
             ).build()
             Log.d("DatabaseInit", "Datenbank initialisiert")
         }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.syntax.androidabschluss.adapter.PictureAdapter
 import de.syntax.androidabschluss.databinding.FragmentPicturesBinding
@@ -29,6 +30,10 @@ class PicturesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.toolbarLayout2.titletexttool.setText("Pictures")
+        binding.toolbarLayout2.backbutton.setOnClickListener{
+            findNavController().popBackStack()
+        }
         pictureAdapter = PictureAdapter { position, pictureItem ->
             // Callback für Klicks auf ein Bild, falls erforderlich
         }

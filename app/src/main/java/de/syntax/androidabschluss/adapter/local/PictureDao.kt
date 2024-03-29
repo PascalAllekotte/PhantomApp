@@ -14,7 +14,7 @@ import de.syntax.androidabschluss.data.model.open.PictureItem
         suspend fun insertPicture(pictureItem: PictureItem)
 
 
-        @Query("SELECT * FROM pictures3")
+        @Query("SELECT * FROM pictures4")
         fun getAllPictures(): LiveData<List<PictureItem>>
 
 
