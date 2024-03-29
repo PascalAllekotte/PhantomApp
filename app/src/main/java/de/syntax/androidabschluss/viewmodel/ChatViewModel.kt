@@ -25,5 +25,4 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-
 }

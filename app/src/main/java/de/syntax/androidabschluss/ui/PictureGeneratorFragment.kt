@@ -50,6 +50,8 @@ class PictureGeneratorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPictureGeneratorBinding.inflate(inflater,container,false)
+        binding.styleswitch.isChecked = false
+        binding.styleswitch.visibility = View.GONE
         return binding.root
 
 
@@ -58,6 +60,7 @@ class PictureGeneratorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /**
         binding.imageSizeRG.setOnCheckedChangeListener { group, checkedId ->
             if (binding.radioBtn3.isChecked) {
                 binding.hqswitch.visibility = View.VISIBLE
@@ -66,7 +69,7 @@ class PictureGeneratorFragment : Fragment() {
             }
         }
 
-
+**/
         binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -79,7 +82,50 @@ class PictureGeneratorFragment : Fragment() {
                 android.R.layout.simple_list_item_1,
                 (1..10).toList()
             )
+
         )
+
+        binding.hqswitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // RadioButton aktivieren, wenn der Switch aktiviert ist
+                binding.radioBtn3.isChecked = true
+                binding.radioBtn1.setText("1024x1024")
+                binding.radioBtn2.setText("1792x1024")
+                binding.radioBtn3.setText("1024x1792")
+
+                binding.styleswitch.isChecked = true
+                binding.styleswitch.visibility = View.VISIBLE
+
+                binding.numberListACT.setText("1")
+                binding.numberListACT.setAdapter(
+                    ArrayAdapter(
+                        view.context,
+                        android.R.layout.simple_list_item_1,
+                        (1..1).toList()
+                    )
+                )
+
+            } else {
+                binding.numberListACT.setAdapter(
+                    ArrayAdapter(
+                        view.context,
+                        android.R.layout.simple_list_item_1,
+                        (1..10).toList()
+                    )
+                )
+                binding.radioBtn1.setText("256x256")
+                binding.radioBtn2.setText("512x512")
+                binding.radioBtn3.setText("1024x1024")
+
+                binding.styleswitch.isChecked = false
+                binding.styleswitch.visibility = View.GONE
+            }
+        }
+
+
+
+
+
 
 
         binding.generateBtn.setOnClickListener {
@@ -96,7 +142,7 @@ class PictureGeneratorFragment : Fragment() {
 
                     val qualityValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isActivated) "standart" else "hd"
                     val styleValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isChecked && binding.styleswitch.isChecked) "vivid" else "natural"
-                    val modelValue = if (binding.radioBtn3.isChecked && binding.hqswitch.isChecked && binding.styleswitch.isChecked) "dall-e-3" else "dall-e-3"
+                    val modelValue = if (binding.hqswitch.isChecked) "dall-e-3" else "dall-e-2"
 
 
                     chatViewModel.createImage(
