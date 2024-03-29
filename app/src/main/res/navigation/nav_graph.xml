@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_botFragment_to_assistantsFragment"
             app:destination="@id/assistantsFragment" />
+        <action
+            android:id="@+id/action_botFragment_to_picturesFragment"
+            app:destination="@id/picturesFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -209,6 +212,15 @@
         <action
             android:id="@+id/action_deepLFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/picturesFragment"
+        android:name="de.syntax.androidabschluss.ui.PicturesFragment"
+        android:label="fragment_pictures"
+        tools:layout="@layout/fragment_pictures" >
+        <action
+            android:id="@+id/action_picturesFragment_to_botFragment"
+            app:destination="@id/botFragment" />
     </fragment>
 
 

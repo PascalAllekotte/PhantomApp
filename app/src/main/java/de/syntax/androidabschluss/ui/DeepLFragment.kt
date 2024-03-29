@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.databinding.FragmentDeepLBinding
 import de.syntax.androidabschluss.utils.languageFullNames
 import de.syntax.androidabschluss.viewmodel.TranslationViewModel
@@ -28,6 +29,13 @@ class DeepLFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbarLayout2.titletexttool.setText("Translator")
+        binding.toolbarLayout2.backbutton.setOnClickListener{
+            findNavController().popBackStack()
+        }
+
+
         binding.targetlanglist.setAdapter(
             ArrayAdapter(
                 view.context,

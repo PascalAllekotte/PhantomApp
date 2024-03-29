@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import de.syntax.androidabschluss.data.repositorys.ChatRepository
 import de.syntax.androidabschluss.response.CreateImageRequest
 
+
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
     private val chatRepository = ChatRepository(application)
@@ -17,7 +18,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun createImage(body: CreateImageRequest) {
-        chatRepository.createImage(body)
+        chatRepository.createImage(body, getApplication())
     }
 
     fun getChatList(robotId: String) {

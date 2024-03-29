@@ -2,12 +2,15 @@ package de.syntax.androidabschluss.data.repositorys
 
  // Angenommen, Message ist unter diesem Pfad.
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
 import de.syntax.androidabschluss.adapter.local.ChatGPTDatabase
 import de.syntax.androidabschluss.adapter.local.Resource
+import de.syntax.androidabschluss.adapter.local.getDatabasePicture
 import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.data.model.open.Data
+import de.syntax.androidabschluss.data.model.open.PictureItem
 import de.syntax.androidabschluss.data.remote.ApiClient
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
@@ -170,11 +173,10 @@ class ChatRepository(val application: Application) {
       //      _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
         }
     }
-
-    fun createImage(body: CreateImageRequest) {
+    fun createImage(body: CreateImageRequest, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Log.d("meet","start")
+                Log.d("meet", "start")
                 _imageStateFlow.emit(Resource.Loading())
                 apiClient.createImage(
                     body,
@@ -186,8 +188,8 @@ class ChatRepository(val application: Application) {
                     ) {
                         CoroutineScope(Dispatchers.IO).launch {
                             val responseBody = response.body()
-                            Log.d("meet",responseBody.toString())
-                            if (responseBody != null){
+                            Log.d("meet", responseBody.toString())
+                            if (responseBody != null) {
                                 imageList.addAll(responseBody.data)
                                 val modifiedDataList = ArrayList<Data>().apply {
                                     addAll(imageList)
@@ -197,10 +199,17 @@ class ChatRepository(val application: Application) {
                                     modifiedDataList
                                 )
                                 _imageStateFlow.emit(Resource.Success(imageResponse))
-                            } else{
+
+                                modifiedDataList.forEach { data ->
+                                    val pictureItem = PictureItem(
+                                        id = 0, // 0 für autoGenerate
+                                        url = data.url,
+                                        created = responseBody.created
+                                    )
+                                    getDatabasePicture(context).pictureDataBaseDao().insertPicture(pictureItem)
+                                }
+                            } else {
                                 _imageStateFlow.emit(Resource.Success(null))
-
-
                             }
                         }
                     }
