@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import de.syntax.androidabschluss.adapter.PictureAdapter
 import de.syntax.androidabschluss.databinding.FragmentPicturesBinding
 import de.syntax.androidabschluss.viewmodel.PicturesViewModel
@@ -40,11 +40,11 @@ class PicturesFragment : Fragment() {
 
         binding.imageRv.apply {
             adapter = pictureAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
         }
 
         picturesViewModel.allPictures.observe(viewLifecycleOwner) { pictures ->
-            pictureAdapter.submitList(pictures)
+            pictureAdapter.submitList(pictures.reversed())
         }
     }
 }

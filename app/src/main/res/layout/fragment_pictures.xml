@@ -7,15 +7,10 @@
     tools:context=".ui.PicturesFragment"
     android:background="@drawable/futuristic_background">
 
-    <include
-        android:id="@+id/toolbarLayout2"
-        layout="@layout/toolbar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imageRv"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:overScrollMode="never"
@@ -30,5 +25,12 @@
         app:spanCount="2"
         tools:listitem="@layout/view_image_layout2" />
 
+
+    <include
+        android:id="@+id/toolbarLayout2"
+        layout="@layout/toolbar_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageRv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
