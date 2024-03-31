@@ -7,61 +7,168 @@
     tools:context=".ui.TranslationFragment"
     android:background="@drawable/futuristic_background">
 
+
     <include
         android:id="@+id/toolbarLayout2"
         layout="@layout/toolbar_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/bt_learning"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView2"
+        style="@style/cardview2"
+        android:layout_width="431dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="Learning"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="-35dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.277"
+        app:neumorph_strokeColor="@color/primary"
+        app:neumorph_strokeWidth="0.7dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
 
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/bt_tips"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/botTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="4dp"
+                android:singleLine="true"
+                android:text="Vocabulary:"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.064" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/bt_learning"
+                style="@style/buttonfinal"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="Learning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/botTitle" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/bt_add"
+                style="@style/buttonfinal"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="Add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_learning" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/bt_tips"
+                style="@style/buttonfinal"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="Translator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_add" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/noteview"
+        style="@style/cardview2"
+        android:layout_width="431dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:text="Translator"
-        app:layout_constraintBottom_toTopOf="@+id/bt_add"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="-35dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/neumorphCardView2"
+        app:layout_constraintVertical_bias="0.169"
+        app:neumorph_strokeColor="@color/primary"
+        app:neumorph_strokeWidth="0.7dp">
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/bt_notes"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_add" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/bt_add"
-        style="@style/buttonfinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_learning" />
+
+            <TextView
+                android:id="@+id/noteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="4dp"
+                android:singleLine="true"
+                android:text="Note &amp; Termin:"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.064" />
+            />
+
+
+
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/bt_termin"
+                style="@style/buttonfinal"
+                android:layout_width="160dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:text="Termins"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_notes"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/bt_notes"
+                style="@style/buttonfinal"
+                android:layout_width="160dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noteTitle"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </soup.neumorphism.NeumorphCardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
