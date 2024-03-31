@@ -20,7 +20,7 @@ class LearningDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLearningDetailBinding.inflate(inflater, container, false)
-        initRecyclerView()
+        setupRecyclerView()
         return binding.root
     }
 
@@ -36,10 +36,12 @@ class LearningDetailFragment : Fragment() {
         viewModel.getVocabItemsByBlock(blockName).observe(viewLifecycleOwner) { vocabItems ->
             vocableAdapter.updateList(vocabItems)
         }
+
     }
 
-    private fun initRecyclerView() {
+    private fun setupRecyclerView() {
         vocableAdapter = VocableAdapter(mutableListOf()) { vocabItem ->
+            viewModel.updateVocabItem(vocabItem)
         }
         binding.blockRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.blockRecyclerView.adapter = vocableAdapter

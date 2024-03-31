@@ -7,10 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentTranslationBinding
@@ -25,7 +21,11 @@ class TranslationFragment : Fragment() {
     private lateinit var noteViewModel: NoteViewModel
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentTranslationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,9 +39,8 @@ class TranslationFragment : Fragment() {
         binding.toolbarLayout2.titletexttool.setText("Brainery")
         binding.toolbarLayout2.backbutton.visibility = View.GONE
 
-        binding.btTips.setOnClickListener{
+        binding.btTips.setOnClickListener {
             findNavController().navigate(R.id.deepLFragment)
-
 
 
         }
@@ -54,13 +53,14 @@ class TranslationFragment : Fragment() {
             findNavController().navigate(R.id.addVokabelFragment)
         }
 
-        binding.btNotes.setOnClickListener{
+        binding.btNotes.setOnClickListener {
             findNavController().navigate(R.id.action_translationFragment_to_noteDetailFragment)
 
         }
 
         //Recyclerview----------------------------
-        setupRecyclerView()
+
+     /**   setupRecyclerView()
         setupItemTouchHelper()
 
         viewModel.vokabelList.observe(viewLifecycleOwner) { vocabularyList ->
@@ -77,20 +77,22 @@ class TranslationFragment : Fragment() {
         binding.vocabularyRecyclerView.adapter = vocableAdapter
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.vocabularyRecyclerView)
-    }
+        }
 
-    private fun setupItemTouchHelper() {
+        private fun setupItemTouchHelper() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                return false
-            }
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        return false
+        }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-            }
+        }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.vocabularyRecyclerView)
+        }
+         **/
     }
 }
 
