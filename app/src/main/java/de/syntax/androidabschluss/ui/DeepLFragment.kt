@@ -30,7 +30,7 @@ class DeepLFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbarLayout2.titletexttool.setText("Translator")
+        binding.toolbarLayout2.titletext.setText("Translator")
         binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }

@@ -97,7 +97,7 @@
     <ImageView
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/test11"
+        android:src="@drawable/test10"
         android:layout_marginStart="3dp"
         android:backgroundTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"

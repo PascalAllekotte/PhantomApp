@@ -8,21 +8,13 @@
     tools:context=".ui.AddVokabelFragment"
     android:background="@drawable/futuristic_background">
 
-
-    <soup.neumorphism.NeumorphImageButton
-        android:id="@+id/backbutton"
-        style="@style/imagebuttonneu"
-        android:layout_width="73dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/back2"
-        app:layout_constraintEnd_toStartOf="@+id/addheader"
-        app:layout_constraintHorizontal_bias="0.0"
+    <include
+        android:id="@+id/toolbarLayout2"
+        layout="@layout/toolbar_layout2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/btn_add"
@@ -36,23 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vokabel2" />
-
-    <soup.neumorphism.NeumorphTextView
-        android:id="@+id/addheader"
-        style="@style/textneu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Add"
-        android:textColor="#5D6786"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
 
     <TextView
         android:id="@+id/tv_language"
@@ -257,9 +232,9 @@
         android:layout_width="305dp"
         android:layout_height="54dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="105dp"
         android:layout_marginEnd="16dp"
         android:hint="Block"
+        android:layout_marginBottom="35dp"
         android:inputType="textMultiLine"
         app:boxBackgroundColor="#A65D6786"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -272,9 +247,9 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
         app:hintTextColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/language"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addheader">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_block"

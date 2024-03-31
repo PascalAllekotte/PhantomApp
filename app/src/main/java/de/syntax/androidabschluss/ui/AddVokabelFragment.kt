@@ -34,11 +34,10 @@ class AddVokabelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.backbutton.setOnClickListener{
+        binding.toolbarLayout2.titletext.setText("Add")
+        binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
-
         }
-
 
         binding.btnAdd.setOnClickListener {
             val builder = AlertDialog.Builder(context)

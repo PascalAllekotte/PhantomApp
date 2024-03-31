@@ -36,6 +36,8 @@ class TranslationFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(VokabelViewModel::class.java)
 
         noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
+        binding.toolbarLayout2.titletexttool.setText("Brainery")
+        binding.toolbarLayout2.backbutton.visibility = View.GONE
 
         binding.btTips.setOnClickListener{
             findNavController().navigate(R.id.deepLFragment)

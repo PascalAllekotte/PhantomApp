@@ -35,7 +35,8 @@ class LearningFragment : Fragment() {
         setupRecyclerView()
         loadVocabulariesIntoAdapter()
 
-        binding.backbutton.setOnClickListener {
+        binding.toolbarLayout2.titletext.setText("Blocks")
+        binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
     }

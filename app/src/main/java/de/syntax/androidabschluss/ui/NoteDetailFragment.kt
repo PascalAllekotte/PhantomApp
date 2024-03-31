@@ -45,8 +45,8 @@ class NoteDetailFragment : Fragment() {
             binding.etContent.text = null
 
         }
-        binding.backbutton.setOnClickListener {
-
+        binding.toolbarLayout2.titletext.setText("Add Notes")
+        binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
 
