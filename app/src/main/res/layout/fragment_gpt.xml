@@ -33,11 +33,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/block"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="297dp"
-        android:layout_height="57dp"
+        android:layout_width="320dp"
+        android:layout_height="43dp"
         android:hint="Block"
         android:inputType="textMultiLine"
         app:boxBackgroundColor="#A65D6786"
@@ -47,15 +48,17 @@
         app:boxCornerRadiusTopStart="16dp"
         app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"
-        android:layout_marginLeft="-10dp"
+        android:layout_marginBottom="20dp"
         app:boxStrokeWidthFocused="3dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
         app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="@+id/sendButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_block"
@@ -63,50 +66,50 @@
             android:layout_height="match_parent"
             android:inputType="textMultiLine"
             android:textColor="@color/white"
+            android:textSize="12sp"
             android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/speechButton"
+        android:layout_width="66dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="-2dp"
+        android:backgroundTint="#00000000"
+        android:scaleType="center"
+        android:src="@drawable/v"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/block"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.987" />
 
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/sendButton"
         style="@style/buttonbot"
-        android:layout_width="75dp"
-        android:layout_height="65dp"
-        android:layout_marginLeft="-4dp"
-        android:layout_marginBottom="-6dp"
+        android:layout_width="72dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#5F6179"
         android:gravity="center"
         android:src="@drawable/senden"
         android:text="Send"
-        android:layout_marginEnd="-10dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/block" />
-
-    <soup.neumorphism.NeumorphImageButton
-        android:id="@+id/speechButton"
-        style="@style/buttonbot"
-        android:layout_width="66dp"
-        android:layout_height="65dp"
-        android:layout_marginLeft="-15dp"
-        android:layout_marginBottom="-6dp"
-        android:backgroundTint="#5F6179"
-        android:gravity="center"
-        android:src="@drawable/senden"
-        android:text="Send"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toEndOf="@+id/block" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.989" />
 
     <include
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar_layout"
-        />
-
-
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="-144dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

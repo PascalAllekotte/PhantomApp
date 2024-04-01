@@ -19,7 +19,7 @@
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/neumorphCardView2"
         style="@style/cardview2"
-        android:layout_width="431dp"
+        android:layout_width="415dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="4dp"
@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:text="Learning"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/botTitle" />
 
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:text="Add"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bt_learning" />
 
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:text="Translator"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bt_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,7 +99,7 @@
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/noteview"
         style="@style/cardview2"
-        android:layout_width="431dp"
+        android:layout_width="415dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="4dp"
@@ -149,6 +152,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_height="wrap_content"
                 android:text="Terms"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bt_notes"
@@ -161,6 +165,8 @@
                 android:layout_marginRight="30dp"
                 android:layout_height="wrap_content"
                 android:text="Notes"
+                android:textSize="12sp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/noteTitle"

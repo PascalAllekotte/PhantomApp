@@ -31,11 +31,13 @@ class PicturesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbarLayout2.titletexttool.setText("Pictures")
-        binding.toolbarLayout2.backbutton.setOnClickListener{
+        binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
         pictureAdapter = PictureAdapter { position, pictureItem ->
 
+
+            picturesViewModel.delete(pictureItem)
 
         }
 
@@ -48,4 +50,5 @@ class PicturesFragment : Fragment() {
             pictureAdapter.submitList(pictures.reversed())
         }
     }
-}
+
+    }

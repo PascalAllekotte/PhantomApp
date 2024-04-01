@@ -77,13 +77,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.pictureGeneratorFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.assistantDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.gptFragment -> binding.bottomNavigationView.visibility = View.GONE
-                R.id.assistantsFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.assistantsFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                    binding.neumorphCardView.visibility = View.GONE
+                    binding.view3.visibility = View.GONE
+                }
+
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
 
 
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
+                    binding.neumorphCardView.visibility = View.VISIBLE
+                    binding.view3.visibility = View.VISIBLE
                 }
             }
         }

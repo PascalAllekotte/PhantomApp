@@ -69,6 +69,7 @@ class PictureGeneratorFragment : Fragment() {
                 binding.hqswitch.visibility = View.GONE
             }
         }
+        the right side more epic call of duty style game. A striking 3D profile picture featuring "Maly_45" prominently in the center, surrounded by a brilliantly crafted gaming character of call of duty. The character is  showcasing a dark, aggressive, and almost animalistic and epic feeling. The character is intricately detailed with sparks and realistic fur textures, bringing the figure to life. The background is enhanced by volumetric lighting and ray tracing, creating a complex and immersive environment that encapsulates both the dark and playful worlds. The overall effect is a visually stunning and conceptually captivating representation of the gaming universe. "Maly_45" , not to many colors
 
 **/
 

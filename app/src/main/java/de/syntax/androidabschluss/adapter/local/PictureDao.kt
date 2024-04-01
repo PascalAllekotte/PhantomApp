@@ -20,7 +20,7 @@ import de.syntax.androidabschluss.data.model.open.PictureItem
         fun getAllPictures(): LiveData<List<PictureItem>>
 
         @Delete
-        fun deltePicture(pictureItem: PictureItem)
+        suspend fun deletePicture(pictureItem: PictureItem)
 
         @Update
         fun updatePicture(pictureItem: PictureItem)

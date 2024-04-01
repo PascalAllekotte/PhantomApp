@@ -27,11 +27,12 @@ class LearningDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.backbutton.setOnClickListener{
+
+        binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
-
-
         }
+        binding.toolbarLayout.titletext.setText("Learn")
+
         val blockName = arguments?.getString("blockName") ?: return
         viewModel.getVocabItemsByBlock(blockName).observe(viewLifecycleOwner) { vocabItems ->
             vocableAdapter.updateList(vocabItems)

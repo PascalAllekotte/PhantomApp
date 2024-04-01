@@ -24,6 +24,28 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+
+    <include
+        android:id="@+id/toolbarLayout"
+        layout="@layout/toolbar_layout"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/addbutton"
+        style="@style/imagebuttonneu"
+        android:layout_width="75dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="-12dp"
+        android:layout_marginBottom="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/adding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.645"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assistant_rv"
         android:layout_width="match_parent"
@@ -41,33 +63,13 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         tools:listitem="@layout/botview_layout" />
 
-    <include
-        android:id="@+id/toolbarLayout"
-        layout="@layout/toolbar_layout"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
-    <soup.neumorphism.NeumorphImageButton
-        android:id="@+id/addbutton"
-        style="@style/imagebuttonneu"
-        android:layout_width="75dp"
-        android:layout_height="72dp"
-        android:layout_marginLeft="-12dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="712dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/adding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:src="@drawable/unten2"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
