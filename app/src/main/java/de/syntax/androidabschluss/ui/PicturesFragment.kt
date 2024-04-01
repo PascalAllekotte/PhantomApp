@@ -35,7 +35,8 @@ class PicturesFragment : Fragment() {
             findNavController().popBackStack()
         }
         pictureAdapter = PictureAdapter { position, pictureItem ->
-            // bilder runt laden später noch
+
+
         }
 
         binding.imageRv.apply {

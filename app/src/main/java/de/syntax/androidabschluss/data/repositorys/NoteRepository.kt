@@ -9,8 +9,6 @@ import de.syntax.androidabschluss.data.model.open.NoteItem
 const val TAG = "NoteRepository"
 class NoteRepository(private val database: NoteDataBase){
 
-    private val noteDataBaseDao = database.noteDataBaseDao()
-
     val noteListe: LiveData<List<NoteItem>> = database.noteDataBaseDao().getAllNoteItems()
 
 
