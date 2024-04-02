@@ -14,6 +14,7 @@ object ApiClient {
         .writeTimeout(60,TimeUnit.SECONDS)
         .build()
 
+
     @Volatile
     private var INSTANCE : ApiInterface? = null
 
