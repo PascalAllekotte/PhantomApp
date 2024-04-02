@@ -36,6 +36,7 @@ class AssistantsFragment : Fragment() {
         ViewModelProvider(this)[AssistantViewModel::class.java]
     }
     private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private lateinit var assistantAdapter: AssistantAdapter
 
 
@@ -51,6 +52,8 @@ class AssistantsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAssistantsBinding.inflate(inflater, container, false)
+
+
         return binding.root
 
     }
@@ -58,27 +61,8 @@ class AssistantsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialisieren Sie den Adapter
-        assistantAdapter = AssistantAdapter { type, position, assistant ->
-            when (type) {
-                "delete" -> assistantViewModel.deleteAssistantUsingId(assistant.assistantId)
-                "update" -> updateAssistant(view, assistant)
-                else -> {
-                    val action = AssistantsFragmentDirections.actionAssistantsFragmentToGptFragment(
-                        assistant.assistantId,
-                        assistant.assistantImg,
-                        assistant.assistantName
-                    )
-                    findNavController().navigate(action)
-                }
-            }
-        }
 
-        binding.assistantRv.adapter = assistantAdapter
 
-        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
-            assistantAdapter.updateStrokeColor(color)
-        }
 
         binding.toolbarLayout.titletexttool.text = "ChatBots" // tool ändern :DD
 
@@ -113,6 +97,12 @@ class AssistantsFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             }
+        }
+        binding.assistantRv.adapter = assistantAdapter
+
+        // Beobachten der Farbänderungen
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            assistantAdapter.updateStrokeColor(color)
         }
         binding.assistantRv.adapter = assistantAdapter
         assistantAdapter.registerAdapterDataObserver(object :
