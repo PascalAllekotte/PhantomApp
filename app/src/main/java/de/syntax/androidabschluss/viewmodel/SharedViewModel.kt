@@ -10,6 +10,7 @@ class SharedViewModel : ViewModel() {
     val strokecolor: LiveData<Int>
         get() = _strokecolor
 
+
     fun updatecolor(color : Int){
         _strokecolor.value = color
     }

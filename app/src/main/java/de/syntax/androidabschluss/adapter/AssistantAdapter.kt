@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,6 +14,14 @@ class AssistantAdapter(
     private val onClickdeleteUpdateCallback : (type: String, position: Int, assistant: Assistant) -> Unit
 
 ) : ListAdapter<Assistant, AssistantAdapter.ViewHolder>(DiffCallback()) {
+
+    private var currentStrokeColor: Int? = null
+
+
+    fun updateStrokeColor(color: Int) {
+        currentStrokeColor = color
+        notifyDataSetChanged()  // Informiert den Adapter, dass sich Daten geändert haben und die View aktualisiert werden muss
+    }
 
     class DiffCallback : DiffUtil.ItemCallback<Assistant>() {
         override fun areItemsTheSame(oldItem: Assistant, newItem: Assistant): Boolean {
@@ -41,6 +50,13 @@ class AssistantAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val assistant = getItem(position)
+
+        currentStrokeColor?.let { color ->
+            // Konvertiert den Int-Farbwert in eine ColorStateList
+            val colorStateList = ColorStateList.valueOf(color)
+            holder.botviewLayoutBinding.botCard.setStrokeColor(colorStateList)
+        }
+
         holder.botviewLayoutBinding.botTitle.text = assistant.assistantName
         holder.botviewLayoutBinding.botImage.setImageResource(assistantImageList[assistant.assistantImg])
 

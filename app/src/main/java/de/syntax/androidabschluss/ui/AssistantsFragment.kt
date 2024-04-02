@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ import de.syntax.androidabschluss.utils.StatusResult
 import de.syntax.androidabschluss.utils.assistantImageList
 import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.viewmodel.AssistantViewModel
+import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -32,8 +34,11 @@ class AssistantsFragment : Fragment() {
     private lateinit var binding: FragmentAssistantsBinding
     private val assistantViewModel: AssistantViewModel by lazy {
         ViewModelProvider(this)[AssistantViewModel::class.java]
-
     }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var assistantAdapter: AssistantAdapter
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +58,27 @@ class AssistantsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /**  binding.backbutton.setOnClickListener {
-        findNavController().popBackStack()
+        // Initialisieren Sie den Adapter
+        assistantAdapter = AssistantAdapter { type, position, assistant ->
+            when (type) {
+                "delete" -> assistantViewModel.deleteAssistantUsingId(assistant.assistantId)
+                "update" -> updateAssistant(view, assistant)
+                else -> {
+                    val action = AssistantsFragmentDirections.actionAssistantsFragmentToGptFragment(
+                        assistant.assistantId,
+                        assistant.assistantImg,
+                        assistant.assistantName
+                    )
+                    findNavController().navigate(action)
+                }
+            }
         }
-         **/
+
+        binding.assistantRv.adapter = assistantAdapter
+
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            assistantAdapter.updateStrokeColor(color)
+        }
 
         binding.toolbarLayout.titletexttool.text = "ChatBots" // tool ändern :DD
 
