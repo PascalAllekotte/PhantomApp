@@ -9,26 +9,35 @@
     android:background="@drawable/futuristic_background">
 
 
+    <include
+        android:id="@+id/toolbarLayout2"
+        layout="@layout/toolbar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <soup.neumorphism.NeumorphButton
         android:id="@+id/logout"
         style="@style/buttonlogout"
         android:layout_width="150dp"
         android:layout_height="65dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="172dp"
         android:gravity="center"
         android:text="logout"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/style" />
 
-
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/stroke"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Strokes:"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -42,100 +51,107 @@
         android:id="@+id/style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="112dp"
         android:text="Account:"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
-    <RadioGroup
-        android:id="@+id/stylegroup"
-        android:layout_width="109dp"
-        android:layout_height="182dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <RadioButton
-            android:id="@+id/rbblure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Auora"
-            android:textColor="@color/white"
-            android:checked="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.296"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/style" />
-
-        <RadioButton
-            android:id="@+id/rbgreen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Matrix"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.296"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/style" />
-
-        <RadioButton
-            android:id="@+id/rbwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Snow"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.296"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/style" />
-
-        <RadioButton
-            android:id="@+id/rbrose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rose"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.296"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/style" />
-
-    </RadioGroup>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:backgroundTint="#000000"
-        android:src="@drawable/test10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <soup.neumorphism.NeumorphTextView
-        android:id="@+id/textview"
-        style="@style/textneu"
+
+    <TextView
+        android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="16dp"
-        android:rotation="-6"
-        android:text="Setting"
-        android:textColor="#5D6786"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:text="Email:"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/style" />
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/cardviewtr"
+        style="@style/cardview2"
+        android:layout_width="125dp"
+        android:layout_height="221dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="-35dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stroke"
+        app:layout_constraintVertical_bias="0.274"
+        app:neumorph_strokeColor="@color/blau"
+        app:neumorph_strokeWidth="0.7dp">
+
+        <RadioGroup
+            android:id="@+id/stylegroup"
+            android:layout_width="109dp"
+            android:layout_height="182dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.335"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stroke">
+
+            <RadioButton
+                android:id="@+id/rbblure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Auora"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.296"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/style" />
+
+            <RadioButton
+                android:id="@+id/rbgreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Matrix"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.296"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/style" />
+
+            <RadioButton
+                android:id="@+id/rbwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Snow"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.296"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/style" />
+
+            <RadioButton
+                android:id="@+id/rbrose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rose"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.296"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/style" />
+
+        </RadioGroup>
+    </soup.neumorphism.NeumorphCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

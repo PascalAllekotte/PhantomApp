@@ -1,6 +1,7 @@
 package de.syntax.androidabschluss.ui
 
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,15 @@ class SettingsFragment : Fragment() {
         val snowColor = ContextCompat.getColor(requireContext(), R.color.weiß)
         val matrixColor = ContextCompat.getColor(requireContext(), R.color.grün)
         val roseColor = ContextCompat.getColor(requireContext(), R.color.rose)
+
+        binding.toolbarLayout2.titletexttool.setText("Settings")
+        binding.toolbarLayout2.backbutton.visibility = View.GONE
+
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { colorInt ->
+            val colorStateList = ColorStateList.valueOf(colorInt)
+            binding.cardviewtr.setStrokeColor(colorStateList)
+
+        }
 
 
         binding.stylegroup.setOnCheckedChangeListener { group, checkedId ->

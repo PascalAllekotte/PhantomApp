@@ -64,7 +64,6 @@ class MainFragment : Fragment() {
 
     private fun setupRecyclerViewNote() {
         noteAdapter = NoteAdapter(mutableListOf()) { noteItem ->
-            // Aufruf der Löschfunktion im ViewModel
             noteViewModel.delete(noteItem)
         }
 
