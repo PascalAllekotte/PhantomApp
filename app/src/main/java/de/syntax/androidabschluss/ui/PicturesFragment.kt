@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,12 +35,21 @@ class PicturesFragment : Fragment() {
         binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
-        pictureAdapter = PictureAdapter { position, pictureItem ->
-
-
-            picturesViewModel.delete(pictureItem)
-
-        }
+        pictureAdapter = PictureAdapter(
+            { position, pictureItem ->
+                //für einen click
+            },
+            { position, pictureItem ->
+                AlertDialog.Builder(context).apply {
+                    setTitle("Bild löschen")
+                    setMessage("Möchten Sie dieses Bild wirklich löschen?")
+                    setPositiveButton("Löschen") { dialog, which ->
+                        picturesViewModel.delete(pictureItem)
+                    }
+                    setNegativeButton("Abbrechen", null)
+                }.show()
+            }
+        )
 
         binding.imageRv.apply {
             adapter = pictureAdapter

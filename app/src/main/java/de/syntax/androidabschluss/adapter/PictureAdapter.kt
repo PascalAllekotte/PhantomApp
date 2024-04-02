@@ -11,13 +11,13 @@ import de.syntax.androidabschluss.data.model.open.PictureItem // Angenommen, die
 import de.syntax.androidabschluss.databinding.ViewImageLayoutBinding
 
 class PictureAdapter(
-    private val onClickCallback: (position: Int, pictureItem: PictureItem) -> Unit
+    private val onClickCallback: (position: Int, pictureItem: PictureItem) -> Unit,
+    private val onLongClickCallback: (position: Int, pictureItem: PictureItem) -> Unit
 ) : ListAdapter<PictureItem, PictureAdapter.ViewHolder>(DiffCallback()) {
 
     class DiffCallback : DiffUtil.ItemCallback<PictureItem>() {
         override fun areItemsTheSame(oldItem: PictureItem, newItem: PictureItem): Boolean {
-            // Möglicherweise müssen Sie diese Methode basierend auf Ihrer PictureItem-Klasse anpassen
-            return oldItem.id == newItem.id // Annahme, dass PictureItem eine ID hat.
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: PictureItem, newItem: PictureItem): Boolean {
@@ -26,15 +26,22 @@ class PictureAdapter(
     }
 
     inner class ViewHolder(val binding: ViewImageLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(pictureItem: PictureItem, onClick: (position: Int, pictureItem: PictureItem) -> Unit) {
+        fun bind(pictureItem: PictureItem, onClick: (position: Int, pictureItem: PictureItem) -> Unit,
+                 onLongClick: (position: Int, pictureItem: PictureItem) -> Unit) {
             Glide.with(binding.loadImage2)
-                .load(pictureItem.url) // Annahme, dass PictureItem eine URL-Variable hat
+                .load(pictureItem.url)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(binding.loadImage2)
+
 
             itemView.setOnClickListener {
                 onClick(adapterPosition, pictureItem)
             }
+
+            itemView.setOnLongClickListener {
+                onLongClick(adapterPosition, pictureItem)
+                true
+                }
         }
     }
 
@@ -49,6 +56,6 @@ class PictureAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pictureItem = getItem(position)
-        holder.bind(pictureItem, onClickCallback)
+        holder.bind(pictureItem, onClickCallback, onLongClickCallback)
     }
 }
