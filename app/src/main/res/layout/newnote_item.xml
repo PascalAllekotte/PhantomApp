@@ -11,7 +11,7 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10sp"
+        android:layout_margin="3sp"
         app:neumorph_strokeColor="@color/blau"
         app:neumorph_strokeWidth="0.8dp"
         app:cardCornerRadius="15sp">

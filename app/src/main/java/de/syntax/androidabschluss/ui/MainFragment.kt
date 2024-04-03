@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
@@ -54,7 +54,7 @@ class MainFragment : Fragment() {
 
         // Zeigt die letzten Einträge als erstres
         noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
-            noteAdapter.updateList(noteList.reversed())
+            noteAdapter.updateList(noteList)
         }
     }
 
@@ -72,9 +72,9 @@ class MainFragment : Fragment() {
             noteViewModel.delete(noteItem)
         }
 
-        binding.noterecyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.noterecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.noterecyclerView.adapter = noteAdapter
-        binding.noterecyclerView.setHasFixedSize(false)
+        binding.noterecyclerView.setHasFixedSize(true)
         LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
     }
 
