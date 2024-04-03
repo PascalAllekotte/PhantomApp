@@ -71,6 +71,11 @@ class TranslationFragment : Fragment() {
 
         }
 
+        binding.btTermin.setOnClickListener {
+            findNavController().navigate(R.id.termsFragment)
+
+        }
+
     }
 
 }

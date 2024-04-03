@@ -6,12 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
+import de.syntax.androidabschluss.utils.getAuoraColor
+import de.syntax.androidabschluss.utils.getEvilColor
+import de.syntax.androidabschluss.utils.getMatrixColor
+import de.syntax.androidabschluss.utils.getRoseColor
+import de.syntax.androidabschluss.utils.getSnowColor
 import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
 
@@ -34,10 +38,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val auoraColor = ContextCompat.getColor(requireContext(), R.color.blau)
-        val snowColor = ContextCompat.getColor(requireContext(), R.color.weiß)
-        val matrixColor = ContextCompat.getColor(requireContext(), R.color.grün)
-        val roseColor = ContextCompat.getColor(requireContext(), R.color.rose)
+
 
         binding.toolbarLayout2.titletexttool.setText("Settings")
         binding.toolbarLayout2.backbutton.visibility = View.GONE
@@ -49,12 +50,14 @@ class SettingsFragment : Fragment() {
         }
 
 
-        binding.stylegroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.stylegroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
-                R.id.rbblure -> sharedViewModel.updatecolor(auoraColor)
-                R.id.rbgreen -> sharedViewModel.updatecolor(matrixColor)
-                R.id.rbwhite -> sharedViewModel.updatecolor(snowColor)
-                R.id.rbrose -> sharedViewModel.updatecolor(roseColor)
+                R.id.rbblure -> sharedViewModel.updatecolor(getAuoraColor(requireContext()))
+                R.id.rbgreen -> sharedViewModel.updatecolor(getMatrixColor(requireContext()))
+                R.id.rbwhite -> sharedViewModel.updatecolor(getSnowColor(requireContext()))
+                R.id.rbrose -> sharedViewModel.updatecolor(getRoseColor(requireContext()))
+                R.id.rbred -> sharedViewModel.updatecolor(getEvilColor(requireContext()))
+
 
 
             }

@@ -13,16 +13,16 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     val chatStateFlow get() = chatRepository.chatStateFlow
     val imageStateFlow get() = chatRepository.imageStateFlow
 
-    fun createChatCompletion(message: String, robotId: String) {
-        chatRepository.createChatCompletion(message, robotId)
+    fun createChatCompletion(message: String, assistantId: String) {
+        chatRepository.createChatCompletion(message, assistantId)
     }
 
     fun createImage(body: CreateImageRequest) {
         chatRepository.createImage(body, getApplication())
     }
 
-    fun getChatList(robotId: String) {
-        chatRepository.getChatList(robotId)
+    fun getChatList(assistantId: String) {
+        chatRepository.getChatList(assistantId)
     }
 
 

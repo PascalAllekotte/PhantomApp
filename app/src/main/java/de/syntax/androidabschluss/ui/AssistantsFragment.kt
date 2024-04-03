@@ -37,15 +37,6 @@ class AssistantsFragment : Fragment() {
     }
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    private lateinit var assistantAdapter: AssistantAdapter
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

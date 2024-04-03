@@ -14,6 +14,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.syntax.androidabschluss.R
 
@@ -139,3 +140,8 @@ val languageFullNames = listOf(
     "Ukrainian",
     "Chinese (simplified)"
 )
+fun getAuoraColor(context: Context) = ContextCompat.getColor(context, R.color.blau)
+fun getSnowColor(context: Context) = ContextCompat.getColor(context, R.color.weiß)
+fun getMatrixColor(context: Context) = ContextCompat.getColor(context, R.color.grün)
+fun getRoseColor(context: Context) = ContextCompat.getColor(context, R.color.rose)
+fun getEvilColor(context: Context) = ContextCompat.getColor(context, R.color.rot)

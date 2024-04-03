@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_translationFragment_to_deepLFragment"
             app:destination="@id/deepLFragment" />
+        <action
+            android:id="@+id/action_translationFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -144,6 +147,9 @@
         <action
             android:id="@+id/action_learningDetailFragment_to_learningFragment"
             app:destination="@id/learningFragment" />
+        <action
+            android:id="@+id/action_learningDetailFragment_to_vocabularyTestFragment"
+            app:destination="@id/vocabularyTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
@@ -221,6 +227,29 @@
         <action
             android:id="@+id/action_picturesFragment_to_botFragment"
             app:destination="@id/botFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vocabularyTestFragment"
+        android:name="de.syntax.androidabschluss.ui.VocabularyTestFragment"
+        android:label="fragment_vocabulary_test"
+        tools:layout="@layout/fragment_vocabulary_test" >
+        <action
+            android:id="@+id/action_vocabularyTestFragment_to_learningDetailFragment"
+            app:destination="@id/learningDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectTextFragment"
+        android:name="de.syntax.androidabschluss.ui.SelectTextFragment"
+        android:label="fragment_select_text"
+        tools:layout="@layout/fragment_select_text" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="de.syntax.androidabschluss.ui.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" >
+        <action
+            android:id="@+id/action_termsFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
     </fragment>
 
 
