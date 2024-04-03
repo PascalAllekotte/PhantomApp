@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.local.NoteDataBase
 import de.syntax.androidabschluss.adapter.local.getDatabaseNote
 import de.syntax.androidabschluss.data.model.open.NoteItem
@@ -20,10 +23,9 @@ class NoteDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteDetailBinding
     lateinit var database: NoteDataBase
-    private val viewModel: NoteViewModel by lazy {
-        ViewModelProvider(this).get(NoteViewModel::class.java)
-    }
 
+    private lateinit var noteAdapter: NoteAdapter
+    private lateinit var noteViewModel: NoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,11 @@ class NoteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        setupRecyclerViewNote()
+        noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
+            noteAdapter.updateList(noteList.reversed())
+        }
 
         binding.btnAdd.setOnClickListener{
             addNoteItem()
@@ -50,6 +56,7 @@ class NoteDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        // note recyclerview
 
     }
 
@@ -72,6 +79,16 @@ class NoteDetailFragment : Fragment() {
 
 
         }
+    }
+
+    private fun setupRecyclerViewNote() {
+        noteAdapter = NoteAdapter(mutableListOf()) { noteItem ->
+            noteViewModel.delete(noteItem)
+        }
+
+        binding.noterecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.noterecyclerView.adapter = noteAdapter
+        LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
     }
 
 
