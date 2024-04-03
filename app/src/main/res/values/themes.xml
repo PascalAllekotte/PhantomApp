@@ -12,4 +12,15 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
+
+    <style name="SearchAutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+    <style name="SearchTheme" parent="Theme.AppCompat.Light">
+        <item name="queryHint">@string/search_notes</item>
+        <item name="autoCompleteTextViewStyle">@style/SearchAutoCompleteTextView</item>
+    </style>
+
 </resources>
