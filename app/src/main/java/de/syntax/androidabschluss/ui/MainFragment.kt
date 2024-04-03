@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.adapter.NoteAdapter
@@ -36,6 +37,9 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbarLayout.backbutton.visibility = View.GONE
+        binding.toolbarLayout.titletexttool.setText("Main")
 
         vokabelViewModel = ViewModelProvider(this).get(VokabelViewModel::class.java)
         setupRecyclerView()
@@ -68,8 +72,9 @@ class MainFragment : Fragment() {
             noteViewModel.delete(noteItem)
         }
 
-        binding.noterecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.noterecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.noterecyclerView.adapter = noteAdapter
+        binding.noterecyclerView.setHasFixedSize(false)
         LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
     }
 

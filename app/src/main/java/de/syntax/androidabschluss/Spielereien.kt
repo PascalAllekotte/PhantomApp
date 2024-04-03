@@ -2,7 +2,16 @@ package de.syntax.androidabschluss
 
 class Spielereien {
 
-//
+//   <com.makeramen.roundedimageview.RoundedImageView
+//                android:id="@+id/imgNote"
+//                android:layout_width="match_parent"
+//                android:layout_height="150dp"
+//                android:adjustViewBounds="true"
+//                android:scaleType="fitXY"
+//                android:visibility="gone"
+//                app:riv_corner_radius_bottom_left="@dimen/_20sdp"
+//                app:riv_corner_radius_bottom_right="@dimen/_20sdp" />
+
     /** //Navigation Bottom bar one bar
      *  <ImageView
      *         android:id="@+id/imgk"
