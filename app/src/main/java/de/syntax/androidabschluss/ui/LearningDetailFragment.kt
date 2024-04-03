@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentLearningDetailBinding
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
@@ -27,6 +28,10 @@ class LearningDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.vokabeltest.setOnClickListener {
+            findNavController().navigate(R.id.vocabularyTestFragment)
+        }
 
         binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()

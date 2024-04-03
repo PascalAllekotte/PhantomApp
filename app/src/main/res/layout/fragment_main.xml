@@ -40,14 +40,13 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="16dp"
                 android:text="Favoriten:"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/weather" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/vocabularyRecyclerView"
@@ -68,7 +67,7 @@
                 android:layout_marginTop="12dp"
                 android:text="Notes:"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.047"
@@ -87,17 +86,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/notes"
                 tools:listitem="@layout/vokabelcard_item" />
 
+            <TextView
+                android:id="@+id/weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Weather:"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginTop="35dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.062"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 
     <include
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar_layout"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="-144dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

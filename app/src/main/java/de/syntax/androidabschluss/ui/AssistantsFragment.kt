@@ -55,7 +55,7 @@ class AssistantsFragment : Fragment() {
 
 
 
-        binding.toolbarLayout.titletexttool.text = "ChatBots" // tool ändern :DD
+        binding.toolbarLayout.titletexttool.text = "ChatBots" // tool ändern D
 
 
         binding.toolbarLayout.backbutton.setOnClickListener{
@@ -90,8 +90,6 @@ class AssistantsFragment : Fragment() {
             }
         }
         binding.assistantRv.adapter = assistantAdapter
-
-        // Beobachten der Farbänderungen
         sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
             assistantAdapter.updateStrokeColor(color)
         }
@@ -178,7 +176,7 @@ class AssistantsFragment : Fragment() {
 
     private fun updateAssistant(view: View, assistant: Assistant){
         val edAssistantName = EditText(view.context)
-        edAssistantName.hint = "Assistantname eingeben:"
+        edAssistantName.hint = "Botname:"
         edAssistantName.maxLines = 3
 
         val textInputLayout = TextInputLayout(view.context)
@@ -195,7 +193,7 @@ class AssistantsFragment : Fragment() {
         container.addView(textInputLayout)
 
         MaterialAlertDialogBuilder(view.context)
-            .setTitle("Name ändern :D")
+            .setTitle("Edit the name:")
             .setView(container)
             .setCancelable(false)
             .setPositiveButton("Update"){ dialog, which ->
@@ -223,7 +221,7 @@ class AssistantsFragment : Fragment() {
     }
     private fun addAssistant(view: View){
         val edAssistantName = EditText(view.context)
-        edAssistantName.hint = "Assistantname eingeben:"
+        edAssistantName.hint = "Type the botname here"
         edAssistantName.maxLines = 3
 
         val textInputLayout = TextInputLayout(view.context)

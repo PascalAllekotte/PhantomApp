@@ -48,8 +48,9 @@ class MainFragment : Fragment() {
             vocableAdapter.updateList(favorite)
         }
 
+        // Zeigt die letzten Einträge als erstres
         noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
-            noteAdapter.updateList(noteList)
+            noteAdapter.updateList(noteList.reversed())
         }
     }
 
