@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,12 +12,26 @@ class NoteAdapter(
     private val onNoteDeleted: (NoteItem) -> Unit
 ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
+    private var currentStrokeColor: Int? = null
+
+    fun updateStrokeColor(color: Int) {
+        currentStrokeColor = color
+        notifyDataSetChanged()  // Informiert den Adapter, dass sich Daten geändert haben und die View aktualisiert werden muss
+    }
+
+
     class NoteViewHolder(val binding: NewnoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(noteItem: NoteItem, onDeleteClick: (NoteItem) -> Unit) {
+        fun bind(noteItem: NoteItem, onDeleteClick: (NoteItem) -> Unit, currentStrokeColor: Int?) {
             binding.tvTitle.text = noteItem.title
             binding.tvDesc.text = noteItem.content
             binding.tvDateTime.setOnClickListener { onDeleteClick(noteItem) }
+            currentStrokeColor?.let { color ->
+                val colorStateList = ColorStateList.valueOf(color)
+                binding.cardView.setStrokeColor(colorStateList) // Annahme: `notecard` ist Teil von `NewnoteItemBinding`
+            }
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -28,7 +43,10 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val noteItem = noteList[position]
-        holder.bind(noteItem, onNoteDeleted)
+        holder.bind(noteItem, onNoteDeleted, currentStrokeColor)
+
+
+
     }
 
     fun updateList(newNoteItems: List<NoteItem>) {

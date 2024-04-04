@@ -28,7 +28,7 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/cardViewTop"
-                style="@style/buttonfinal"
+                style="@style/buttonfinal2"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
 
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/revealButton"
-                style="@style/buttonCardview"
+                style="@style/buttonfinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -84,7 +84,7 @@
                 android:id="@+id/loesungCard"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
-                style="@style/buttonfinal"
+                style="@style/buttonfinal2"
                 app:neumorph_strokeWidth="1dp"
                 app:neumorph_strokeColor="@color/secondary"
                 android:layout_marginStart="-30dp"

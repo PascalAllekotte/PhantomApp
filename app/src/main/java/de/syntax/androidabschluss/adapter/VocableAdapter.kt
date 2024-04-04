@@ -1,26 +1,33 @@
 package de.syntax.androidabschluss.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import de.syntax.androidabschluss.adapter.local.VokabelDataBaseDao
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.VokabelcardItemBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class VocableAdapter(
     private val vocabularyList: MutableList<VocabItem>,
     private val onItemChanged: (VocabItem) -> Unit
 ) : RecyclerView.Adapter<VocableAdapter.VocabViewHolder>() {
 
+    private var currentStrokeColor: Int? = null
+
+    fun updateStrokeColor(color: Int) {
+        currentStrokeColor = color
+        notifyDataSetChanged()  // Informiert den Adapter, dass sich Daten geändert haben und die View aktualisiert werden muss
+    }
+
+
     class VocabViewHolder(
         val binding: VokabelcardItemBinding,
-        private val onItemChanged: (VocabItem) -> Unit
+        private val onItemChanged: (VocabItem) -> Unit,
+        private var currentStrokeColor: Int?
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(vocabItem: VocabItem) {
+
             binding.language.text = vocabItem.language
             binding.vokabel.text = vocabItem.translation
             binding.cbFavorite.isChecked = vocabItem.favorite
@@ -41,12 +48,20 @@ class VocableAdapter(
                     onItemChanged(vocabItem)
                 }
             }
+            currentStrokeColor?.let { color ->
+                val colorStateList = ColorStateList.valueOf(color)
+                binding.cardViewTop.setStrokeColor(colorStateList) // Stellen Sie sicher, dass vokabelcard im Binding existiert
+            }
+
+
+
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VocabViewHolder {
         val binding = VokabelcardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VocabViewHolder(binding, onItemChanged)
+        return VocabViewHolder(binding, onItemChanged, currentStrokeColor)
     }
 
     override fun onBindViewHolder(holder: VocabViewHolder, position: Int) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -14,6 +15,7 @@ import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
+import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 
@@ -26,6 +28,8 @@ class MainFragment : Fragment() {
 
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var noteViewModel: NoteViewModel
+
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +60,15 @@ class MainFragment : Fragment() {
         noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
             noteAdapter.updateList(noteList)
         }
+
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            noteAdapter.updateStrokeColor(color)
+            vocableAdapter.updateStrokeColor(color)
+        }
     }
 
     private fun setupRecyclerView() {
         vocableAdapter = VocableAdapter(mutableListOf()) { vocabItem ->
-            // Handle vocab item click
         }
         binding.vocabularyRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.vocabularyRecyclerView.adapter = vocableAdapter

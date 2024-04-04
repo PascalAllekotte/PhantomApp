@@ -89,7 +89,6 @@ class AssistantsFragment : Fragment() {
                 }
             }
         }
-        binding.assistantRv.adapter = assistantAdapter
         sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
             assistantAdapter.updateStrokeColor(color)
         }
