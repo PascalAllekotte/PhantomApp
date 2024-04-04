@@ -65,10 +65,17 @@ class MainActivity : AppCompatActivity() {
 
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.mainFragment -> binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.mainFragment -> {
+                    binding.bottomNavigationView.visibility = View.VISIBLE
+                    binding.neumorphCardView.visibility = View.VISIBLE
+                    binding.view3.visibility = View.VISIBLE
+                }
                 //---------------------------------------------------
-                R.id.homeFragment -> binding.bottomNavigationView.visibility = View.GONE
-                R.id.loginFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.homeFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                    binding.neumorphCardView.visibility = View.GONE
+                    binding.view3.visibility = View.GONE
+                }                R.id.loginFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.registrationFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.addVokabelFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.noteDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
@@ -82,7 +89,12 @@ class MainActivity : AppCompatActivity() {
                     binding.neumorphCardView.visibility = View.GONE
                     binding.view3.visibility = View.GONE
                 }
+                R.id.selectTextFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                    binding.neumorphCardView.visibility = View.VISIBLE
+                    binding.view3.visibility = View.VISIBLE
 
+                }
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
 

@@ -125,6 +125,8 @@ class GptFragment : Fragment() {
 
 
                     R.id.slectTxtMenu -> {
+                        val action = GptFragmentDirections.actionGptFragmentToSelectTextFragment(message)
+                        findNavController().navigate(action)
                         textToSpeech.stop()
                         true
                     }

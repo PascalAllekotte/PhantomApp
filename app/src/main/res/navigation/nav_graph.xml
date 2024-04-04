@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment2"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_noteDetailDetailFragment"
+            app:destination="@id/noteDetailDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/translationFragment"
@@ -159,6 +162,9 @@
         <action
             android:id="@+id/action_noteDetailFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+        <action
+            android:id="@+id/action_noteDetailFragment_to_noteDetailDetailFragment"
+            app:destination="@id/noteDetailDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/assistantDetailFragment"
@@ -178,6 +184,7 @@
             android:id="@+id/action_pictureGeneratorFragment_to_botFragment"
             app:destination="@id/botFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/gptFragment"
         android:name="de.syntax.androidabschluss.ui.GptFragment"
@@ -197,6 +204,11 @@
         <argument
             android:name="assistantName"
             app:argType="string" />
+
+
+        <action
+            android:id="@+id/action_gptFragment_to_selectTextFragment"
+            app:destination="@id/selectTextFragment" />
     </fragment>
     <fragment
         android:id="@+id/assistantsFragment"
@@ -241,7 +253,14 @@
         android:id="@+id/selectTextFragment"
         android:name="de.syntax.androidabschluss.ui.SelectTextFragment"
         android:label="fragment_select_text"
-        tools:layout="@layout/fragment_select_text" />
+        tools:layout="@layout/fragment_select_text" >
+        <action
+            android:id="@+id/action_selectTextFragment_to_gptFragment"
+            app:destination="@id/gptFragment" />
+        <argument
+            android:name="selectedMessage"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/termsFragment"
         android:name="de.syntax.androidabschluss.ui.TermsFragment"
@@ -250,6 +269,18 @@
         <action
             android:id="@+id/action_termsFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.NoteDetailDetailFragment"
+        android:label="fragment_note_detail_detail"
+        tools:layout="@layout/fragment_note_detail_detail" >
+        <action
+            android:id="@+id/action_noteDetailDetailFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_noteDetailDetailFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 

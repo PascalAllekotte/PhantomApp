@@ -33,7 +33,7 @@
         android:textStyle="bold"
         android:visibility="gone"
         tools:text="Receiver Message"
-        android:textColor="@color/black"
+        android:textColor="#D3D3D3"
         android:layout_height="wrap_content"/>
 
     <TextView
@@ -45,7 +45,7 @@
         android:textAlignment="textStart"
         android:textStyle="bold"
         tools:text="Mar 10, 2024 6:00pm"
-        android:textColor="@color/black"
+        android:textColor="#D3D3D3"
         android:textSize="12sp"
         android:layout_height="wrap_content"/>
 

@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentSelectTextBinding
+import soup.neumorphism.NeumorphImageButton
 
 
 class SelectTextFragment : Fragment() {
 
     private lateinit var binding : FragmentSelectTextBinding
+    private val selectArgs : SelectTextFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -20,17 +23,26 @@ class SelectTextFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSelectTextBinding.inflate(inflater,container,false)
-        return inflater.inflate(R.layout.fragment_select_text, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbarLayout.titletext.setText("Select")
-        binding.toolbarLayout.backbutton.setOnClickListener {
-            findNavController().popBackStack()
+        binding.selecttext.text = selectArgs.selectedMessage
+
+
+
+
+        //---Klappt nur mit R.ID
+        val close = view.findViewById<NeumorphImageButton>(R.id.backbuttonselect)
+        close.setOnClickListener {
+            findNavController().navigateUp()
         }
+
+
+
 
 
 
