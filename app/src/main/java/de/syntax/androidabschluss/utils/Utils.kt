@@ -11,6 +11,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -80,6 +81,7 @@ fun Context.longToastShow(message: String){
     Toast.makeText(this,message, Toast.LENGTH_LONG).show()
 
 }
+//------
 fun Context.copyToClipBoard(message: String) {
     val clipBoard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText("Copied Text",message)
@@ -103,7 +105,7 @@ fun Dialog.setupDialog(layoutResId : Int){
     setCancelable(false)
 }
 
-
+// For the translator--Target languages from documentation
 val languageFullNames = listOf(
     "Arabic",
     "Bulgarian",
@@ -140,8 +142,18 @@ val languageFullNames = listOf(
     "Ukrainian",
     "Chinese (simplified)"
 )
-fun getAuoraColor(context: Context) = ContextCompat.getColor(context, R.color.blau)
-fun getSnowColor(context: Context) = ContextCompat.getColor(context, R.color.weiß)
-fun getMatrixColor(context: Context) = ContextCompat.getColor(context, R.color.grün)
-fun getRoseColor(context: Context) = ContextCompat.getColor(context, R.color.rose)
-fun getEvilColor(context: Context) = ContextCompat.getColor(context, R.color.rot)
+
+//----------Strokecolors
+        fun getAuoraColor(context: Context) = ContextCompat.getColor(context, R.color.blau)
+        fun getSnowColor(context: Context) = ContextCompat.getColor(context, R.color.weiß)
+        fun getMatrixColor(context: Context) = ContextCompat.getColor(context, R.color.grün)
+        fun getRoseColor(context: Context) = ContextCompat.getColor(context, R.color.rose)
+        fun getEvilColor(context: Context) = ContextCompat.getColor(context, R.color.rot)
+
+
+//----------Animations
+fun startButtonAnimation(context: Context, view: View, animationResource: Int = R.anim.anima) {
+    val vibrationAnimation = AnimationUtils.loadAnimation(context, animationResource)
+    view.startAnimation(vibrationAnimation)
+}
+

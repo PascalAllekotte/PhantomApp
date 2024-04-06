@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         android:visibility="visible"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="110dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
+        android:layout_marginBottom="30dp"
         tools:listitem="@layout/view_image_layout2" />
 
 

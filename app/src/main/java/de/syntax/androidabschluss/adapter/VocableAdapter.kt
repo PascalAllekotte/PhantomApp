@@ -40,6 +40,7 @@ class VocableAdapter(
                     binding.language2.text = vocabItem.language2
                     binding.vokabel2.text = vocabItem.translation2
                 }
+
             }
 
             binding.cbFavorite.setOnCheckedChangeListener { _, isChecked ->
