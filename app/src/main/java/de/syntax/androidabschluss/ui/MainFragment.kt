@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
@@ -41,6 +43,10 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.weatherBtn.setOnClickListener {
+            findNavController().navigate(R.id.weatherFragment)
+        }
 
         binding.toolbarLayout.backbutton.visibility = View.GONE
         binding.toolbarLayout.titletexttool.setText("Main")

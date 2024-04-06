@@ -46,7 +46,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weather" />
+                app:layout_constraintTop_toBottomOf="@+id/weather_btn" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/vocabularyRecyclerView"
@@ -95,6 +95,19 @@
                 app:layout_constraintHorizontal_bias="0.062"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/weather_btn"
+                style="@style/buttonfinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weather" />
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

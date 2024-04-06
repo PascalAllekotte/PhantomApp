@@ -141,3 +141,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.github.parse-community.Parse-SDK-Android:bolts-tasks:4.3.0") // Use '+' for latest version or specify a version number
 }
+
+kapt{
+    correctErrorTypes true
+}
