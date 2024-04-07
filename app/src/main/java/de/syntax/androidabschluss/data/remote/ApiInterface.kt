@@ -3,6 +3,7 @@ package de.syntax.androidabschluss.data.remote
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
 import de.syntax.androidabschluss.adapter.Request.DeeplRequest
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
+import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
 import de.syntax.androidabschluss.response.ChatRequest
 import de.syntax.androidabschluss.response.ChatResponse
 import de.syntax.androidabschluss.response.CreateImageRequest
@@ -52,6 +53,15 @@ interface ApiInterface {
         @Query("units") units: String,
         @Query("appid") ApiKey: String,
     ): Call<CurrentResponseApi>
+
+    @GET("data/2.5/forecast?")
+    fun getForecastWeather(
+        @Query("lat") lat:Double,
+        @Query("lon") lon:Double,
+        @Query("units") units: String,
+        @Query("appid") ApiKey: String,
+    ): Call<ForecastResponseApi>
+
 
 
 }
