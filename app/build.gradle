@@ -111,7 +111,8 @@ dependencies {
 
     // Wetter
     implementation("com.github.MatteoBattilana:WeatherView:3.0.0")
-
+    //BlurView
+    implementation("com.github.Dimezis:BlurView:version-2.0.3")
 
     implementation("com.aallam.openai:openai-client")
     runtimeOnly ("io.ktor:ktor-client-okhttp")

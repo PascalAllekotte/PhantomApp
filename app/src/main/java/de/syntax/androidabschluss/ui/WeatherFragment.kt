@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.adapter.ForeCastAdapter
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
 import de.syntax.androidabschluss.databinding.FragmentWeatherBinding
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
@@ -21,6 +22,7 @@ class WeatherFragment : Fragment() {
     private lateinit var binding : FragmentWeatherBinding
     private val weatherViewModel: WeatherViewModel by viewModels()
     private val calendar by lazy { Calendar.getInstance() }
+    private val forecastAdapter by lazy { ForeCastAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +50,7 @@ class WeatherFragment : Fragment() {
             cityTxt.text = name
             progressBar.visibility = View.VISIBLE
             weatherViewModel.loadCurrentWeather(lat, lon, "metric").enqueue(object :
-            retrofit2.Callback<CurrentResponseApi> {
+                retrofit2.Callback<CurrentResponseApi> {
                 override fun onResponse(
                     call: Call<CurrentResponseApi>,
                     response: Response<CurrentResponseApi>
@@ -72,7 +74,7 @@ class WeatherFragment : Fragment() {
                                 it.main?.tempMin?.let { Math.round(it).toString() }+"°"
 
 
-                           // val drawable=if(isNightNow())
+                            // val drawable=if(isNightNow())
                         }
                     }
                 }
@@ -86,32 +88,10 @@ class WeatherFragment : Fragment() {
 
     }
 
+
     private fun isNightNow():Boolean{
     return calendar.get(Calendar.HOUR_OF_DAY) >= 18
     }
 
-    /**
-     *
 
-    private fun setDynamicallyWallpaper(icon: String): Int {
-        return when (icon.dropLast(1)) {
-            "01" -> {
-            }
-
-        }
-    }
-
-
-
-    private fun initWeatherView(type: PrecipType){
-
-        binding.weatherView.apply {
-            setWeatherData(type)
-            angle=-20
-            emissionRate=100.0f
-
-        }
-
-    }
-**/
 }

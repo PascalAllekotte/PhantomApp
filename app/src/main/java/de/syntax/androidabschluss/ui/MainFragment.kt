@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import de.syntax.androidabschluss.R
+import de.syntax.androidabschluss.adapter.ForeCastAdapter
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
@@ -41,6 +42,8 @@ class MainFragment : Fragment() {
     //Wetter
     private val weatherViewModel: WeatherViewModel by viewModels()
     private val calendar by lazy { Calendar.getInstance() }
+    private val forecastAdapter by lazy { ForeCastAdapter() }
+
 
 
     private val sharedViewModel : SharedViewModel by activityViewModels()
@@ -127,6 +130,9 @@ class MainFragment : Fragment() {
             noteAdapter.updateStrokeColor(color)
             vocableAdapter.updateStrokeColor(color)
         }
+
+        // wetter forecast
+
     }
 
     private fun setupRecyclerView() {
