@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,11 +20,13 @@ import de.syntax.androidabschluss.adapter.ForeCastAdapter
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
+import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
+import eightbitlab.com.blurview.RenderScriptBlur
 import retrofit2.Call
 import retrofit2.Response
 import java.util.Calendar
@@ -64,6 +67,7 @@ class MainFragment : Fragment() {
             var lon = 6.88
             var name = "Mülheim an der Ruhr"
 
+            // current temperature
             cityTxt.text = name
             progressBar.visibility = View.VISIBLE
             weatherViewModel.loadCurrentWeather(lat, lon, "metric").enqueue(object :
@@ -101,6 +105,53 @@ class MainFragment : Fragment() {
                 }
 
             })
+
+            //Setting Blue View
+            var radius=10f
+            val decorView = requireActivity().window.decorView
+            val rootView=(decorView.findViewById(android.R.id.content) as ViewGroup?)
+            val windowBACKGROUND=decorView.background
+
+            rootView?.let {
+                blueView.setupWith(it, RenderScriptBlur(requireContext())) // eventuell fehler
+                    .setFrameClearDrawable(windowBACKGROUND)
+                    .setBlurRadius(radius)
+                blueView.outlineProvider = ViewOutlineProvider.BACKGROUND
+                blueView.clipToOutline = true
+            }
+
+            // forecast temp
+            weatherViewModel.loadForeCastWeather(lat, lon,  "metric")
+                .enqueue(object : retrofit2.Callback<ForecastResponseApi> {
+                    override fun onResponse(
+                        call: Call<ForecastResponseApi>,
+                        response: Response<ForecastResponseApi>
+                    ) {
+                        if (response.isSuccessful) {
+                            val data = response.body()
+                            blueView.visibility = View.VISIBLE
+
+                            data?.let {
+                                forecastAdapter.differ.submitList(it.list)
+                                forcastView.apply {
+                                    layoutManager = LinearLayoutManager(
+                                        requireContext(),
+                                        LinearLayoutManager.HORIZONTAL,
+                                        false
+                                    )
+                                    adapter = forecastAdapter
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ForecastResponseApi>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+
+
         }
 
         binding.weatherBtn.setOnClickListener {
@@ -130,9 +181,6 @@ class MainFragment : Fragment() {
             noteAdapter.updateStrokeColor(color)
             vocableAdapter.updateStrokeColor(color)
         }
-
-        // wetter forecast
-
     }
 
     private fun setupRecyclerView() {
