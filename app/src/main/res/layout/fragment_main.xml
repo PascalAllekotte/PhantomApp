@@ -36,6 +36,19 @@
             android:layout_height="wrap_content">
 
 
+
+            <TextView
+                android:id="@+id/term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Terms:"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weather_btn" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -46,7 +59,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weather_btn" />
+                app:layout_constraintTop_toBottomOf="@+id/term" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/vocabularyRecyclerView"
@@ -115,7 +128,7 @@
                 android:layout_height="133dp"
                 android:layout_marginLeft="200dp"
                 android:layout_marginRight="18dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintBottom_toTopOf="@+id/term"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -364,12 +377,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
-
     <include
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar_layout"
-        />
+
+         />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
