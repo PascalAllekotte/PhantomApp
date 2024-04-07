@@ -109,7 +109,8 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
-
+    // Wetter
+    implementation("com.github.MatteoBattilana:WeatherView:3.0.0")
 
 
     implementation("com.aallam.openai:openai-client")

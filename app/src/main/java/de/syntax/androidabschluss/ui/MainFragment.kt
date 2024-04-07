@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,10 +17,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
+import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
+import de.syntax.androidabschluss.viewmodel.WeatherViewModel
+import retrofit2.Call
+import retrofit2.Response
+import java.util.Calendar
 
 
 class MainFragment : Fragment() {
@@ -30,6 +37,11 @@ class MainFragment : Fragment() {
 
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var noteViewModel: NoteViewModel
+
+    //Wetter
+    private val weatherViewModel: WeatherViewModel by viewModels()
+    private val calendar by lazy { Calendar.getInstance() }
+
 
     private val sharedViewModel : SharedViewModel by activityViewModels()
 
@@ -43,6 +55,50 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            var lat = 51.43
+            var lon = 6.88
+            var name = "Mülheim an der Ruhr"
+
+            cityTxt.text = name
+            progressBar.visibility = View.VISIBLE
+            weatherViewModel.loadCurrentWeather(lat, lon, "metric").enqueue(object :
+                retrofit2.Callback<CurrentResponseApi> {
+                override fun onResponse(
+                    call: Call<CurrentResponseApi>,
+                    response: Response<CurrentResponseApi>
+                ) {
+
+                    if(response.isSuccessful){
+                        val data=response.body()
+                        progressBar.visibility=View.GONE
+                        linearLayout.visibility=View.VISIBLE
+                        data?.let {
+                            statustxt.text=
+                                it.weather?.get(0)?.main ?: "-"
+                            humiditytxt.text=it.main?.humidity?.toString()+"%"
+                            windTxt.text =
+                                it.wind?.speed?.let { Math.round(it).toString() }+"km"
+                            currentTempTxt.text=
+                                it.main?.temp?.let { Math.round(it).toString() }+"°"
+                            maxTempTxt.text=
+                                it.main?.tempMax?.let { Math.round(it).toString() }+"°"
+                            minTempTxt.text=
+                                it.main?.tempMin?.let { Math.round(it).toString() }+"°"
+
+
+                            // val drawable=if(isNightNow())
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CurrentResponseApi>, t: Throwable) {
+                    Toast.makeText(requireContext(), t.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+            })
+        }
 
         binding.weatherBtn.setOnClickListener {
             findNavController().navigate(R.id.weatherFragment)
