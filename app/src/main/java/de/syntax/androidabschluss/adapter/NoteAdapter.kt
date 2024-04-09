@@ -1,6 +1,5 @@
 package de.syntax.androidabschluss.adapter
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,11 +23,13 @@ class NoteAdapter(
         fun bind(noteItem: NoteItem, onDeleteClick: (NoteItem) -> Unit, currentStrokeColor: Int?) {
             binding.tvTitle.text = noteItem.title
             binding.tvDesc.text = noteItem.content
-            binding.tvDateTime.setOnClickListener { onDeleteClick(noteItem) }
+            binding.tvDateTime.text = noteItem.dateTime
+           /** binding.tvDateTime.setOnClickListener { onDeleteClick(noteItem) }
             currentStrokeColor?.let { color ->
                 val colorStateList = ColorStateList.valueOf(color)
                 binding.cardView.setStrokeColor(colorStateList) // Annahme: `notecard` ist Teil von `NewnoteItemBinding`
             }
+           **/
         }
 
 

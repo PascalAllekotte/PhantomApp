@@ -23,11 +23,11 @@ fun getDatabaseNote(context: Context): NoteDataBase {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 NoteDataBase::class.java,
-                "note_database"
+                "note_database2"
             ).build()
-            Log.d("DatabaseInit", "Datenbank initialisiert")
+            Log.d("DatabaseInit2", "Datenbank initialisiert")
         }
-        Log.d("DatabaseInit", "Datenbankinstanz zurückgegeben")
+        Log.d("DatabaseInit2", "Datenbankinstanz zurückgegeben")
         return INSTANCE
     }
 }

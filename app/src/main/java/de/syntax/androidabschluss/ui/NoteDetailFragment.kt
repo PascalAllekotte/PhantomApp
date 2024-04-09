@@ -17,6 +17,9 @@ import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.databinding.FragmentNoteDetailBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class NoteDetailFragment : Fragment() {
@@ -26,6 +29,10 @@ class NoteDetailFragment : Fragment() {
 
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var noteViewModel: NoteViewModel
+
+    //Zeit einbau für Note
+    private var currentTime: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +44,9 @@ class NoteDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
+        currentTime = sdf.format(Date())
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         setupRecyclerViewNote()
@@ -64,10 +74,15 @@ class NoteDetailFragment : Fragment() {
         val ntitle = binding.etTitle.text.toString()
         val ncontent = binding.etContent.text.toString()
 
+        val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
+        currentTime = sdf.format(Date())
+
         if (ntitle.isNotEmpty() && ncontent.isNotEmpty()) {
             val newNoteItem = NoteItem(
                 title = ntitle,
-                content = ncontent
+                content = ncontent,
+                dateTime = currentTime
+
             )
 
             lifecycleScope.launch {
