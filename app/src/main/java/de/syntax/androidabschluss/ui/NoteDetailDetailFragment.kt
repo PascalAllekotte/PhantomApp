@@ -21,6 +21,7 @@ class NoteDetailDetailFragment : Fragment() {
 
     private var currentdate : String? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
