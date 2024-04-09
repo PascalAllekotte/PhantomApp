@@ -51,6 +51,11 @@ class NoteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //strokefarbe
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            noteAdapter.updateStrokeColor(color)
+        }
+
         // zurück navigieren
         binding.addbutton.setOnClickListener{
             findNavController().navigate(R.id.noteDetailDetailFragment)

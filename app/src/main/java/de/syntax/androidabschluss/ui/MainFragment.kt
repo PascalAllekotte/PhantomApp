@@ -95,7 +95,7 @@ class MainFragment : Fragment() {
                                 it.main?.tempMin?.let { Math.round(it).toString() }+"°"
 
 
-                            // val drawable=if(isNightNow())
+
                         }
                     }
                 }
