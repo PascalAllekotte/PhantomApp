@@ -146,7 +146,6 @@ class MainFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<ForecastResponseApi>, t: Throwable) {
-                        TODO("Not yet implemented")
                     }
                 })
 

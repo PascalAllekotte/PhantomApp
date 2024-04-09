@@ -39,6 +39,8 @@ class NoteDetailFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,27 +66,9 @@ class NoteDetailFragment : Fragment() {
         // note recyclerview
 
     }
-/**
-    private fun addNoteItem() {
-
-        val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
-        currentTime = sdf.format(Date())
 
 
-        if (ntitle.isNotEmpty() && ncontent.isNotEmpty()) {
-            val newNoteItem = NoteItem(
-                title = ntitle,
-                content = ncontent,
-                dateTime = currentTime
-            )
 
-            lifecycleScope.launch {
-                val dp = getDatabaseNote(requireContext())
-                dp.noteDataBaseDao().insert(newNoteItem)
-            }
-        }
-    }
-**/
     private fun setupRecyclerViewNote() {
         noteAdapter = NoteAdapter(mutableListOf()) { noteItem ->
             noteViewModel.delete(noteItem)

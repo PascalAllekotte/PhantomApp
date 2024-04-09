@@ -48,8 +48,7 @@ class NoteDetailDetailFragment : Fragment() {
 
 
     }
-
-
+    //ToDo wenn notetitel vorhanden updaten und + zu einem haken ändern
     fun addnoteItem() {
         val title = binding.noteTitle.text.toString()
         val content = binding.notetext.text.toString()
