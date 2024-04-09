@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.adapter.LearningAdapter
 import de.syntax.androidabschluss.databinding.FragmentLearningBinding
+import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 
@@ -22,13 +24,24 @@ class LearningFragment : Fragment() {
         ViewModelProvider(this).get(VokabelViewModel::class.java)
     }
 
+    private val sharedViewModel : SharedViewModel by activityViewModels()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentLearningBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        // Stroke color über viewmodel ändern
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            learningAdapter.updateStrokeColor(color)
+
+        }
 
         initializeAdapter()
         initializeDatabase()

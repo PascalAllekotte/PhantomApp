@@ -182,6 +182,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:textColor="@color/white"
+                android:text="Eine fesselnde, von Pixar inspirierte 3D-Render-Illustration einer entzückenden getigerten Katze in einem Yoga-Setting. Die Katze, ein orangefarbener Tiger, trägt ein lebhaftes lila Yoga-Outfit und ein Stirnband für Übungen mit dem Text 'Leon' in goldgelber Schrift. Trotz ihres genervten Ausdrucks sieht die Katze niedlich aus. Auf ihrem T-Shirt steht 'Korff' in majestätischer lila Schrift. Die Katze balanciert auf einem glänzenden lila Übungsball und blickt in Richtung der Kamera. katze ist ein muskelpaket"
                 android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
