@@ -19,155 +19,48 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
-        android:theme="@style/SearchTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="90dp"
         android:background="@drawable/searchviewbackground"
         android:focusable="false"
         android:hint="Search notes"
+        android:theme="@style/SearchTheme"
         app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"
         app:boxStrokeWidthFocused="3dp"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarLayout2"
         app:searchIcon="@drawable/search_note" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="184dp"
-        android:text="Latest notes:"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noterecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:listitem="@layout/note_item" />
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        tools:listitem="@layout/newnote_item" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Note title:"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/addbutton"
+        style="@style/imagebuttonneu"
+        android:layout_width="75dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-12dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/adding"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noterecyclerView" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tf_title"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="Note Title"
-        android:inputType="textMultiLine"
-        app:boxBackgroundColor="#A65D6786"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="#4775FF"
-        app:boxStrokeWidth="2dp"
-        app:boxStrokeWidthFocused="3dp"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/white"
-        app:hintTextColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Note content:"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tf_title" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tf_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="Note Title"
-        android:inputType="textMultiLine"
-        app:boxBackgroundColor="#A65D6786"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="#4775FF"
-        app:boxStrokeWidth="2dp"
-        app:boxStrokeWidthFocused="3dp"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/white"
-        app:hintTextColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/btn_add"
-        style="@style/buttonfinal"
-        android:layout_width="223dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#5F6179"
-        android:text="add"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tf_content" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

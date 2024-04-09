@@ -6,17 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.local.NoteDataBase
-import de.syntax.androidabschluss.adapter.local.getDatabaseNote
-import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.databinding.FragmentNoteDetailBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -45,6 +42,10 @@ class NoteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.addbutton.setOnClickListener{
+            findNavController().navigate(R.id.noteDetailDetailFragment)
+        }
+
         val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
         currentTime = sdf.format(Date())
 
@@ -54,13 +55,7 @@ class NoteDetailFragment : Fragment() {
             noteAdapter.updateList(noteList.reversed())
         }
 
-        binding.btnAdd.setOnClickListener{
-            addNoteItem()
 
-            binding.etTitle.text = null
-            binding.etContent.text = null
-
-        }
         binding.toolbarLayout2.titletext.setText("Add Notes")
         binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
@@ -69,39 +64,33 @@ class NoteDetailFragment : Fragment() {
         // note recyclerview
 
     }
-
+/**
     private fun addNoteItem() {
-        val ntitle = binding.etTitle.text.toString()
-        val ncontent = binding.etContent.text.toString()
 
         val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
         currentTime = sdf.format(Date())
+
 
         if (ntitle.isNotEmpty() && ncontent.isNotEmpty()) {
             val newNoteItem = NoteItem(
                 title = ntitle,
                 content = ncontent,
                 dateTime = currentTime
-
             )
 
             lifecycleScope.launch {
-
                 val dp = getDatabaseNote(requireContext())
                 dp.noteDataBaseDao().insert(newNoteItem)
-
             }
-
-
         }
     }
-
+**/
     private fun setupRecyclerViewNote() {
         noteAdapter = NoteAdapter(mutableListOf()) { noteItem ->
             noteViewModel.delete(noteItem)
         }
 
-        binding.noterecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.noterecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.noterecyclerView.adapter = noteAdapter
         LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
     }

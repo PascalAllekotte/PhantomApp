@@ -196,6 +196,7 @@ class MainFragment : Fragment() {
             noteViewModel.delete(noteItem)
         }
 
+        //----------------Note--------------
         binding.noterecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.noterecyclerView.adapter = noteAdapter
         binding.noterecyclerView.setHasFixedSize(true)
