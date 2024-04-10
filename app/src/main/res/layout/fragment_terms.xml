@@ -33,6 +33,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:searchIcon="@drawable/search_note" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/termRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        tools:listitem="@layout/term_item"/>
+
+
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/addbutton"
         style="@style/imagebuttonneu"

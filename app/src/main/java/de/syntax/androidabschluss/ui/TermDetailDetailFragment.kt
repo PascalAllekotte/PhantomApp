@@ -47,9 +47,6 @@ class TermDetailDetailFragment : Fragment() {
         binding.addbutton.setOnClickListener {
 
             addTermItem()
-
-            binding.termtext.text = binding.termcontent.text
-            binding.termdate.text = binding.date.text
         }
 
 

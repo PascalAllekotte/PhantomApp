@@ -40,8 +40,8 @@ class MainFragment : Fragment() {
     private lateinit var vocableAdapter: VocableAdapter
     private lateinit var vokabelViewModel: VokabelViewModel
 
-    private lateinit var noteAdapter: NoteAdapter
-    private lateinit var noteViewModel: NoteViewModel
+    private lateinit var noteAdapter: NoteAdapter // xxxxxx
+    private lateinit var noteViewModel: NoteViewModel  // xxxx
 
     //Wetter
     private val weatherViewModel: WeatherViewModel by viewModels()
@@ -171,7 +171,7 @@ class MainFragment : Fragment() {
         setupRecyclerView()
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        setupRecyclerViewNote()
+        setupRecyclerViewNote() // xxxx
 
         vokabelViewModel.vokabelList.observe(viewLifecycleOwner) { vocabularyList ->
             val favorite = vocabularyList.filter { it.favorite }
@@ -181,7 +181,7 @@ class MainFragment : Fragment() {
         // Zeigt die letzten Einträge als erstres
         noteViewModel.noteList.observe(viewLifecycleOwner) { noteList ->
             noteAdapter.updateList(noteList)
-        }
+        } //xxx
 
         sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
             noteAdapter.updateStrokeColor(color)

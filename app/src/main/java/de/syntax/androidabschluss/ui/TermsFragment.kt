@@ -5,14 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.R
+import de.syntax.androidabschluss.adapter.TermAdapter
 import de.syntax.androidabschluss.databinding.FragmentTermsBinding
+import de.syntax.androidabschluss.viewmodel.TermViewModel
 
 
 class TermsFragment : Fragment() {
 
     private lateinit var binding : FragmentTermsBinding
+
+    private lateinit var termAdapter: TermAdapter
+    private lateinit var termViewModel: TermViewModel
 
 
 
@@ -36,7 +44,27 @@ class TermsFragment : Fragment() {
             findNavController().navigate(R.id.termDetailDetailFragment)
         }
 
+        termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
+        setUpTermRecyclerview()
 
+
+        termViewModel.termList.observe(viewLifecycleOwner) { termList ->
+            termAdapter.updateList(termList)
+
+        }
+
+
+
+    }
+
+    private fun setUpTermRecyclerview() {
+        termAdapter = TermAdapter(mutableListOf()) { termItem ->
+            termViewModel.deleteTermItem(termItem)
+        }
+
+        binding.termRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.termRecyclerView.adapter = termAdapter
+        LinearSnapHelper().attachToRecyclerView(binding.termRecyclerView)
 
     }
 
