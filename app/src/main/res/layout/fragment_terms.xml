@@ -22,7 +22,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/searchviewbackground"
         android:focusable="false"
-        android:hint="Search notes"
+        android:hint="Search Terms"
         android:theme="@style/SearchTheme"
         app:boxStrokeColor="#4775FF"
         app:boxStrokeWidth="2dp"

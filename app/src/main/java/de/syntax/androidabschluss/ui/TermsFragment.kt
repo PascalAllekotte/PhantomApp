@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,15 +13,18 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.TermAdapter
 import de.syntax.androidabschluss.databinding.FragmentTermsBinding
+import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.TermViewModel
 
 
 class TermsFragment : Fragment() {
 
     private lateinit var binding : FragmentTermsBinding
-
     private lateinit var termAdapter: TermAdapter
     private lateinit var termViewModel: TermViewModel
+
+    private val sharedViewModel : SharedViewModel by activityViewModels()
+
 
 
 
@@ -34,6 +38,7 @@ class TermsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
         binding.toolbarLayout.titletext.setText("Terms")
@@ -52,7 +57,9 @@ class TermsFragment : Fragment() {
             termAdapter.updateList(termList)
 
         }
-
+        sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
+            termAdapter.updateStrokeColor(color)
+        }
 
 
     }

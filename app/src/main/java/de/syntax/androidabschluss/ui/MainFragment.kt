@@ -18,12 +18,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ForeCastAdapter
 import de.syntax.androidabschluss.adapter.NoteAdapter
+import de.syntax.androidabschluss.adapter.TermAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
 import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
+import de.syntax.androidabschluss.viewmodel.TermViewModel
 import de.syntax.androidabschluss.viewmodel.UserSettingsViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
@@ -42,6 +44,9 @@ class MainFragment : Fragment() {
 
     private lateinit var noteAdapter: NoteAdapter // xxxxxx
     private lateinit var noteViewModel: NoteViewModel  // xxxx
+
+    private lateinit var termAdapter: TermAdapter
+    private lateinit var termViewModel: TermViewModel
 
     //Wetter
     private val weatherViewModel: WeatherViewModel by viewModels()
@@ -186,6 +191,16 @@ class MainFragment : Fragment() {
         sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
             noteAdapter.updateStrokeColor(color)
             vocableAdapter.updateStrokeColor(color)
+            termAdapter.updateStrokeColor(color)
+        }
+
+        termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
+        setUpTermRecyclerview()
+
+
+        termViewModel.termList.observe(viewLifecycleOwner) { termList ->
+            termAdapter.updateList(termList)
+
         }
     }
 
@@ -207,6 +222,17 @@ class MainFragment : Fragment() {
         binding.noterecyclerView.adapter = noteAdapter
         binding.noterecyclerView.setHasFixedSize(true)
         LinearSnapHelper().attachToRecyclerView(binding.noterecyclerView)
+    }
+
+    private fun setUpTermRecyclerview() {
+        termAdapter = TermAdapter(mutableListOf()) { termItem ->
+            termViewModel.deleteTermItem(termItem)
+        }
+
+        binding.termRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.termRecyclerView.adapter = termAdapter
+        LinearSnapHelper().attachToRecyclerView(binding.termRecyclerView)
+
     }
 
 

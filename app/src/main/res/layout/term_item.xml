@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:neumorph_strokeColor="@color/blau"
-    app:neumorph_strokeWidth="1dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:neumorph_strokeWidth="0.7dp"
+    android:layout_marginTop="-8dp"
+    android:layout_marginLeft="-30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:layout_marginLeft="20dp"
             android:text="Arzttermin askljnckjbasd"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:layout_marginBottom="-20dp"
             app:layout_constraintBottom_toTopOf="@+id/termdate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.052"

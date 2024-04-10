@@ -25,7 +25,8 @@ interface TermDatabaseDao {
     @Delete
     suspend fun deleteTerm(term: TermItem)
 
-    @Query("SELECT * FROM TermItem")
+    @Query("SELECT * FROM TermItem ORDER BY termDate ASC")
     fun getAllTermItems(): LiveData<List<TermItem>>
+
 
 }

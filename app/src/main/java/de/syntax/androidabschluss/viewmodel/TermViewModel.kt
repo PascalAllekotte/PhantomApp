@@ -34,9 +34,17 @@ class TermViewModel (application: Application): AndroidViewModel(application){
             _termComplete.value = true
         }
     }
+
     fun updateTermItem(termItem: TermItem){
         viewModelScope.launch {
             repository.update(termItem)
+            _termComplete.value = true
+        }
+    }
+
+    fun getAllTerms(){
+        viewModelScope.launch {
+            repository.getAllTermItems()
             _termComplete.value = true
         }
     }

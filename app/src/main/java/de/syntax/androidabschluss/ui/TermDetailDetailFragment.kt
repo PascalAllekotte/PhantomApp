@@ -72,25 +72,26 @@ class TermDetailDetailFragment : Fragment() {
         val termdate = binding.date.text.toString()
 
         if (termdate.isNotEmpty() && termtext.isNotEmpty()){
+            val parts = termdate.split(".")
+            val day = parts[0]
+            val month = parts[1]
+            val year = parts[2]
+            val sortableDate = "$year-${month.padStart(2, '0')}-${day.padStart(2, '0')}"
+
             val newTermItem = TermItem(
-                termDate = termdate,
+                termDate = sortableDate,
                 termText = termtext
             )
 
             lifecycleScope.launch{
-
-                val dp = getDatabaseTerm(requireContext())
-                dp.termDatabaseDao().insert(newTermItem)
-
-
+                val db = getDatabaseTerm(requireContext())
+                db.termDatabaseDao().insert(newTermItem)
             }
-
-
         }
-
     }
 
 
-    }
+
+}
 
 

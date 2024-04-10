@@ -42,7 +42,7 @@ class TermRepository(private val database: TermDatabase) {
         }
     }
 
-    fun getAllTermItems(term: TermItem){
+    fun getAllTermItems(){
         try {
             database.termDatabaseDao().getAllTermItems()
         }catch (e: Exception){
