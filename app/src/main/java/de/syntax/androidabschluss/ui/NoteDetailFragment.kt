@@ -122,6 +122,6 @@ class NoteDetailFragment : Fragment() {
         }
     }
 
-
+// todo item klickbar machen
 
 }

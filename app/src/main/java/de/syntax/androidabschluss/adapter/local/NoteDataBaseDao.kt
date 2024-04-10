@@ -21,8 +21,6 @@ interface NoteDataBaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(noteList: List<NoteItem>)
 
-
-
     @Delete
     suspend fun deleteNote(note: NoteItem)
 

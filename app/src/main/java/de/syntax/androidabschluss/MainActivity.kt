@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private val auth = FirebaseAuth.getInstance()
 
+
+
     private val networkConnectivityObserver: NetworkConnectivityObserver by lazy {
         NetworkConnectivityObserver(this)
     }
@@ -98,6 +100,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.noteDetailDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+
+                //Termsfragmente
+                R.id.termsFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.termDetailDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
 
 
                 else -> {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentTermsBinding
 
 
@@ -31,8 +32,16 @@ class TermsFragment : Fragment() {
         binding.toolbarLayout.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
+        binding.addbutton.setOnClickListener {
+            findNavController().navigate(R.id.termDetailDetailFragment)
+        }
+
+
 
     }
 
 
 }
+
+
+

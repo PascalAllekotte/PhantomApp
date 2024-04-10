@@ -24,6 +24,7 @@ import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
+import de.syntax.androidabschluss.viewmodel.UserSettingsViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -47,6 +48,11 @@ class MainFragment : Fragment() {
     private val calendar by lazy { Calendar.getInstance() }
     private val forecastAdapter by lazy { ForeCastAdapter() }
 
+    //Setting instanz setzten und laden
+    private val userSettingsViewModel: UserSettingsViewModel by viewModels()
+
+
+
 
 
     private val sharedViewModel : SharedViewModel by activityViewModels()
@@ -61,6 +67,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.apply {
             var lat = 51.43

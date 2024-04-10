@@ -84,6 +84,7 @@
         <action
             android:id="@+id/action_translationFragment_to_termsFragment"
             app:destination="@id/termsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/botFragment"
@@ -272,6 +273,9 @@
         <action
             android:id="@+id/action_termsFragment_to_translationFragment"
             app:destination="@id/translationFragment" />
+        <action
+            android:id="@+id/action_termsFragment_to_termDetailDetailFragment"
+            app:destination="@id/termDetailDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailDetailFragment"
@@ -293,6 +297,16 @@
         <action
             android:id="@+id/action_weatherFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termDetailDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.TermDetailDetailFragment"
+        android:label="fragment_term_detail_detail"
+        tools:layout="@layout/fragment_term_detail_detail" >
+
+        <action
+            android:id="@+id/action_termDetailDetailFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
     </fragment>
 
 

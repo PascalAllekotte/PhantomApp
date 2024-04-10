@@ -3,6 +3,7 @@ package de.syntax.androidabschluss.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -96,16 +97,14 @@ class SettingsFragment : Fragment() {
 
 
     }
+//hey also wenn man in der app aufs settingfragment geht kann man in der radiogroup auswählen welche farbe die strokes in der app haben dies alles funktioniert auch wenn man durch die app navigiert aber wenn man die app neu startet muss man die farbe auf dem settingsfragment wieder ändern ich möchte das der zustand beim verlassen der app bestehen bleib und beim erneuten öffnen der app die farbe bei den fargmenten automatisch den letzten zustand angepasst wird
 
-
-
-
-
-
-
-  //                    val streamUrl = "https://sunsl.streamabc.net/sunsl-techno-mp3-192-4912904?sABC=6614015p%230%2306sr033o32rq9r1o2nn6qq9o3297no19%23fgernz.fhafuvar-yvir.qr&aw_0_1st.playerid=stream.sunshine-live.de&amsparams=playerid:stream.sunshine-live.de;skey:1712587100"
-
-
-
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor = sharedPreferences.edit()
+        editor.putInt("selected_color", binding.stylegroup.checkedRadioButtonId)
+        editor.apply()
+    }
 }
 
