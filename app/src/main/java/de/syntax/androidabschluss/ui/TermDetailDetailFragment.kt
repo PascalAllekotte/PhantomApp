@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.adapter.local.getDatabaseTerm
+import de.syntax.androidabschluss.data.model.open.TermItem
 import de.syntax.androidabschluss.databinding.FragmentTermDetailDetailBinding
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 
@@ -37,8 +41,14 @@ class TermDetailDetailFragment : Fragment() {
 
         }
 
+
+        // Eckdaten vom xml
+
         binding.addbutton.setOnClickListener {
-            binding.termtext.text = binding.editText.text
+
+            addTermItem()
+
+            binding.termtext.text = binding.termcontent.text
             binding.termdate.text = binding.date.text
         }
 
@@ -58,6 +68,31 @@ class TermDetailDetailFragment : Fragment() {
         }, year, month, day).show()
 
         }
+
+
+    fun addTermItem(){
+        val termtext = binding.termcontent.text.toString()
+        val termdate = binding.date.text.toString()
+
+        if (termdate.isNotEmpty() && termtext.isNotEmpty()){
+            val newTermItem = TermItem(
+                termDate = termdate,
+                termText = termtext
+            )
+
+            lifecycleScope.launch{
+
+                val dp = getDatabaseTerm(requireContext())
+                dp.termDatabaseDao().insert(newTermItem)
+
+
+            }
+
+
+        }
+
+    }
+
 
     }
 
