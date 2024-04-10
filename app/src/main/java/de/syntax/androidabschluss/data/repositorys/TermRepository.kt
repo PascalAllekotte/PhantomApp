@@ -49,10 +49,4 @@ class TermRepository(private val database: TermDatabase) {
             Log.e(TAG3, "Error get all term from database")
         }
     }
-
-
-
-
-
-
 }
