@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -29,7 +28,6 @@ import de.syntax.androidabschluss.viewmodel.TermViewModel
 import de.syntax.androidabschluss.viewmodel.UserSettingsViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
-import eightbitlab.com.blurview.RenderScriptBlur
 import retrofit2.Call
 import retrofit2.Response
 import java.util.Calendar
@@ -124,13 +122,7 @@ class MainFragment : Fragment() {
             val rootView=(decorView.findViewById(android.R.id.content) as ViewGroup?)
             val windowBACKGROUND=decorView.background
 
-            rootView?.let {
-                blueView.setupWith(it, RenderScriptBlur(requireContext())) // eventuell fehler
-                    .setFrameClearDrawable(windowBACKGROUND)
-                    .setBlurRadius(radius)
-                blueView.outlineProvider = ViewOutlineProvider.BACKGROUND
-                blueView.clipToOutline = true
-            }
+
 
             // forecast temp
             weatherViewModel.loadForeCastWeather(lat, lon,  "metric")
@@ -192,6 +184,7 @@ class MainFragment : Fragment() {
             noteAdapter.updateStrokeColor(color)
             vocableAdapter.updateStrokeColor(color)
             termAdapter.updateStrokeColor(color)
+
         }
 
         termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)

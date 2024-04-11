@@ -133,15 +133,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="235dp"
-                android:layout_height="133dp"
+                android:layout_width="240dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="200dp"
-                android:layout_marginRight="18dp"
                 app:layout_constraintBottom_toTopOf="@+id/term"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <eightbitlab.com.blurview.BlurView
+                <soup.neumorphism.NeumorphCardView
                     android:id="@+id/blueView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -150,6 +149,8 @@
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/forecast_bg"
                     android:visibility="visible"
+                    app:neumorph_strokeWidth="0.7dp"
+                    app:neumorph_strokeColor="@color/blau"
                     app:blurOverlayColor="#10ffffff"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +170,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </eightbitlab.com.blurview.BlurView>
+                </soup.neumorphism.NeumorphCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
