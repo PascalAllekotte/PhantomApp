@@ -1,6 +1,7 @@
 package de.syntax.androidabschluss.ui
 
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -184,6 +185,8 @@ class MainFragment : Fragment() {
             noteAdapter.updateStrokeColor(color)
             vocableAdapter.updateStrokeColor(color)
             termAdapter.updateStrokeColor(color)
+            val colorStateList = ColorStateList.valueOf(color)
+            binding.blueView.setStrokeColor(colorStateList)
 
         }
 
