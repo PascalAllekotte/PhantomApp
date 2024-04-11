@@ -157,3 +157,8 @@ fun startButtonAnimation(context: Context, view: View, animationResource: Int = 
     view.startAnimation(vibrationAnimation)
 }
 
+
+//prompts
+
+//                android:text="A Miki mouse with Typography, text 'Pascal' With a background of a night cyberpunk city with many colored lights all beatiful in 3D, photo, poster, 3d render, cinematic, anime, vibrant, typography, painting, conceptual art 'Pascal'"
+//Albert Einstein eating an ice cream in the style of Laika Studios, Tim Burton, cinematic, A hauntingly beautiful illustration of Albert Einstein, depicted in the unique style of Laika Studios and Tim Burton. The renowned physicist is seen sitting on a mysterious, moonlit park bench, with a brooding sky overhead. He is enjoying a single scoop of ice cream in a cone, which is glowing ominously. The overall atmosphere of the scene is both whimsical and dark, capturing the essence of Tim Burton's cinematic universe., cinematic

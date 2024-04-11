@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:textColor="@color/white"
-                android:text="Eine fesselnde, von Pixar inspirierte 3D-Render-Illustration einer entzückenden getigerten Katze in einem Yoga-Setting. Die Katze, ein orangefarbener Tiger, trägt ein lebhaftes lila Yoga-Outfit und ein Stirnband für Übungen mit dem Text 'Leon' in goldgelber Schrift. Trotz ihres genervten Ausdrucks sieht die Katze niedlich aus. Auf ihrem T-Shirt steht 'Korff' in majestätischer lila Schrift. Die Katze balanciert auf einem glänzenden lila Übungsball und blickt in Richtung der Kamera. katze ist ein muskelpaket"
+                android:text="Albert Einstein eating an ice cream in the style of Laika Studios, Tim Burton, cinematic, A hauntingly beautiful illustration of Albert Einstein, depicted in the unique style of Laika Studios and Tim Burton. The renowned physicist is seen sitting on a mysterious, moonlit park bench, with a brooding sky overhead. He is enjoying a single scoop of ice cream in a cone, which is glowing ominously. The overall atmosphere of the scene is both whimsical and dark, capturing the essence of Tim Burton's cinematic universe., cinematic"
                 android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
