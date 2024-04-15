@@ -51,7 +51,7 @@ class VocableAdapter(
             }
             currentStrokeColor?.let { color ->
                 val colorStateList = ColorStateList.valueOf(color)
-                binding.cardViewTop.setStrokeColor(colorStateList) // Stellen Sie sicher, dass vokabelcard im Binding existiert
+                binding.cardViewTop.setStrokeColor(colorStateList)
             }
 
 
