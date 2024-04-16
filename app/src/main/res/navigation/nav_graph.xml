@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_botFragment_to_picturesFragment"
             app:destination="@id/picturesFragment" />
+        <action
+            android:id="@+id/action_botFragment_to_imageEditFragment"
+            app:destination="@id/imageEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -307,6 +310,15 @@
         <action
             android:id="@+id/action_termDetailDetailFragment_to_termsFragment"
             app:destination="@id/termsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageEditFragment"
+        android:name="de.syntax.androidabschluss.ui.ImageEditFragment"
+        android:label="fragment_image_edit"
+        tools:layout="@layout/fragment_image_edit" >
+        <action
+            android:id="@+id/action_imageEditFragment_to_botFragment"
+            app:destination="@id/botFragment" />
     </fragment>
 
 

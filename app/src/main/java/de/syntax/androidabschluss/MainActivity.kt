@@ -100,6 +100,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.noteDetailDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.imageEditFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+
+                }
 
                 //Termsfragmente
                 R.id.termsFragment -> binding.bottomNavigationView.visibility = View.GONE
