@@ -1,6 +1,6 @@
 package de.syntax.androidabschluss.data.repositorys
 
-import de.syntax.androidabschluss.adapter.local.UserSettingsDao
+import de.syntax.androidabschluss.data.local.UserSettingsDao
 import de.syntax.androidabschluss.data.model.open.UserSettings
 
 

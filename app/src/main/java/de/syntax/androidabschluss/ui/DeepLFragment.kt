@@ -12,12 +12,17 @@ import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.databinding.FragmentDeepLBinding
 import de.syntax.androidabschluss.utils.languageFullNames
 import de.syntax.androidabschluss.viewmodel.TranslationViewModel
+import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 
 
 class DeepLFragment : Fragment() {
 
     private lateinit var binding: FragmentDeepLBinding
     private val viewModel: TranslationViewModel by viewModels()
+
+    //Vokabel
+    private val viewModelvokabel: VokabelViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,16 @@ class DeepLFragment : Fragment() {
         binding.toolbarLayout2.titletext.setText("Translator")
         binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
+        }
+
+        viewModelvokabel.uniqueBlockList.observe(viewLifecycleOwner) { blocks ->
+            binding.tblocklist.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.simple_list_item_1,
+                    blocks
+                )
+            )
         }
 
 

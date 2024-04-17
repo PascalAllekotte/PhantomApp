@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.data.local
 
 import de.syntax.androidabschluss.utils.Status
 

@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import de.syntax.androidabschluss.adapter.local.VokabelDataBase
+import de.syntax.androidabschluss.data.local.VokabelDataBase
 import de.syntax.androidabschluss.databinding.ActivityMainBinding
 import de.syntax.androidabschluss.utils.NetworkConnectivityObserver
 import de.syntax.androidabschluss.utils.NetworkStatus

@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

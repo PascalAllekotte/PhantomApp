@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import de.syntax.androidabschluss.adapter.local.UserSettingsDao
-import de.syntax.androidabschluss.adapter.local.UserSettingsDatabase
+import de.syntax.androidabschluss.data.local.UserSettingsDao
+import de.syntax.androidabschluss.data.local.UserSettingsDatabase
 import de.syntax.androidabschluss.data.model.open.UserSettings
 import kotlinx.coroutines.launch
 

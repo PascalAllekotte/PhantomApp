@@ -2,7 +2,7 @@ package de.syntax.androidabschluss.data.repositorys
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import de.syntax.androidabschluss.adapter.local.VokabelDataBase
+import de.syntax.androidabschluss.data.local.VokabelDataBase
 import de.syntax.androidabschluss.data.model.open.VocabItem
 
 const val V_TAG = "VokabelRepository"

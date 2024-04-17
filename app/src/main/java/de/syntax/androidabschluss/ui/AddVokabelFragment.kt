@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import de.syntax.androidabschluss.adapter.local.VokabelDataBase
-import de.syntax.androidabschluss.adapter.local.getDatabase
+import de.syntax.androidabschluss.data.local.VokabelDataBase
+import de.syntax.androidabschluss.data.local.getDatabase
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.databinding.FragmentAddVokabelBinding
 import kotlinx.coroutines.launch

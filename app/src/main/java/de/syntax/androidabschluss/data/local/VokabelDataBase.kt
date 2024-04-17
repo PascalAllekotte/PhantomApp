@@ -1,10 +1,10 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.data.local
 
 
+import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
-import android.content.Context  // Corrected import
-import android.util.Log
 import androidx.room.RoomDatabase
 import de.syntax.androidabschluss.data.model.open.VocabItem
 

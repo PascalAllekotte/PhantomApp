@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -9,7 +9,7 @@ import androidx.room.Update
 import de.syntax.androidabschluss.data.model.open.VocabItem
 
 
-//tes
+
 @Dao
 interface VokabelDataBaseDao {
 

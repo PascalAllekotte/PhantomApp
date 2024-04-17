@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.local
+package de.syntax.androidabschluss.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -15,7 +15,7 @@ abstract class TermDatabase : RoomDatabase(){
 
 private lateinit var INSTANCE: TermDatabase
 
-fun getDatabaseTerm(context: Context): TermDatabase{
+fun getDatabaseTerm(context: Context): TermDatabase {
 
     synchronized(TermDatabase::class.java) {
         if (!::INSTANCE.isInitialized){

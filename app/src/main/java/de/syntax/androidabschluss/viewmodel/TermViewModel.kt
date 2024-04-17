@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import de.syntax.androidabschluss.adapter.local.getDatabaseTerm
+import de.syntax.androidabschluss.data.local.getDatabaseTerm
 import de.syntax.androidabschluss.data.model.open.TermItem
 import de.syntax.androidabschluss.data.repositorys.TermRepository
 import kotlinx.coroutines.launch

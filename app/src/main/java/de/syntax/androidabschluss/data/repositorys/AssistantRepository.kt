@@ -3,8 +3,8 @@ package de.syntax.androidabschluss.data.repositorys
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.syntax.androidabschluss.adapter.local.ChatGPTDatabase
-import de.syntax.androidabschluss.adapter.local.Resource
+import de.syntax.androidabschluss.data.local.ChatGPTDatabase
+import de.syntax.androidabschluss.data.local.Resource
 import de.syntax.androidabschluss.data.model.open.Assistant
 import de.syntax.androidabschluss.utils.StatusResult
 import kotlinx.coroutines.CoroutineScope

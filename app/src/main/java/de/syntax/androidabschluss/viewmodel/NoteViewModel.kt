@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import de.syntax.androidabschluss.adapter.local.getDatabaseNote
+import de.syntax.androidabschluss.data.local.getDatabaseNote
 import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.data.repositorys.NoteRepository
 import kotlinx.coroutines.launch

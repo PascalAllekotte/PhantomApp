@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_mainFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_vokabelChangeFragment"
+            app:destination="@id/vokabelChangeFragment" />
     </fragment>
     <fragment
         android:id="@+id/translationFragment"
@@ -160,6 +163,9 @@
         <action
             android:id="@+id/action_learningDetailFragment_to_vocabularyTestFragment"
             app:destination="@id/vocabularyTestFragment" />
+        <action
+            android:id="@+id/action_learningDetailFragment_to_vokabelChangeFragment"
+            app:destination="@id/vokabelChangeFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
@@ -319,6 +325,15 @@
         <action
             android:id="@+id/action_imageEditFragment_to_botFragment"
             app:destination="@id/botFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vokabelChangeFragment"
+        android:name="de.syntax.androidabschluss.ui.VokabelChangeFragment"
+        android:label="fragment_vokabel_change"
+        tools:layout="@layout/fragment_vokabel_change" >
+        <action
+            android:id="@+id/action_vokabelChangeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 

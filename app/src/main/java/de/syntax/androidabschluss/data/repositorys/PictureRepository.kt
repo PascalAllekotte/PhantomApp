@@ -2,7 +2,7 @@ package de.syntax.androidabschluss.data.repositorys
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import de.syntax.androidabschluss.adapter.local.PictureDatabase
+import de.syntax.androidabschluss.data.local.PictureDatabase
 import de.syntax.androidabschluss.data.model.open.PictureItem
 
 const val TAG2 = "PictureRepository"

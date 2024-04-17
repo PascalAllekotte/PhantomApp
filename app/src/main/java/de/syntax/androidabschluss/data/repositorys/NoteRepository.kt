@@ -2,7 +2,7 @@ package de.syntax.androidabschluss.data.repositorys
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import de.syntax.androidabschluss.adapter.local.NoteDataBase
+import de.syntax.androidabschluss.data.local.NoteDataBase
 import de.syntax.androidabschluss.data.model.open.NoteItem
 
 

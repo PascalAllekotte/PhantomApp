@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.NoteAdapter
-import de.syntax.androidabschluss.adapter.local.NoteDataBase
+import de.syntax.androidabschluss.data.local.NoteDataBase
 import de.syntax.androidabschluss.databinding.FragmentNoteDetailBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel

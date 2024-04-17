@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import de.syntax.androidabschluss.adapter.local.getDatabase
+import de.syntax.androidabschluss.data.local.getDatabase
 import de.syntax.androidabschluss.data.model.open.VocabItem
 import de.syntax.androidabschluss.data.repositorys.VokabelRepository
 import kotlinx.coroutines.launch

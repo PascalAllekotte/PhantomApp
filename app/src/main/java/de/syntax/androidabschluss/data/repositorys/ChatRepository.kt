@@ -5,9 +5,9 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
-import de.syntax.androidabschluss.adapter.local.ChatGPTDatabase
-import de.syntax.androidabschluss.adapter.local.Resource
-import de.syntax.androidabschluss.adapter.local.getDatabasePicture
+import de.syntax.androidabschluss.data.local.ChatGPTDatabase
+import de.syntax.androidabschluss.data.local.Resource
+import de.syntax.androidabschluss.data.local.getDatabasePicture
 import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.data.model.open.Data
 import de.syntax.androidabschluss.data.model.open.PictureItem
