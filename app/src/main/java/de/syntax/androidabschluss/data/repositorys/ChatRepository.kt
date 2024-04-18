@@ -29,9 +29,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.util.Date
 import java.util.UUID
 
@@ -222,6 +229,82 @@ class ChatRepository(val application: Application) {
                     }
                 })
             } catch(e: Exception) {
+                e.printStackTrace()
+                _imageStateFlow.emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    fun createImageEdit(
+        prompt: String,
+        originalImage: File,
+        maskImage: File,
+        n: Int,
+        size: String,
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                _imageStateFlow.emit(Resource.Loading())
+
+
+                val request = HashMap<String, RequestBody>()
+                request["prompt"] = prompt.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                request["n"] = n.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                request["size"] = size.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+                apiClient.createImageEdit(
+                    MultipartBody.Part.createFormData(
+                        "image",
+                        originalImage.name,
+                        originalImage.asRequestBody("image/*".toMediaType())
+                    ),
+                    MultipartBody.Part.createFormData(
+                        "mask",
+                        maskImage.name,
+                        maskImage.asRequestBody("image/*".toMediaType())
+                    ),
+                    request
+                ).enqueue(object : Callback<ImageResponse> {
+                    override fun onResponse(
+                        call: Call<ImageResponse>,
+                        response: Response<ImageResponse>,
+                    ) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val responseBody = response.body()
+                            Log.d("meet", responseBody.toString())
+                            if (responseBody != null) {
+                                imageList.addAll(responseBody.data)
+                                val modifiedDataList = ArrayList<Data>().apply {
+                                    addAll(imageList)
+                                }
+                                val imageResponse = ImageResponse(
+                                    responseBody.created,
+                                    modifiedDataList
+                                )
+                                _imageStateFlow.emit(Resource.Success(imageResponse))
+
+                                modifiedDataList.forEach { data ->
+                                    val pictureItem = PictureItem(
+                                        id = 0,
+                                        url = data.url,
+                                        created = responseBody.created
+                                    )
+
+                                }
+                            } else {
+                                _imageStateFlow.emit(Resource.Success(null))
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                        t.printStackTrace()
+                        CoroutineScope(Dispatchers.IO).launch {
+                            _imageStateFlow.emit(Resource.Error(t.message.toString()))
+                        }
+                    }
+                })
+            } catch (e: Exception) {
                 e.printStackTrace()
                 _imageStateFlow.emit(Resource.Error(e.message.toString()))
             }

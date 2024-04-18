@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import de.syntax.androidabschluss.data.repositorys.ChatRepository
 import de.syntax.androidabschluss.response.CreateImageRequest
+import java.io.File
 
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,5 +26,14 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         chatRepository.getChatList(assistantId)
     }
 
+    fun createImageEdit(
+        prompt: String,
+        originalImage: File,
+        maskImage: File,
+        n: Int,
+        size: String,
+    ) {
+        chatRepository.createImageEdit(prompt, originalImage, maskImage, n, size)
+    }
 
 }
