@@ -16,8 +16,8 @@ class CustomDrawView(context: Context, attrs: AttributeSet? = null) : View(conte
     private lateinit var canvasBitmap: Canvas
     private val paintClear = Paint().apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        strokeWidth = 45f // Set the line width
-        color = Color.WHITE // Set the color to transparent
+        strokeWidth = 55f // Set the line width
+        color = Color.TRANSPARENT // Set the color to transparent
         style = Paint.Style.STROKE // Set the paint style to stroke
     }
 
@@ -37,7 +37,6 @@ class CustomDrawView(context: Context, attrs: AttributeSet? = null) : View(conte
         myWidth = MeasureSpec.getSize(widthMeasureSpec)
         myHeight = MeasureSpec.getSize(heightMeasureSpec)
 
-        // Set the width and height of the bitmap to match the view's dimensions
         bitmap = Bitmap.createScaledBitmap(bitmap, myWidth, myHeight, false)
         canvasBitmap = Canvas(bitmap)
         setMeasuredDimension(myWidth, myHeight)
@@ -45,7 +44,6 @@ class CustomDrawView(context: Context, attrs: AttributeSet? = null) : View(conte
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        // Draw the bitmap onto the canvas
         canvas.drawBitmap(bitmap, 0f, 0f, null)
     }
 

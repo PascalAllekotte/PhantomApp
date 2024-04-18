@@ -69,6 +69,8 @@ class ImageEditFragment : Fragment() {
 
                     binding.image.setBitmap(savedBitmap)
 
+                    binding.imagetra.visibility = View.VISIBLE
+
                     val bitmap = getBitmapFromView(binding.image,binding.image.myHeight,binding.image.myWidth)
 
                     val maskedFile = File(requireContext().filesDir, "photos.png")
@@ -105,7 +107,11 @@ class ImageEditFragment : Fragment() {
         binding.btnSelect.setOnClickListener {
             singlePhotoPickerLauncher.launch(
                 PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+
             )
+
+
+
         }
         binding.btnedit.setOnClickListener {
             if (binding.edPrompt.text.toString().trim().isNotEmpty()) {

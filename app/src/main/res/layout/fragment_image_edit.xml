@@ -146,6 +146,17 @@
                     android:textColorHint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ImageView
+                android:id="@+id/imagetra"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:src="@drawable/holololo"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSelect" />
+
             <de.syntax.androidabschluss.utils.CustomDrawView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
