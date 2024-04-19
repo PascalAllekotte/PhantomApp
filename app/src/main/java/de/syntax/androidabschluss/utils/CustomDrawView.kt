@@ -12,24 +12,28 @@ import android.view.MotionEvent
 import android.view.View
 
 class CustomDrawView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
-    private var bitmap: Bitmap
+    private var bitmap: Bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     private lateinit var canvasBitmap: Canvas
+    private val history = mutableListOf<Bitmap>()
+
     private val paintClear = Paint().apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        strokeWidth = 55f // Set the line width
-        color = Color.TRANSPARENT // Set the color to transparent
-        style = Paint.Style.STROKE // Set the paint style to stroke
+        strokeWidth = 20f
+        color = Color.TRANSPARENT
+        style = Paint.Style.FILL_AND_STROKE
     }
 
-    private var lastX: Float = 0f
-    private var lastY: Float = 0f
     var myWidth = 0
+        private set
     var myHeight = 0
+        private set
+
+    private lateinit var initialBitmap: Bitmap
 
     init {
-        // Initialize with a default bitmap (can be empty or a placeholder)
-        bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
         canvasBitmap = Canvas(bitmap)
+        initialBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true) // Kopie des initialen Zustands speichern
+        history.add(initialBitmap)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -50,28 +54,45 @@ class CustomDrawView(context: Context, attrs: AttributeSet? = null) : View(conte
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                // Store the initial touch coordinates
-                lastX = event.x
-                lastY = event.y
+                history.add(bitmap.copy(Bitmap.Config.ARGB_8888, true))
+                if (history.size > 10) {
+                    history.removeAt(0)
+                }
             }
             MotionEvent.ACTION_MOVE -> {
-                // Draw a line from the previous touch point to the current touch point
                 val x = event.x
                 val y = event.y
-                canvasBitmap.drawLine(lastX, lastY, x, y, paintClear)
-                lastX = x
-                lastY = y
-                invalidate() // Request a redraw of the view
+                val radius = 30f
+                canvasBitmap.drawCircle(x, y, radius, paintClear)
+                invalidate()
             }
         }
         return true
     }
 
-    // Method to set the bitmap dynamically
-    fun setBitmap(newBitmap: Bitmap) {
-        bitmap = Bitmap.createScaledBitmap(newBitmap, myWidth, myHeight, false)
-        canvasBitmap = Canvas(bitmap)
-        invalidate() // Redraw the view with the new bitmap
+    fun undo() {
+
+        if (history.size > 1) {
+            history.removeAt(history.size - 1) // Letzten Eintrag entfernen
+            bitmap = history.last().copy(Bitmap.Config.ARGB_8888, true)
+            canvasBitmap = Canvas(bitmap)
+            invalidate() // Neu zeichnen
+        }
     }
 
+    fun setInitialBitmap(newBitmap: Bitmap) {
+        initialBitmap = Bitmap.createScaledBitmap(newBitmap, width, height, true)
+        bitmap = initialBitmap.copy(Bitmap.Config.ARGB_8888, true)
+        canvasBitmap.setBitmap(bitmap)
+        history.clear()
+        history.add(bitmap.copy(Bitmap.Config.ARGB_8888, true))
+        invalidate()
+    }
+
+
+    fun updateStrokeWidth(strokeWidth: Float) {
+        paintClear.strokeWidth = strokeWidth
+        invalidate()
+    }
 }
+

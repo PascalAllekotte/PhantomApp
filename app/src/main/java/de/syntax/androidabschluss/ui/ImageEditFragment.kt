@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.SeekBar
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
@@ -57,6 +58,7 @@ class ImageEditFragment : Fragment() {
         return binding.root
     }
 
+
     private lateinit var originalImageUri: Uri
     private lateinit var maskedImageUri: Uri
     private val singlePhotoPickerLauncher =
@@ -67,7 +69,11 @@ class ImageEditFragment : Fragment() {
                     val savedBitmap =
                         MediaStore.Images.Media.getBitmap(requireContext().contentResolver, it)
 
-                    binding.image.setBitmap(savedBitmap)
+                    binding.image.setInitialBitmap(savedBitmap)
+
+                    binding.imagetra.setImageBitmap(savedBitmap)
+                    binding.imagetra.visibility = View.VISIBLE
+                    binding.imagefilter.visibility = View.VISIBLE
 
                     binding.imagetra.visibility = View.VISIBLE
 
@@ -96,6 +102,29 @@ class ImageEditFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+        binding.undo.setOnClickListener {
+            binding.image.undo()
+        }
+
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // Update die Strichstärke basierend auf dem Wert des SeekBars
+                val strokeWidth = progress.toFloat() // Convert progress to float
+                binding.image.updateStrokeWidth(strokeWidth)
+                binding.masksize.text = strokeWidth.toString()
+
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
 
         binding.toolbarLayout.backbutton.setOnClickListener {
             findNavController().popBackStack()

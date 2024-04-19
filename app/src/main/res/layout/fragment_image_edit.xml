@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,12 +27,28 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageButton
+                android:id="@+id/undo"
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/transparent"
+                android:rotation="45"
+                android:src="@drawable/undo"
+                android:text="hey"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintEnd_toStartOf="@+id/btnSelect"
+                app:layout_constraintHorizontal_bias="0.062"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <SeekBar
                 android:id="@+id/seekBar"
                 android:layout_width="320dp"
                 android:layout_height="36dp"
                 android:backgroundTint="@color/blau"
-                android:max="9"
+                android:max="150"
+                android:min="10"
                 android:progress="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.893"
@@ -58,7 +75,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="-4dp"
-
                 android:text="Choose your image:"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -176,6 +192,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:src="@drawable/holololo"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <ImageView
+                android:id="@+id/imagefilter"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:src="@drawable/filtereffekt"
                 android:scaleType="fitXY"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
