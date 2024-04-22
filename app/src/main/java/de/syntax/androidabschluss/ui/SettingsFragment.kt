@@ -50,6 +50,11 @@ class SettingsFragment : Fragment() {
         val streamUrl = "https://sunsl.streamabc.net/sunsl-techno-mp3-192-4912904?sABC=6614015p%230%2306sr033o32rq9r1o2nn6qq9o3297no19%23fgernz.fhafuvar-yvir.qr&aw_0_1st.playerid=stream.sunshine-live.de&amsparams=playerid:stream.sunshine-live.de;skey:1712587100"
 
         //Speichert den aktuellen Switch zustand im viewmodel
+
+
+        binding.weatherBtn.setOnClickListener{
+            findNavController().navigate(R.id.weatherFragment)
+        }
        playerViewModel.isPlaying.observe(viewLifecycleOwner) { isPlaying ->
            binding.techno.isChecked = isPlaying
 

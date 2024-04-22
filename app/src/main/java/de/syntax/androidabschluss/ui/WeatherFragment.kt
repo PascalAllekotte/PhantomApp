@@ -141,9 +141,7 @@ class WeatherFragment : Fragment() {
     }
 
 
-    private fun isNightNow():Boolean{
-    return calendar.get(Calendar.HOUR_OF_DAY) >= 18
-    }
+
 
 
 }

@@ -329,13 +329,6 @@ class PictureGeneratorFragment : Fragment() {
 
     }
 
-
-
-
-
-
-
-
 }
 
 
