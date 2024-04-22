@@ -24,10 +24,14 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ForeCastAdapter.ViewHolder, position: Int) {
         val binding = ForecastViewholderBinding.bind(holder.itemView)
 
+        // Das Datum im String-Format aus der aktuellen Liste zum dateobjekt umwandeln
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(differ.currentList[position].dtTxt.toString())
+        //Instance von calender erstellen
         val calendar = Calendar.getInstance()
-        calendar.time = date
+        calendar.time = date // setzt das umgewandelte date im Kalender
 
+
+        // wochentage in kurzform ermitteln
         val dayOfWeekName = when (calendar.get(Calendar.DAY_OF_WEEK)) {
             1 -> "Su"
             2 -> "Mo"
@@ -41,13 +45,16 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
 
         binding.nameDayTxt.text = dayOfWeekName
 
-        val calendarHour = calendar.get(Calendar.HOUR)
+        // stunden im 24h format setzten
         val hour24 = calendar.get(Calendar.HOUR_OF_DAY)
         val minutes = calendar.get(Calendar.MINUTE)
+        // hier setzt man die stunden in die textview im stunden inuten format
         binding.hourTxt.text = String.format("%02d:%02d", hour24, minutes) // formatiert Zeit
 
+        //temperatur abrufen
         binding.tempTxt.text = differ.currentList[position].main?.temp?.let { Math.round(it) }.toString() + "°"
 
+        //name des wettersymbols bestimmen und den resourcen zuordnen
         val icon=when(differ.currentList[position].weather?.get(0)?.icon.toString()){
             "01d", "01n" -> "sunny"
             "02d", "02n" -> "cloudy_sunny"
@@ -60,10 +67,12 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
             "50d", "50n" -> "windy"
             else -> "sunny"
         }
+        //hier wird die resource id anhand von icon ermittel
         val drwableResourceId: Int = binding.root.resources.getIdentifier(
             icon,
             "drawable", binding.root.context.packageName
         )
+        //hier wird das bild dann reingeladen
         Glide.with(binding.root.context)
             .load(drwableResourceId)
             .into(binding.pic)
@@ -73,7 +82,10 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root)
 
+    // anzahl der elemente zurückgeben
     override fun getItemCount() = differ.currentList.size
+
+    //callback um die lsite immer zu aktuallisieren
 
     private val differCallback = object : DiffUtil.ItemCallback<ForecastResponseApi.data>() {
         override fun areItemsTheSame(
@@ -91,6 +103,7 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
         }
 
     }
+    // asynchrones dient zur optimierung in der Recyclerview
     val differ = AsyncListDiffer(this, differCallback)
 
 }
