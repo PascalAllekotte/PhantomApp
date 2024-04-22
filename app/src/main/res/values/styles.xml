@@ -234,8 +234,8 @@
 
     <style name="textneu" parent="android:Widget">
         <item name="neumorph_shadowElevation">2dp</item>
-        <item name="neumorph_shadowColorLight">#4B63AE</item>
-        <item name="neumorph_shadowColorDark">#191C27</item>
+        <item name="neumorph_shadowColorLight">#007D7D7D</item>
+        <item name="neumorph_shadowColorDark">#C1C1C1</item>
     </style>
 
 

@@ -24,15 +24,18 @@
         android:layout_marginLeft="125dp"
         android:layout_marginTop="16dp"
         android:rotation="-6"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:text="Generator"
-        android:textColor="#5D6786"
+        android:textColor="#B05B6FAE"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/backbutton"

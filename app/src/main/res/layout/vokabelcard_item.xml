@@ -51,7 +51,7 @@
                         android:fontFamily="@font/manropebold"
                         android:text="your language"
                         android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/vokabel"
@@ -62,7 +62,7 @@
                         android:fontFamily="@font/exo2variablefont"
                         android:text="Insert database text"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </soup.neumorphism.NeumorphCardView>
 
@@ -80,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="12sp"
                 android:text="Aufdecken" />
 
             <soup.neumorphism.NeumorphCardView
@@ -109,7 +110,7 @@
                         android:fontFamily="@font/manropebold"
                         android:text="your language"
                         android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/vokabel2"
@@ -120,7 +121,7 @@
                         android:fontFamily="@font/exo2variablefont"
                         android:text="Insert database text"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </soup.neumorphism.NeumorphCardView>
 
