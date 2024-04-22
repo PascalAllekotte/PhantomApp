@@ -27,6 +27,7 @@
         android:text="Generator"
         android:textColor="#5D6786"
         android:textSize="32sp"
+        android:fontFamily="@font/exo2variablefont"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
