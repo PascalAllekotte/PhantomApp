@@ -156,23 +156,23 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
 
     }
     override fun onValueSelected(e: Entry?, h: Highlight?) {
-        // Formatieren und Anzeigen der Daten im Textfeld
         e?.let {
             val index = it.x.toInt()
             if (index >= 0 && index < forecastAdapter.differ.currentList.size) {
                 val temperature = forecastAdapter.differ.currentList[index].main?.temp ?: "-"
                 val dateMillis = forecastAdapter.differ.currentList[index].dt?.times(1000L) ?: 0L
-                val date =
-                    SimpleDateFormat("EEEE, d MMM yyyy", Locale.GERMANY).format(Date(dateMillis))
-                val displayText = "Temperatur: $temperature°C am $date"
-                binding.detailTextView.text =
-                    displayText  // Angenommen, `detailTextView` ist Ihr Textfeld
+                // Anpassen des Formats, um Datum und Uhrzeit zu inkludieren
+                val dateTime = SimpleDateFormat("EEEE, d MMM yyyy, HH:mm 'Uhr'", Locale.GERMANY).format(Date(dateMillis))
+                val displayText = "Temperatur: $temperature°C am $dateTime"
+                binding.detailTextView.text = displayText  // Angenommen, `detailTextView` ist Ihr Textfeld
             }
         }
     }
-        override fun onNothingSelected() {
-            binding.detailTextView.text = ""  // Löscht das Textfeld, wenn keine Selektion vorliegt
-        }
+
+    override fun onNothingSelected() {
+        binding.detailTextView.text = ""  // Löscht das Textfeld, wenn keine Selektion vorliegt
+    }
+
 
     private fun setChartData() {
         val entries = ArrayList<Entry>()  // Liste für die Datenpunkte

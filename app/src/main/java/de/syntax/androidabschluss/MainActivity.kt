@@ -100,6 +100,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.deepLFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.picturesFragment -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.noteDetailDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.weatherFragment -> binding.bottomNavigationView.visibility = View.GONE
+
                 R.id.imageEditFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
 
@@ -205,8 +207,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if (someDenied) {
-                        // here app Setting open because all permission is not granted
-                        // and permanent denied
                         appSettingOpen(this)
                     } else {
                         // here warning permission show
