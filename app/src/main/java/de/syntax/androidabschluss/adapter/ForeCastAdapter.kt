@@ -42,9 +42,9 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
         binding.nameDayTxt.text = dayOfWeekName
 
         val calendarHour = calendar.get(Calendar.HOUR)
-        val hour12 = if (calendarHour == 0) 12 else calendarHour // Setzt Mitternacht auf 12 statt 0
+        val hour24 = calendar.get(Calendar.HOUR_OF_DAY)
         val minutes = calendar.get(Calendar.MINUTE)
-        binding.hourTxt.text = String.format("%02d:%02d", hour12, minutes) // formatiert Zeit
+        binding.hourTxt.text = String.format("%02d:%02d", hour24, minutes) // formatiert Zeit
 
         binding.tempTxt.text = differ.currentList[position].main?.temp?.let { Math.round(it) }.toString() + "°"
 

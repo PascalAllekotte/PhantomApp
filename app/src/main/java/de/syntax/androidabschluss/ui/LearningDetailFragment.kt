@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.VocableAdapter
 import de.syntax.androidabschluss.databinding.FragmentLearningDetailBinding
@@ -36,7 +37,11 @@ class LearningDetailFragment : Fragment() {
         binding.toolbarLayout.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
-        binding.toolbarLayout.titletext.setText("Learn")
+        val blockName1 = arguments?.getString("blockName")
+
+        binding.toolbarLayout.titletext.setText("$blockName1")
+
+
 
         val blockName = arguments?.getString("blockName") ?: return
         viewModel.getVocabItemsByBlock(blockName).observe(viewLifecycleOwner) { vocabItems ->
@@ -45,11 +50,13 @@ class LearningDetailFragment : Fragment() {
 
     }
 
+
     private fun setupRecyclerView() {
         vocableAdapter = VocableAdapter(mutableListOf()) { vocabItem ->
             viewModel.updateVocabItem(vocabItem)
         }
-        binding.blockRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.blockRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.blockRecyclerView.adapter = vocableAdapter
+        LinearSnapHelper().attachToRecyclerView(binding.blockRecyclerView)
     }
 }
