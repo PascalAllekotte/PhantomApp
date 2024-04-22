@@ -1,7 +1,14 @@
 package de.syntax.androidabschluss.ui
 
 import android.app.Dialog
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Context.DOWNLOAD_SERVICE
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +27,7 @@ import de.syntax.androidabschluss.adapter.ImageAdapter
 import de.syntax.androidabschluss.databinding.FragmentPictureGeneratorBinding
 import de.syntax.androidabschluss.response.CreateImageRequest
 import de.syntax.androidabschluss.utils.Status
+import de.syntax.androidabschluss.utils.appSettingOpen
 import de.syntax.androidabschluss.utils.hideKeyBoard
 import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.utils.setupDialog
@@ -27,6 +36,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 
 class PictureGeneratorFragment : Fragment() {
@@ -44,6 +54,31 @@ class PictureGeneratorFragment : Fragment() {
         }
     }
 
+    private val multiplePermissionNameList = if (Build.VERSION.SDK_INT >= 33) {
+        arrayListOf()
+    } else {
+        arrayListOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        )
+    }
+
+    private fun Context.checkMultiplePermission(): Boolean {
+        val listPermissionNeeded = arrayListOf<String>()
+        for (permission in multiplePermissionNameList) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                listPermissionNeeded.add(permission)
+            }
+        }
+        if (listPermissionNeeded.isNotEmpty()) {
+            return false
+        }
+        return true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -198,14 +233,23 @@ class PictureGeneratorFragment : Fragment() {
                 .into(loadImagein)
 
             downloadBtn.setOnClickListener {
-
+                if(it.context.checkMultiplePermission()){
+                    it.context.download(data.url)
+                }else {
+                    appSettingOpen(it.context)
+                }
             }
         }
 
         binding.imageRv.adapter = imageAdapter
 
         binding.downloadAllBtn.setOnClickListener {
-            imageAdapter.currentList.map {
+            if(it.context.checkMultiplePermission()){
+                imageAdapter.currentList.map { list->
+                    it.context.download(list.url)
+                }
+            }else {
+                appSettingOpen(it.context)
             }
         }
 
@@ -247,6 +291,41 @@ class PictureGeneratorFragment : Fragment() {
 
 
 
+
+    }
+
+    private fun getRandomString():String{
+        val allowedChar = ( 'A'.. 'Z') + ( 'a'..'z') + (0..9)
+
+        return (1..7)
+            .map {allowedChar.random()}
+            .joinToString("")
+
+
+    }
+    private fun Context.download(url: String) {
+        val folder = File(
+            Environment.getExternalStorageDirectory().toString() + "/Download/Image"
+        )
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
+        longToastShow("Download Started")
+        val fileName = getRandomString() + ".jpg"
+
+        val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val request = DownloadManager.Request(Uri.parse(url))
+        request.setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_WIFI or
+                    DownloadManager.Request.NETWORK_MOBILE
+        )
+        request.setTitle(fileName)
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOWNLOADS,
+            "Image/$fileName"
+        )
+        downloadManager.enqueue(request)
 
     }
 

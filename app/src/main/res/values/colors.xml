@@ -23,6 +23,9 @@
     //backgroundinputtext
     <color name="input">#A65D6786</color>
 
+    //test lila
+    <color name="lila">#db0670</color>
+
 
 
     <color name="primary_variant">#3700B3</color>

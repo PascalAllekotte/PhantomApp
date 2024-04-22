@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
         }
         checkMultiplePermission()
     }
+
     private fun checkMultiplePermission(): Boolean {
         val listPermissionNeeded = arrayListOf<String>()
         for (permission in multiplePermissionNameList) {
