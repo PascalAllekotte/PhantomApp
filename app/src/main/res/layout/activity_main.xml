@@ -50,6 +50,7 @@
             android:layout_height="67dp"
             android:layout_gravity="bottom"
             android:background="#00000000"
+            android:fontFamily="@font/exo2variablefont"
             app:itemActiveIndicatorStyle="@style/activated"
             app:itemIconTint="@color/bottom_nav_item_color"
             app:itemTextColor="@color/bottom_nav_item_color"

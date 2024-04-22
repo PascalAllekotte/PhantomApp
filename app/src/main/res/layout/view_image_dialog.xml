@@ -33,8 +33,9 @@
                 android:backgroundTint="#8744AA"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/exo2variablefont"
                 android:text="Cancel"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/downloadBtn"
@@ -45,7 +46,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/black"
                 android:text="Download"
-                android:textSize="20sp" />
+                android:fontFamily="@font/exo2variablefont"
+                android:textSize="14sp" />
         </LinearLayout>
 
 

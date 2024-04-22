@@ -6,6 +6,7 @@
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_notes"
         android:iconTint="#5D6786"
+        android:fontFamily="@font/exo2variablefont"
         android:title="Main" />
     <item
         android:id="@+id/translationFragment"
@@ -13,12 +14,14 @@
         android:layout_height="wrap_content"
         android:iconTint="#5D6786"
         android:icon="@drawable/icon_chat"
+        android:fontFamily="@font/exo2variablefont"
         android:title="Vokabeln" />
     <item
         android:id="@+id/settingsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:iconTint="#5D6786"
+        android:fontFamily="@font/exo2variablefont"
         android:icon="@drawable/icon_settings"
         android:title="Settings" />
 
@@ -27,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:iconTint="#5D6786"
+        android:fontFamily="@font/exo2variablefont"
         android:icon="@drawable/assistant"
         android:title="Assistant" />
 

@@ -14,6 +14,7 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
+        android:fontFamily="@font/exo2variablefont"
         android:text="-"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -28,6 +29,7 @@
         android:shadowDy="1"
         android:shadowRadius="3"
         android:text="-"
+        android:fontFamily="@font/exo2variablefont"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="14sp" />
@@ -48,6 +50,7 @@
         android:shadowDy="1"
         android:shadowRadius="3"
         android:text="-"
+        android:fontFamily="@font/exo2variablefont"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="14sp" />
