@@ -30,12 +30,11 @@ import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
 import retrofit2.Call
 import retrofit2.Response
-import java.util.Calendar
 
 
 class MainFragment : Fragment() {
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
+
+    private lateinit var binding : FragmentMainBinding
 
     private lateinit var vocableAdapter: VocableAdapter
     private lateinit var vokabelViewModel: VokabelViewModel
@@ -48,7 +47,6 @@ class MainFragment : Fragment() {
 
     //Wetter
     private val weatherViewModel: WeatherViewModel by viewModels()
-    private val calendar by lazy { Calendar.getInstance() }
     private val forecastAdapter by lazy { ForeCastAdapter() }
 
 
@@ -61,7 +59,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -113,11 +111,6 @@ class MainFragment : Fragment() {
 
             })
 
-            //Setting Blue View
-            var radius=10f
-            val decorView = requireActivity().window.decorView
-            val rootView=(decorView.findViewById(android.R.id.content) as ViewGroup?)
-            val windowBACKGROUND=decorView.background
 
 
 
@@ -191,9 +184,11 @@ class MainFragment : Fragment() {
 
 
         termViewModel.termList.observe(viewLifecycleOwner) { termList ->
-            termAdapter.updateList(termList)
-
+            // Begrenze die Liste auf die ersten zwei Einträge
+            val limitedList = if (termList.size > 2) termList.take(2) else termList
+            termAdapter.updateList(limitedList)
         }
+
     }
 
     private fun setupRecyclerView() {
@@ -228,8 +223,5 @@ class MainFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
