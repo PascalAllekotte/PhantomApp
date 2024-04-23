@@ -44,9 +44,13 @@ class RegistrationFragment : Fragment() {
         binding.button.setOnClickListener {
             val email = binding.regmail.text.toString()
             val password = binding.regpassword.text.toString()
+            val password2 = binding.regpassword2.text.toString()
             val name = binding.regname.text.toString()
-            if (email.isEmpty() || password.isEmpty() || name.isEmpty() ) {
+
+            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || password2.isEmpty()) {
                 Toast.makeText(context, "Bitte erst Eingabe machen!!!", Toast.LENGTH_SHORT).show()
+            } else if (password != password2) {
+                Toast.makeText(context, "Die Passwörter stimmen nicht überein.", Toast.LENGTH_SHORT).show()
             } else {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(requireActivity()) { task ->
@@ -73,6 +77,7 @@ class RegistrationFragment : Fragment() {
         }
 
         return binding.root
+
     }
 
     private fun saveUsernameToDatabase(userId: String?, name: String) {

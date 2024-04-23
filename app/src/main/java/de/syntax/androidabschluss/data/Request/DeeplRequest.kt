@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.adapter.Request
+package de.syntax.androidabschluss.data.Request
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

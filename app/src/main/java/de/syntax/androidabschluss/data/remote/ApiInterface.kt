@@ -1,7 +1,7 @@
 package de.syntax.androidabschluss.data.remote
 
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
-import de.syntax.androidabschluss.adapter.Request.DeeplRequest
+import de.syntax.androidabschluss.data.Request.DeeplRequest
 import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
 import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
 import de.syntax.androidabschluss.response.ChatRequest

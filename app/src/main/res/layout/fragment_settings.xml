@@ -102,6 +102,21 @@
         app:layout_constraintTop_toBottomOf="@+id/style" />
 
     <TextView
+        android:id="@+id/theMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pascal@ggg.com"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toEndOf="@+id/mail"
+        app:layout_constraintTop_toTopOf="@+id/mail"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,6 +128,22 @@
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mail" />
+
+    <TextView
+        android:id="@+id/thePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="188dp"
+        android:text="Password"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toEndOf="@+id/password"
+        app:layout_constraintTop_toTopOf="@+id/password"
+        app:layout_constraintVertical_bias="0.0" />
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/cardviewtr"
