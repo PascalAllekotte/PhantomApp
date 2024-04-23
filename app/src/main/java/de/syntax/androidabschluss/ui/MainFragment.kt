@@ -26,7 +26,6 @@ import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
 import de.syntax.androidabschluss.viewmodel.TermViewModel
-import de.syntax.androidabschluss.viewmodel.UserSettingsViewModel
 import de.syntax.androidabschluss.viewmodel.VokabelViewModel
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
 import retrofit2.Call
@@ -51,9 +50,6 @@ class MainFragment : Fragment() {
     private val weatherViewModel: WeatherViewModel by viewModels()
     private val calendar by lazy { Calendar.getInstance() }
     private val forecastAdapter by lazy { ForeCastAdapter() }
-
-    //Setting instanz setzten und laden
-    private val userSettingsViewModel: UserSettingsViewModel by viewModels()
 
 
 

@@ -2,8 +2,8 @@ package de.syntax.androidabschluss.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +20,26 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     val currentUserName: LiveData<String?>
         get() = _currentUserName
 
+    private val _loginError = MutableLiveData<String>()
+    val loginError: LiveData<String>
+        get() = _loginError
+
+    private val _userEmail = MutableLiveData<String?>(firebaseAuth.currentUser?.email)
+    val userEmail: LiveData<String?> get() = _userEmail
+
+    private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+        _currentUser.value = firebaseAuth.currentUser
+        _userEmail.value = firebaseAuth.currentUser?.email
+    }
+
+    init {
+        firebaseAuth.addAuthStateListener(authStateListener)
+    }
+    override fun onCleared() {
+        super.onCleared()
+        firebaseAuth.removeAuthStateListener(authStateListener)
+    }
+
     fun login(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -28,6 +48,7 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
             } else {
                 _currentUser.value = null
                 _currentUserName.value = null
+                _loginError.value = task.exception?.message ?: "An unknown error occurred"
             }
         }
     }

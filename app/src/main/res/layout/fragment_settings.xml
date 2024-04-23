@@ -19,74 +19,130 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <soup.neumorphism.NeumorphButton
+        android:id="@+id/resetPasswordBtn"
+        style="@style/buttonfinal"
+        android:layout_width="248dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:text="Passwort zurücksetzen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thePassword" />
+
+    <soup.neumorphism.NeumorphButton
         android:id="@+id/weather_btn"
         style="@style/buttonfinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
         android:text="Weather"
+        android:textSize="12sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather" />
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/logout"
-        style="@style/buttonfinal"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="172dp"
-        android:gravity="center"
-        android:text="logout"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style" />
-
-    <TextView
-        android:id="@+id/stroke"
+    <Switch
+        android:id="@+id/techno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Strokes:"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="84dp"
+        android:text="Techno"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout" />
+        app:layout_constraintTop_toBottomOf="@+id/weather"
+        app:layout_constraintVertical_bias="0.166" />
 
     <TextView
         android:id="@+id/weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="Weather:"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.674"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stroke" />
+        app:layout_constraintTop_toBottomOf="@+id/cardviewtr" />
+
+
+    <EditText
+        android:id="@+id/currentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Aktuelles Passwort"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetPasswordBtn" />
+
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Neues Passwort"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/currentPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/changePasswordBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Passwort ändern"
+        app:layout_constraintTop_toBottomOf="@id/newPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Radio:"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/weather"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toEndOf="@+id/weather"
+        app:layout_constraintTop_toTopOf="@+id/weather" />
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/logout"
+        style="@style/buttonfinal"
+        android:layout_width="148dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="272dp"
+        android:gravity="center"
+        android:text="logout"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style" />
 
     <TextView
         android:id="@+id/style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="84dp"
         android:text="Account:"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/mail"
@@ -95,7 +151,7 @@
         android:layout_marginTop="8dp"
         android:text="Email:"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,13 +161,11 @@
         android:id="@+id/theMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="pascal@ggg.com"
+        android:layout_marginStart="40dp"
+        android:text="die mail"
         android:textColor="@color/white"
-        android:textSize="17sp"
-
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toEndOf="@+id/mail"
         app:layout_constraintTop_toTopOf="@+id/mail"
         app:layout_constraintVertical_bias="0.0" />
@@ -122,7 +176,7 @@
         android:layout_height="wrap_content"
         android:text="Password:"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="12sp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.057"
@@ -133,14 +187,12 @@
         android:id="@+id/thePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="188dp"
-        android:text="Password"
-        android:textColor="@color/white"
-        android:textSize="17sp"
+        android:layout_marginStart="16dp"
         android:inputType="textPassword"
+        android:text="thösmdlmösflmöke"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toEndOf="@+id/password"
         app:layout_constraintTop_toTopOf="@+id/password"
         app:layout_constraintVertical_bias="0.0" />
@@ -148,104 +200,82 @@
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/cardviewtr"
         style="@style/cardview2"
-        android:layout_width="125dp"
-        android:layout_height="278dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="4dp"
-        android:layout_marginStart="-35dp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stroke"
-        app:layout_constraintVertical_bias="0.274"
+        app:layout_constraintVertical_bias="0.137"
         app:neumorph_strokeColor="@color/blau"
         app:neumorph_strokeWidth="0.7dp">
 
-        <RadioGroup
-            android:id="@+id/stylegroup"
-            android:layout_width="109dp"
-            android:layout_height="241dp"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.335"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stroke">
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
-            <RadioButton
-                android:id="@+id/rbblure"
+            <RadioGroup
+                android:id="@+id/stylegroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Auora"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/style" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbgreen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Matrix"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/style" />
+                <RadioButton
+                    android:id="@+id/rbblure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Auora"
+                    android:textColor="@color/white" />
 
-            <RadioButton
-                android:id="@+id/rbwhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Snow"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/style" />
+                <RadioButton
+                    android:id="@+id/rbgreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matrix"
+                    android:textColor="@color/white" />
 
-            <RadioButton
-                android:id="@+id/rbrose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rose"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/style" />
+                <RadioButton
+                    android:id="@+id/rbwhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Snow"
+                    android:textColor="@color/white" />
 
-            <RadioButton
-                android:id="@+id/rbred"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Evil"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/style" />
+                <RadioButton
+                    android:id="@+id/rbrose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rose"
+                    android:textColor="@color/white" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rbred"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Evil"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
+        </HorizontalScrollView>
     </soup.neumorphism.NeumorphCardView>
 
-    <Switch
-        android:id="@+id/techno"
+    <TextView
+        android:id="@+id/stroke"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Techno"
+        android:text="Strokes:"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/stroke"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewtr"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail"
-        app:layout_constraintVertical_bias="0.652" />
+        app:layout_constraintTop_toBottomOf="@+id/logout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

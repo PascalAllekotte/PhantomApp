@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.firebase.auth.FirebaseAuth
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
 import de.syntax.androidabschluss.utils.getAuoraColor
@@ -19,6 +20,7 @@ import de.syntax.androidabschluss.utils.getEvilColor
 import de.syntax.androidabschluss.utils.getMatrixColor
 import de.syntax.androidabschluss.utils.getRoseColor
 import de.syntax.androidabschluss.utils.getSnowColor
+import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 import de.syntax.androidabschluss.viewmodel.PlayerViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel
@@ -46,6 +48,27 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewmodel.userEmail.observe(viewLifecycleOwner) { email ->
+            binding.theMail.text = email ?: "Keine E-Mail verfügbar"
+        }
+
+        binding.resetPasswordBtn.setOnClickListener {
+            viewmodel.userEmail.value?.let { email ->
+                if (email.isNotEmpty()) {
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                context?.longToastShow("Ein Link zum Zurücksetzen Ihres Passworts wurde gesendet.")
+                            } else {
+                                context?.longToastShow("Fehler beim Senden des Reset-Links: ${task.exception?.message}")
+                            }
+                        }
+                } else {
+                    context?.longToastShow("Keine registrierte E-Mail-Adresse gefunden.")
+                }
+            }
+        }
 
         val streamUrl = "https://sunsl.streamabc.net/sunsl-techno-mp3-192-4912904?sABC=6614015p%230%2306sr033o32rq9r1o2nn6qq9o3297no19%23fgernz.fhafuvar-yvir.qr&aw_0_1st.playerid=stream.sunshine-live.de&amsparams=playerid:stream.sunshine-live.de;skey:1712587100"
 
@@ -102,7 +125,6 @@ class SettingsFragment : Fragment() {
 
 
     }
-//hey also wenn man in der app aufs settingfragment geht kann man in der radiogroup auswählen welche farbe die strokes in der app haben dies alles funktioniert auch wenn man durch die app navigiert aber wenn man die app neu startet muss man die farbe auf dem settingsfragment wieder ändern ich möchte das der zustand beim verlassen der app bestehen bleib und beim erneuten öffnen der app die farbe bei den fargmenten automatisch den letzten zustand angepasst wird
 
     override fun onPause() {
         super.onPause()
