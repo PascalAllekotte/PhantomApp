@@ -57,6 +57,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-inappmessaging-display:20.4.2'
     def open_ai_api_version = "3.2.3"
     def lifecycle_version = "2.6.1"
     def view_model_activity_version = "1.7.1"

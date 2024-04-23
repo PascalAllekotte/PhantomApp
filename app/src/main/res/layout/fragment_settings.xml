@@ -22,14 +22,26 @@
         android:id="@+id/resetPasswordBtn"
         style="@style/buttonfinal"
         android:layout_width="248dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="8dp"
-        android:textSize="12sp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
         android:text="Passwort zurücksetzen"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thePassword" />
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/changePassword"
+        style="@style/buttonfinal"
+        android:layout_width="248dp"
+        android:layout_height="60dp"
+        android:text="Passwort ändern"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetPasswordBtn" />
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/weather_btn"
@@ -73,34 +85,6 @@
         app:layout_constraintTop_toBottomOf="@+id/cardviewtr" />
 
 
-    <EditText
-        android:id="@+id/currentPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Aktuelles Passwort"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetPasswordBtn" />
-
-    <EditText
-        android:id="@+id/newPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Neues Passwort"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/currentPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <Button
-        android:id="@+id/changePasswordBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Passwort ändern"
-        app:layout_constraintTop_toBottomOf="@id/newPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
         android:id="@+id/radio"
         android:layout_width="wrap_content"
@@ -118,23 +102,22 @@
     <soup.neumorphism.NeumorphButton
         android:id="@+id/logout"
         style="@style/buttonfinal"
-        android:layout_width="148dp"
+        android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginTop="272dp"
         android:gravity="center"
         android:text="logout"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style" />
+        app:layout_constraintTop_toBottomOf="@+id/changePassword" />
 
     <TextView
         android:id="@+id/style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="108dp"
         android:text="Account:"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -153,7 +136,7 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/style" />
 
@@ -174,12 +157,12 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Password:"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mail" />
 
@@ -204,6 +187,7 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="10dp"
+        android:layout_marginTop="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
@@ -269,6 +253,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Strokes:"
+        android:layout_marginTop="30dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"

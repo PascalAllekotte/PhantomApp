@@ -1,17 +1,19 @@
 package de.syntax.androidabschluss.ui
 
 
+import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.exoplayer2.ExoPlayer
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
@@ -29,7 +31,6 @@ import de.syntax.androidabschluss.viewmodel.SharedViewModel
 
 class SettingsFragment : Fragment() {
 
-    private var player: ExoPlayer? = null
 
     private lateinit var binding: FragmentSettingsBinding
     private val viewmodel: FirebaseViewModel by activityViewModels()
@@ -51,6 +52,46 @@ class SettingsFragment : Fragment() {
 
         viewmodel.userEmail.observe(viewLifecycleOwner) { email ->
             binding.theMail.text = email ?: "Keine E-Mail verfügbar"
+        }
+
+        binding.changePassword.setOnClickListener {
+            val inflater = LayoutInflater.from(context)
+            val view = inflater.inflate(R.layout.dialog_change_password, null)
+            val currentPasswordInput = view.findViewById<EditText>(R.id.currentPassword)
+            val newPasswordInput = view.findViewById<EditText>(R.id.newPassword)
+
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Passwort ändern")
+                .setView(view)
+                .setPositiveButton("Speichern") { dialog, _ ->
+                    val currentPassword = currentPasswordInput.text.toString()
+                    val newPassword = newPasswordInput.text.toString()
+
+                    if (currentPassword.isEmpty() || newPassword.isEmpty()) {
+                        context?.longToastShow("Bitte füllen Sie alle Felder aus.")
+                    } else {
+                        val user = FirebaseAuth.getInstance().currentUser
+                        val credential = EmailAuthProvider.getCredential(user!!.email!!, currentPassword)
+
+                        user.reauthenticate(credential).addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                user.updatePassword(newPassword).addOnCompleteListener { updateTask ->
+                                    if (updateTask.isSuccessful) {
+                                        context?.longToastShow("Passwort erfolgreich geändert.")
+                                    } else {
+                                        context?.longToastShow("Fehler beim Ändern des Passworts: ${updateTask.exception?.message}")
+                                    }
+                                }
+                            } else {
+                                context?.longToastShow("Fehler bei der Authentifizierung: ${task.exception?.message}")
+                            }
+                        }
+                    }
+                }
+                .setNegativeButton("Abbrechen", null)
+                .create()
+
+            dialog.show()
         }
 
         binding.resetPasswordBtn.setOnClickListener {
