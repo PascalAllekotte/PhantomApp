@@ -19,16 +19,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.syntax.androidabschluss.R
 
-val assistantImageList = listOf(
-    R.drawable.robot_1,
-    R.drawable.robot_2,
-    R.drawable.robot_3,
-    R.drawable.testlogo,
 
-
-
-
-)
 enum class Status{
     LOADING,
     SUCCESS,
@@ -95,6 +86,18 @@ fun Context.copyToClipBoard(message: String) {
     intent.putExtra(Intent.EXTRA_TEXT,message)
     startActivity(Intent.createChooser(intent,"Share Message"))
 }
+
+val assistantImageList = listOf(
+    R.drawable.robot_1,
+    R.drawable.robot_2,
+    R.drawable.robot_3,
+    R.drawable.testlogo,
+
+
+
+
+    )
+
 
 fun Dialog.setupDialog(layoutResId : Int){
     setContentView(layoutResId)

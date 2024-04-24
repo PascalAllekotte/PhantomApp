@@ -62,13 +62,12 @@ class GptFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Einrichten des TextToSpeech-Objekts
         textToSpeech = TextToSpeech(view.context) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val result = textToSpeech.setLanguage(Locale.getDefault())
-                if (result == TextToSpeech.LANG_MISSING_DATA
-                    || result == TextToSpeech.LANG_NOT_SUPPORTED
-                ) {
-                    view.context.longToastShow("language is not supported")
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    view.context.longToastShow("Language is not supported")
                 }
             }
         }
@@ -83,10 +82,17 @@ class GptFragment : Fragment() {
         }
         binding.toolbarLayout.titletexttool.text = gptArgs.assistantName
 
+
+        // Erstellt einen ChatAdapter mit einem Lambda als Parameter für Interaktionen
         val chatAdapter = ChatAdapter(){ message, textView ->
 
+            // Erstellt einen themenspezifischen ContextWrapper für das Popup-Menü
             val contextThemeWrapper = ContextThemeWrapper(context, R.style.YourCustomPopupMenuStyle)
+
+            // Initialisiert das Popup-Menü am Ort des TextViews
             val popup = PopupMenu(contextThemeWrapper, textView)
+
+            // Versucht, das Icon neben dem Menütext anzuzeigen
             try {
                 val fields = popup.javaClass.declaredFields
                 for (field in fields) {
@@ -103,8 +109,10 @@ class GptFragment : Fragment() {
                 e.printStackTrace()
             }
 
+            // Lädt das Menü aus den Ressourcen
             popup.menuInflater.inflate(R.menu.option_menu, popup.menu)
 
+            // Definiert Aktionen für die Menüauswahl
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.copyMenu -> {
@@ -143,18 +151,24 @@ class GptFragment : Fragment() {
 
 
         }
+
+        // Setzt den ChatAdapter für den RecyclerView
         binding.chatRv.adapter = chatAdapter
+
+        // Registriert einen Datenbeobachter, um beim Einfügen von Elementen automatisch zu scrollen
         chatAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
+                // Scrollt zur neuen Nachricht
                 binding.chatRv.smoothScrollToPosition(positionStart)
             }
         })
 
-
+        // Setzt Click-Listener für den Spracherkennungsbutton
         binding.speechButton.setOnClickListener {
             binding.etBlock.text = null
             try {
+                // Startet die Spracherkennungsaktivität
                 val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
                 intent.putExtra(
                     RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -190,46 +204,40 @@ class GptFragment : Fragment() {
 
     }
 
+    // Lädt die Chatliste und aktualisiert die UI entsprechend des Ladestatus
     private fun callGetChatList(chatRV: RecyclerView, chatAdapter: ChatAdapter) {
         CoroutineScope(Dispatchers.Main).launch {
             chatViewModel
                 .chatStateFlow
                 .collectLatest {
                     when (it.status) {
-                        Status.LOADING -> {}
+                        Status.LOADING -> {} // Keine Aktion erforderlich beim Laden
                         Status.SUCCESS -> {
-
+                            // Bei Erfolg, aktualisiere die Chatliste im Adapter
                             it.data?.collect { chatlist ->
                                 chatAdapter.submitList(chatlist)
-
-
                             }
                         }
-
                         Status.ERROR -> {
-
-                            it.message?.let { it1 -> chatRV.context.longToastShow(it1) }
+                            // Bei Fehler, zeige eine Toast-Nachricht
+                            it.message?.let { message -> chatRV.context.longToastShow(message) }
                         }
-
                     }
                 }
-
         }
-
     }
 
+    // Stellt sicher, dass Text-to-Speech bei Verlassen der View gestoppt wird
     override fun onDestroyView() {
         super.onDestroyView()
         textToSpeech.stop()
     }
-    private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result->
-        if (result.resultCode == Activity.RESULT_OK){
-            val results = result.data?.getStringArrayListExtra(
-                RecognizerIntent.EXTRA_RESULTS
-            ) as ArrayList<String>
 
-            binding.etBlock.setText(results[0])
+    // Verarbeitet das Ergebnis der Spracherkennung und setzt den erkannten Text in das Eingabefeld
+    private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val results = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS) as ArrayList<String>
+            binding.etBlock.setText(results[0]) // Setzt den erkannten Text als Nachricht
         }
     }
 }
