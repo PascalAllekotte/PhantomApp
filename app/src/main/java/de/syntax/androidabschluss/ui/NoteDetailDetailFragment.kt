@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.data.local.getDatabaseNote
 import de.syntax.androidabschluss.data.model.open.NoteItem
 import de.syntax.androidabschluss.databinding.FragmentNoteDetailDetailBinding
+import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -42,7 +43,14 @@ class NoteDetailDetailFragment : Fragment() {
         }
 
         binding.addbutton.setOnClickListener {
-            addnoteItem()
+            if (binding.noteTitle.text?.isNotEmpty() == true && binding.notetext.text?.isNotEmpty() == true){
+                addnoteItem()
+                context?.longToastShow("Notiz hinzugefügt")
+            } else {
+                context?.longToastShow("Bitte erst Eingabe machen!")
+            }
+
+
         }
 
         binding.toolbarLayout.titletexttool.setText("$currentdate")

@@ -47,6 +47,7 @@ class TermDetailDetailFragment : Fragment() {
         binding.addbutton.setOnClickListener {
             if (binding.termcontent.text?.isNotEmpty() == true && binding.date.text.isNotEmpty() == true){
                 addTermItem()
+                context?.longToastShow("Termin hinzugefügt")
             } else{
                 context?.longToastShow("Bitte erst Eingabe machen")
             }
