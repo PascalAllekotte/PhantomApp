@@ -32,20 +32,10 @@ class SelectTextFragment : Fragment() {
 
         binding.selecttext.text = selectArgs.selectedMessage
 
-
-
-
-        //---Klappt nur mit R.ID
         val close = view.findViewById<NeumorphImageButton>(R.id.backbuttonselect)
         close.setOnClickListener {
             findNavController().navigateUp()
         }
-
-
-
-
-
-
     }
 
 }

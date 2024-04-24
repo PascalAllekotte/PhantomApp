@@ -22,11 +22,7 @@ class TermsFragment : Fragment() {
     private lateinit var binding : FragmentTermsBinding
     private lateinit var termAdapter: TermAdapter
     private lateinit var termViewModel: TermViewModel
-
     private val sharedViewModel : SharedViewModel by activityViewModels()
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

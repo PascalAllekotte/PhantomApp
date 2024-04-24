@@ -38,14 +38,12 @@ class TermDetailDetailFragment : Fragment() {
 
         binding.date.setOnClickListener{
             showDate()
-
         }
 
 
         // Eckdaten vom xml
 
         binding.addbutton.setOnClickListener {
-
             addTermItem()
         }
 
@@ -63,8 +61,7 @@ class TermDetailDetailFragment : Fragment() {
             val selectedDate = "$dayOfMonth.${month + 1}.$year"
             binding.date.text = selectedDate
         }, year, month, day).show()
-
-        }
+    }
 
 
     fun addTermItem(){
@@ -89,9 +86,6 @@ class TermDetailDetailFragment : Fragment() {
             }
         }
     }
-
-
-
 }
 
 
