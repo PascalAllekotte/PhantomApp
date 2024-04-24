@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.data.local.getDatabaseTerm
 import de.syntax.androidabschluss.data.model.open.TermItem
 import de.syntax.androidabschluss.databinding.FragmentTermDetailDetailBinding
+import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -44,7 +45,13 @@ class TermDetailDetailFragment : Fragment() {
         // Eckdaten vom xml
 
         binding.addbutton.setOnClickListener {
-            addTermItem()
+            if (binding.termcontent.text?.isNotEmpty() == true && binding.date.text.isNotEmpty() == true){
+                addTermItem()
+            } else{
+                context?.longToastShow("Bitte erst Eingabe machen")
+            }
+
+
         }
 
 
