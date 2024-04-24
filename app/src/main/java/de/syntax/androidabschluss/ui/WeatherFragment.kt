@@ -147,59 +147,76 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
         }
     }
 
+// Wird aufgerufen, wenn ein Diagrammwert ausgewählt wird
+override fun onValueSelected(e: Entry?, h: Highlight?) {
+    e?.let {
+        // Index des ausgewählten Eintrags bestimmen
+        val index = it.x.toInt()
 
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        e?.let {
-            val index = it.x.toInt()
-            if (index >= 0 && index < forecastAdapter.differ.currentList.size) {
-                val temperature = forecastAdapter.differ.currentList[index].main?.temp ?: "-"
-                val dateMillis = forecastAdapter.differ.currentList[index].dt?.times(1000L) ?: 0L
-                // Anpassen des Formats, um Datum und Uhrzeit zu inkludieren
-                val dateTime = SimpleDateFormat("EEEE, d MMM yyyy, HH:mm 'Uhr'", Locale.GERMANY).format(Date(dateMillis))
-                val displayText = "Temperatur: $temperature°C am $dateTime"
-                binding.detailTextView.text = displayText
-            }
+        // Gültigkeitsprüfung des Index
+        if (index >= 0 && index < forecastAdapter.differ.currentList.size) {
+            // Temperatur aus der Vorhersageliste holen
+            val temperature = forecastAdapter.differ.currentList[index].main?.temp ?: "-"
+
+            // Datum aus Unix-Zeitstempel berechnen
+            val dateMillis = forecastAdapter.differ.currentList[index].dt?.times(1000L) ?: 0L
+            val dateTime = SimpleDateFormat("EEEE, d MMM yyyy, HH:mm 'Uhr'", Locale.GERMANY).format(Date(dateMillis))
+
+            // Anzeigetext erstellen und setzen
+            val displayText = "Temperatur: $temperature°C am $dateTime"
+            binding.detailTextView.text = displayText
         }
     }
+}
+
 
     override fun onNothingSelected() {
         binding.detailTextView.text = ""  // Löscht das Textfeld, wenn keine Selektion vorliegt
     }
 
 
+    // Erstellt das Diagramm für die Wettervorhersage
     private fun setChartData() {
-        val entries = ArrayList<Entry>()  // Liste für die Datenpunkte
-        val dateValues = ArrayList<Long>() // Liste für die UNIX-Zeitstempel der Datenpunkte
+        val entries = ArrayList<Entry>()  // Initialisiert die Liste für die Temperaturdatenpunkte
+        val dateValues = ArrayList<Long>() // Speichert die UNIX-Zeitstempel für die Datenpunkte
 
+        // Iteriert durch die Liste der Wetterdaten
         for (i in forecastAdapter.differ.currentList.indices) {
+            // Liest die Temperatur und wandelt sie in Float um, standardmäßig 0f bei Fehlen
             val temperature = forecastAdapter.differ.currentList[i].main?.temp?.toFloat() ?: 0f
-            val dateMillis =
-                forecastAdapter.differ.currentList[i].dt?.times(1000L)  // angenommen 'dt' ist der UNIX-Zeitstempel in Sekunden
+            // Berechnet den Millisekundenwert aus dem UNIX-Zeitstempel
+            val dateMillis = forecastAdapter.differ.currentList[i].dt?.times(1000L)
+            // Fügt einen neuen Datenpunkt zur Liste hinzu
             entries.add(Entry(i.toFloat(), temperature))
+            // Fügt den Zeitstempel zur Liste hinzu, wenn er nicht null ist
             if (dateMillis != null) {
                 dateValues.add(dateMillis)
             }
         }
 
+        // Erstellt ein DataSet aus den Einträgen, definiert Aussehen und Beschriftung
         val dataSet = LineDataSet(entries, "Temperatur")
         dataSet.fillAlpha = 110
         dataSet.color = Color.WHITE
         dataSet.valueTextColor = Color.MAGENTA
         dataSet.valueTextSize = 12f
+
+        // Konfiguriert die Farben der Diagrammachsen und der Legende
         binding.chart.xAxis.textColor = Color.WHITE
         binding.chart.axisLeft.textColor = Color.WHITE
         binding.chart.axisRight.textColor = Color.WHITE
         binding.chart.legend.textColor = Color.WHITE
 
-
+        // Erstellt LineData aus dem DataSet und setzt es ins Diagramm
         val lineData = LineData(dataSet)
         binding.chart.data = lineData
 
-        // Setzen des ValueFormatters für die X-Achse
+        // Setzt einen benutzerdefinierten ValueFormatter für die X-Achse, um Datumswerte anzuzeigen
         binding.chart.xAxis.valueFormatter = DayAxisValueFormatter(dateValues)
-        binding.chart.xAxis.granularity = 1f  // Stellt sicher, dass jeder Index ein Label erhält
+        binding.chart.xAxis.granularity = 1f  // Stellt sicher, dass jeder Wert ein Label erhält
 
-        binding.chart.invalidate() // Aktualisiert das Diagramm
+        // Fordert das Diagramm auf, sich selbst zu zeichnen/aktualisieren
+        binding.chart.invalidate()
     }
 
 
@@ -207,15 +224,20 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
 }
 
 
+// Klasse zur Formatierung der X-Achsenbeschriftung in Diagrammen
 class DayAxisValueFormatter(private val dates: List<Long>) : ValueFormatter() {
+    // Datumformatierer für Wochentage
     private val dateFormatter = SimpleDateFormat("EE", Locale.GERMANY)
 
+    // Übernimmt Float-Wert und liefert formatierten Datumstext zurück
     override fun getFormattedValue(value: Float): String {
-        // value ist der Index des Datenpunkts, der in eine Position in der Liste `dates` umgewandelt wird.
+        // Überprüft Bereich und konvertiert Index zu Datum
         return if (value.toInt() >= 0 && value.toInt() < dates.size) {
-            dateFormatter.format(dates[value.toInt()])
+            dateFormatter.format(Date(dates[value.toInt()]))
         } else {
+            // Leerer String bei ungültigem Index
             ""
         }
     }
 }
+
