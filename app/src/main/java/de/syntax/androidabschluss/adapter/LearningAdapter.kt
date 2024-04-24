@@ -20,7 +20,7 @@ class LearningAdapter(
 
     fun updateStrokeColor(color: Int) {
         currentStrokeColor = color
-        notifyDataSetChanged()  // Informiert den Adapter, dass sich Daten geändert haben und die View aktualisiert werden muss
+        notifyDataSetChanged()
     }
 
     class LearnViewHolder(val binding: LearningItemBinding, private val onItemCklicked: (String) -> Unit) : RecyclerView.ViewHolder(binding.root) {
@@ -33,7 +33,7 @@ class LearningAdapter(
 
             currentStrokeColor?.let { color ->
                 val colorStateList = ColorStateList.valueOf(color)
-                binding.blockCardView.setStrokeColor(colorStateList) // Annahme: `notecard` ist Teil von `NewnoteItemBinding`
+                binding.blockCardView.setStrokeColor(colorStateList)
             }
 
         }

@@ -86,7 +86,6 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
     override fun getItemCount() = differ.currentList.size
 
     //callback um die lsite immer zu aktuallisieren
-
     private val differCallback = object : DiffUtil.ItemCallback<ForecastResponseApi.data>() {
         override fun areItemsTheSame(
             oldItem: ForecastResponseApi.data,
@@ -94,7 +93,6 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
         ): Boolean {
             return oldItem == newItem
         }
-
         override fun areContentsTheSame(
             oldItem: ForecastResponseApi.data,
             newItem: ForecastResponseApi.data
