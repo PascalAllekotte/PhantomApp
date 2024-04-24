@@ -2,11 +2,15 @@ package de.syntax.androidabschluss.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.DownloadManager
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +21,7 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +31,7 @@ import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ImageAdapter
 import de.syntax.androidabschluss.databinding.FragmentImageEditBinding
 import de.syntax.androidabschluss.utils.Status
+import de.syntax.androidabschluss.utils.appSettingOpen
 import de.syntax.androidabschluss.utils.longToastShow
 import de.syntax.androidabschluss.utils.setupDialog
 import de.syntax.androidabschluss.viewmodel.ChatViewModel
@@ -48,6 +54,15 @@ class ImageEditFragment : Fragment() {
             setupDialog(R.layout.view_image_dialog)
         }
     }
+    private val multiplePermissionNameList = if (Build.VERSION.SDK_INT >= 33) {
+        arrayListOf()  // Keine Berechtigungen erforderlich für Android 12 und höher
+    } else {
+        arrayListOf(  // Berechtigungen für den Zugriff auf externen Speicher für Android-Versionen vor 12
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        )
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +70,7 @@ class ImageEditFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentImageEditBinding.inflate(inflater, container, false)
+        binding.toolbarLayout.titletext.setText("Editor")
         return binding.root
     }
 
@@ -169,7 +185,7 @@ class ImageEditFragment : Fragment() {
         }
 
 
-    val loadImagein = viewImageDialog.findViewById<ImageView>(R.id.loadImage3)
+        val loadImagein = viewImageDialog.findViewById<ImageView>(R.id.loadImage3)
         val cancelBtn = viewImageDialog.findViewById<Button>(R.id.cancelBtn)
         val downloadBtn = viewImageDialog.findViewById<Button>(R.id.downloadBtn)
 
@@ -185,14 +201,30 @@ class ImageEditFragment : Fragment() {
                 .placeholder(R.drawable.ic_placeholder)  // Zeigt ein Platzhalterbild während des Ladens
                 .into(loadImagein)
 
-            // Hier könnte Code zum Herunterladen des Bildes implementiert werden
             downloadBtn.setOnClickListener {
-
+                if (it.context.checkMultiplePermission()) {
+                    it.context.download(data.url)
+                } else {
+                    appSettingOpen(it.context)
+                }
             }
         }
 
         binding.imageRv.adapter = imageEditAdapter
 
+
+
+        // Listener für den Download-All-Button
+        binding.downloadAllBtn.setOnClickListener {
+            if (it.context.checkMultiplePermission()) {
+                // Startet den Download für alle Bilder in der Liste
+                imageEditAdapter.currentList.map { list ->
+                    it.context.download(list.url)
+                }
+            } else {
+                appSettingOpen(it.context)
+            }
+        }
         // Nutzt Coroutines, um Bildlisten asynchron zu verarbeiten und UI-Aktualisierungen zu handhaben
         CoroutineScope(Dispatchers.IO).launch {
             chatViewModel.imageStateFlow.collect {
@@ -209,6 +241,16 @@ class ImageEditFragment : Fragment() {
                             binding.loadingPB.visibility = View.GONE
                             imageEditAdapter.submitList(it.data?.data)
                             Log.d("imageList", it.data?.data.toString())
+                            // Zeigt oder verbirgt den "Download All"-Button basierend auf der Liste
+                            if (imageEditAdapter.currentList.isNotEmpty()) {
+                                binding.downloadAllBtn.visibility = View.VISIBLE
+                                binding.dowloadall.visibility= View.VISIBLE
+                            } else {
+                                binding.downloadAllBtn.visibility = View.GONE
+                                binding.dowloadall.visibility= View.GONE
+                            }
+
+
                         }
                     }
                     Status.ERROR -> {
@@ -229,6 +271,54 @@ class ImageEditFragment : Fragment() {
         view.draw(canvas)
         return bitmap
     }
+
+
+    // Funktion zum Erzeugen einer zufälligen Zeichenkette für Dateinamen
+    private fun getRandomString(): String {
+        val allowedChar = ('A'..'Z') + ('a'..'z') + (0..9)
+        return (1..7)
+            .map { allowedChar.random() }
+            .joinToString("")
+    }
+
+    // Funktion zum Herunterladen einer Datei über URL
+    private fun Context.download(url: String) {
+        // Prüft, ob der Download-Ordner existiert, und erstellt ihn, falls nicht vorhanden
+        val folder = File(Environment.getExternalStorageDirectory().toString() + "/Download/Image")
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
+        longToastShow("Download Started")  // Zeigt Benachrichtigung für den Downloadstart
+
+        // Erstellt einen zufälligen Dateinamen
+        val fileName = getRandomString() + ".jpg"
+
+        // Verwendet den DownloadManager für den Download
+        val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val request = DownloadManager.Request(Uri.parse(url))
+        request.setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE
+        )
+        request.setTitle(fileName)  // Setzt den Titel der Download-Benachrichtigung
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Image/$fileName")
+        downloadManager.enqueue(request)  // Startet den Download
+    }
+
+    private fun Context.checkMultiplePermission(): Boolean {
+        val listPermissionNeeded = arrayListOf<String>()
+        for (permission in multiplePermissionNameList) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                listPermissionNeeded.add(permission)  // Fügt fehlende Berechtigungen zur Liste hinzu
+            }
+        }
+        return listPermissionNeeded.isEmpty()  // Gibt true zurück, wenn alle Berechtigungen erteilt wurden
+    }
+
 }
 
 //A striking 3D render of Bart Simpson in a full-body shot, wearing his iconic yellow shirt, blue shorts, and red sneakers. He dons a pair of cool black shaded sunglasses, accentuating his rebellious persona. The background is a cinematic, high-contrast urban setting, with graffiti-covered walls and a neon sign. The overall atmosphere is edgy and fashionable, capturing the essence of Bart's unique style., cinematic, illustration, 3d render, fashion bart Simpson, full body shot, wearing typical outfit, wearing black shaded sunglasses, 3/4 angle shot, illustration, 3d render, cinematic, fashion

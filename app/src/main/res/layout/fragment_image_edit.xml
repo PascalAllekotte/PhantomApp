@@ -51,7 +51,7 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.928"
+                app:layout_constraintHorizontal_bias="0.439"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,15 +59,45 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-4dp"
+                android:layout_marginBottom="-10dp"
                 android:text="Choose your image:"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/btnSelect"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.827"
+                app:layout_constraintHorizontal_bias="0.442"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/dowloadall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Download All"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="invisible"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/downloadAllBtn"
+                app:layout_constraintEnd_toEndOf="@+id/downloadAllBtn"
+                app:layout_constraintStart_toStartOf="@+id/downloadAllBtn" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/downloadAllBtn"
+                style="@style/buttonfinal"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:background="@drawable/fbh"
+                android:text="here"
+                android:visibility="invisible"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnSelect"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnSelect"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/masksize"
@@ -236,4 +266,5 @@
         layout="@layout/toolbar_layout2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
