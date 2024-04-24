@@ -11,68 +11,54 @@ import de.syntax.androidabschluss.databinding.BotviewLayoutBinding
 import de.syntax.androidabschluss.utils.assistantImageList
 
 class AssistantAdapter(
-    private val onClickdeleteUpdateCallback : (type: String, position: Int, assistant: Assistant) -> Unit
-
+    private val onClickDeleteUpdateCallback: (type: String, position: Int, assistant: Assistant) -> Unit
 ) : ListAdapter<Assistant, AssistantAdapter.ViewHolder>(DiffCallback()) {
 
     private var currentStrokeColor: Int? = null
 
-
+    // stroke farbe
     fun updateStrokeColor(color: Int) {
         currentStrokeColor = color
-        notifyDataSetChanged()  // Informiert den Adapter, dass sich Daten geändert haben und die View aktualisiert werden muss
+        notifyDataSetChanged()
     }
 
+    // implementierung der DiffUtil.ItemCallback um zu aktuallisieren
     class DiffCallback : DiffUtil.ItemCallback<Assistant>() {
-        override fun areItemsTheSame(oldItem: Assistant, newItem: Assistant): Boolean {
-            return oldItem.assistantId == newItem.assistantId
-        }
-
-        override fun areContentsTheSame(oldItem: Assistant, newItem: Assistant): Boolean {
-            return oldItem == newItem
-        }
+        override fun areItemsTheSame(oldItem: Assistant, newItem: Assistant): Boolean = oldItem.assistantId == newItem.assistantId
+        override fun areContentsTheSame(oldItem: Assistant, newItem: Assistant): Boolean = oldItem == newItem
     }
 
-    class ViewHolder(val botviewLayoutBinding: BotviewLayoutBinding)
-        : RecyclerView.ViewHolder(botviewLayoutBinding.root) {
 
-    }
+    class ViewHolder(val binding: BotviewLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            BotviewLayoutBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(BotviewLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val assistant = getItem(position)
 
         currentStrokeColor?.let { color ->
-            // Konvertiert den Int-Farbwert in eine ColorStateList
             val colorStateList = ColorStateList.valueOf(color)
-            holder.botviewLayoutBinding.botCard.setStrokeColor(colorStateList)
+            holder.binding.botCard.setStrokeColor(colorStateList)
         }
 
-        holder.botviewLayoutBinding.botTitle.text = assistant.assistantName
-        holder.botviewLayoutBinding.botImage.setImageResource(assistantImageList[assistant.assistantImg])
+        holder.binding.botTitle.text = assistant.assistantName
+        holder.binding.botImage.setImageResource(assistantImageList[assistant.assistantImg])
 
         holder.itemView.setOnClickListener {
-            if (holder.adapterPosition != -1) {
-                onClickdeleteUpdateCallback("click", holder.adapterPosition, assistant)            }
+            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                onClickDeleteUpdateCallback("click", holder.adapterPosition, assistant)
+            }
         }
-        holder.botviewLayoutBinding.editview.setOnClickListener {
-            if (holder.adapterPosition != -1) {
-                onClickdeleteUpdateCallback("delete", holder.adapterPosition, assistant)            }
+        holder.binding.editview.setOnClickListener {
+            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                onClickDeleteUpdateCallback("delete", holder.adapterPosition, assistant)
+            }
         }
-        holder.botviewLayoutBinding.deleteview.setOnClickListener {
-            if (holder.adapterPosition != -1) {
-                onClickdeleteUpdateCallback("update", holder.adapterPosition, assistant)            }
+        holder.binding.deleteview.setOnClickListener {
+            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                onClickDeleteUpdateCallback("update", holder.adapterPosition, assistant)
+            }
         }
-
     }
-
 }
