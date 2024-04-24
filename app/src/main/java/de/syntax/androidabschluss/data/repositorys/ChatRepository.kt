@@ -1,6 +1,5 @@
 package de.syntax.androidabschluss.data.repositorys
 
- // Angenommen, Message ist unter diesem Pfad.
 import android.app.Application
 import android.content.Context
 import android.util.Log
@@ -76,13 +75,15 @@ class ChatRepository(val application: Application) {
 
     }
 
+    // Erstellt einen Chat-Vorgang und verarbeitet die Kommunikation
     fun createChatCompletion(message: String, assistantId: String) {
-        val receiverId = UUID.randomUUID().toString()
+        val receiverId = UUID.randomUUID().toString() // Generiert eine eindeutige ID für den Empfänger
         CoroutineScope(Dispatchers.IO).launch {
-            delay(200)
-            val senderId = UUID.randomUUID().toString()
+            delay(200) // Verzögerung zur Simulation von Netzwerklatenz oder Verarbeitungszeit
+            val senderId = UUID.randomUUID().toString() // Generiert eine eindeutige ID für den Sender
             try {
                 async {
+                    // Fügt die gesendete Nachricht zur Datenbank hinzu
                     chatGPTDao.insertChat(
                         Chat(
                             senderId,
@@ -96,19 +97,19 @@ class ChatRepository(val application: Application) {
                     )
                 }.await()
 
+                // Erstellt eine Liste der bisherigen Nachrichten für diesen Assistenten und fügt eine Begrüßungsnachricht hinzu, falls nötig
                 val messageList = chatGPTDao.getChatListFlow(assistantId).map {
                     it.message
                 }.reversed().toMutableList()
 
-                if(messageList.size == 1){
+                if (messageList.size == 1) {
                     messageList.add(
                         0,
-                        Message("Ich bin Pascal dein persönlicher Sprachassistant",
-                        "system"
-                        )
+                        Message("Ich bin Pascal dein persönlicher Assistant", "system")
                     )
                 }
                 async {
+                    // Fügt eine leere Nachricht hinzu, um den Platzhalter für die nächste Antwort des Systems zu reservieren
                     chatGPTDao.insertChat(
                         Chat(
                             receiverId,
@@ -122,12 +123,12 @@ class ChatRepository(val application: Application) {
                     )
                 }.await()
 
+                // Erstellt eine Anfrage an den API-Client, um eine Antwort vom ChatGPT Modell zu erhalten
                 val chatRequest = ChatRequest(
                     messageList,
                     CHATGPT_MODEL
                 )
-                apiClient.createChatCompletion(chatRequest).enqueue(object :
-                    Callback<ChatResponse> {
+                apiClient.createChatCompletion(chatRequest).enqueue(object : Callback<ChatResponse> {
                     override fun onResponse(
                         call: Call<ChatResponse>,
                         response: Response<ChatResponse>
@@ -135,8 +136,8 @@ class ChatRepository(val application: Application) {
                         val code = response.code()
                         if (code == 200) {
                             CoroutineScope(Dispatchers.IO).launch {
+                                // Aktualisiert die leere Nachricht mit der echten Antwort, falls vorhanden
                                 response.body()?.choices?.get(0)?.message?.let {
-                                    Log.d("message", it.toString())
                                     chatGPTDao.updateChatPaticularField(
                                         receiverId,
                                         it.content,
@@ -146,56 +147,64 @@ class ChatRepository(val application: Application) {
                                 }
                             }
                         } else {
-                            Log.d("error", response.errorBody().toString())
+                            // Bei einem Fehler in der API-Antwort, entferne die erstellten Chat-Einträge
                             deleteChatIfApiFailure(receiverId, senderId)
                         }
                     }
 
-
-
                     override fun onFailure(call: Call<ChatResponse>, t: Throwable) {
+                        // Loggt und behandelt einen Netzwerk- oder Verarbeitungsfehler
                         t.printStackTrace()
                         deleteChatIfApiFailure(receiverId, senderId)
-
                     }
-
-
                 })
             } catch (e: Exception) {
+                // Fängt und behandelt Ausnahmen während des Chat-Erstellungsprozesses
                 e.printStackTrace()
                 deleteChatIfApiFailure(receiverId, senderId)
-
             }
         }
     }
+
+
+
+    // Löscht Chateinträge bei einem API-Fehler und informiert den Benutzer
     private fun deleteChatIfApiFailure(receiverId: String, senderId: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            // Führt Löschoperationen für beide Chat-IDs parallel aus
             listOf(
                 async { chatGPTDao.deleteChatUsingChatId(receiverId) },
                 async { chatGPTDao.deleteChatUsingChatId(senderId) }
             ).awaitAll()
-            withContext(Dispatchers.Main){
+            // Zeigt eine Benachrichtigung auf dem Hauptthread, wenn etwas schiefgeht
+            withContext(Dispatchers.Main) {
                 application.longToastShow("Irgendwas ist falsch gelaufen")
             }
-      //      _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
+            // _chatStateFlow.emit(Resource.Error("Irgendwas ist falsch gelaufen"))
         }
     }
+
+
+    // Initiert den Prozess zur Erstellung eines Bildes über eine externe API
     fun createImage(body: CreateImageRequest, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Log.d("meet", "start")
+                Log.d("bilder", "start")
+                // Signalisiert den Start der Bildladung
                 _imageStateFlow.emit(Resource.Loading())
+                // Sendet die Anfrage, um ein Bild zu erstellen
                 apiClient.createImage(
                     body,
                     authorization = "Bearer $OPENAI_API_KEY"
                 ).enqueue(object : Callback<ImageResponse> {
                     override fun onResponse(
                         call: Call<ImageResponse>,
-                        response: Response<ImageResponse>,
+                        response: Response<ImageResponse>
                     ) {
                         CoroutineScope(Dispatchers.IO).launch {
                             val responseBody = response.body()
-                            Log.d("meet", responseBody.toString())
+                            Log.d("bilder", responseBody.toString())
+                            // Verarbeitet die Antwort, wenn das Bild erfolgreich erstellt wurde
                             if (responseBody != null) {
                                 imageList.addAll(responseBody.data)
                                 val modifiedDataList = ArrayList<Data>().apply {
@@ -205,23 +214,27 @@ class ChatRepository(val application: Application) {
                                     responseBody.created,
                                     modifiedDataList
                                 )
+                                // Sendet Erfolgsmeldung mit den Bildinformationen
                                 _imageStateFlow.emit(Resource.Success(imageResponse))
 
+                                // Speichert die erhaltenen Bilder in der lokalen Datenbank
                                 modifiedDataList.forEach { data ->
                                     val pictureItem = PictureItem(
-                                        id = 0, // 0 für autoGenerate
+                                        id = 0,
                                         url = data.url,
                                         created = responseBody.created
                                     )
                                     getDatabasePicture(context).pictureDataBaseDao().insertPicture(pictureItem)
                                 }
                             } else {
+                                // Sendet eine Erfolgsmeldung ohne Daten, falls die Antwort leer ist
                                 _imageStateFlow.emit(Resource.Success(null))
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                        // Loggt und behandelt Netzwerk- oder Verarbeitungsfehler
                         t.printStackTrace()
                         CoroutineScope(Dispatchers.IO).launch {
                             _imageStateFlow.emit(Resource.Error(t.message.toString()))
@@ -229,6 +242,7 @@ class ChatRepository(val application: Application) {
                     }
                 })
             } catch(e: Exception) {
+                // Fängt und loggt Ausnahmen während des Bildladeprozesses
                 e.printStackTrace()
                 _imageStateFlow.emit(Resource.Error(e.message.toString()))
             }
@@ -244,14 +258,16 @@ class ChatRepository(val application: Application) {
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                // Signalisiert den Start des Ladevorgangs
                 _imageStateFlow.emit(Resource.Loading())
 
-
+                // Bereitet die Anfrage vor, indem sie erforderliche Daten in das passende Format konvertiert
                 val request = HashMap<String, RequestBody>()
                 request["prompt"] = prompt.toRequestBody("multipart/form-data".toMediaTypeOrNull())
                 request["n"] = n.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
                 request["size"] = size.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
+                // Sendet die Bearbeitungsanfrage an den API-Client
                 apiClient.createImageEdit(
                     MultipartBody.Part.createFormData(
                         "image",
@@ -272,6 +288,7 @@ class ChatRepository(val application: Application) {
                         CoroutineScope(Dispatchers.IO).launch {
                             val responseBody = response.body()
                             Log.d("meet", responseBody.toString())
+                            // Verarbeitet die Antwort und aktualisiert den Status bei Erfolg
                             if (responseBody != null) {
                                 imageList.addAll(responseBody.data)
                                 val modifiedDataList = ArrayList<Data>().apply {
@@ -283,21 +300,23 @@ class ChatRepository(val application: Application) {
                                 )
                                 _imageStateFlow.emit(Resource.Success(imageResponse))
 
+                                // Fügt die bearbeiteten Bilder zur lokalen Speicherung hinzu
                                 modifiedDataList.forEach { data ->
                                     val pictureItem = PictureItem(
                                         id = 0,
                                         url = data.url,
                                         created = responseBody.created
                                     )
-
                                 }
                             } else {
+                                // Sendet eine Erfolgsmeldung ohne Daten, falls die Antwort leer ist
                                 _imageStateFlow.emit(Resource.Success(null))
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                        // Loggt und behandelt Netzwerk- oder Verarbeitungsfehler
                         t.printStackTrace()
                         CoroutineScope(Dispatchers.IO).launch {
                             _imageStateFlow.emit(Resource.Error(t.message.toString()))
@@ -305,6 +324,7 @@ class ChatRepository(val application: Application) {
                     }
                 })
             } catch (e: Exception) {
+                // Fängt und loggt Ausnahmen während des Bildbearbeitungsprozesses
                 e.printStackTrace()
                 _imageStateFlow.emit(Resource.Error(e.message.toString()))
             }

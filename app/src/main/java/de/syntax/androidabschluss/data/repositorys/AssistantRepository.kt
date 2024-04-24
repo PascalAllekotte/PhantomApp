@@ -99,7 +99,5 @@ class AssistantRepository(application: Application) {
         _statusLiveData.postValue(Resource.Error("Something ist schief gelaufen"))
 
     }
-
     }
-
 }
