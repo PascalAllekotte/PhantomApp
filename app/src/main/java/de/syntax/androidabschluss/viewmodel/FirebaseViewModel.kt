@@ -40,18 +40,6 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
         firebaseAuth.removeAuthStateListener(authStateListener)
     }
 
-    fun login(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                _currentUser.value = firebaseAuth.currentUser
-                fetchUserName()
-            } else {
-                _currentUser.value = null
-                _currentUserName.value = null
-                _loginError.value = task.exception?.message ?: "An unknown error occurred"
-            }
-        }
-    }
 
     private fun fetchUserName() {
         _currentUser.value?.uid?.let { userId ->

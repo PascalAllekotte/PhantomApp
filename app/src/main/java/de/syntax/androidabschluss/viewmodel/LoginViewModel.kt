@@ -34,10 +34,7 @@ class LoginViewModel : ViewModel() {
             }
     }
 
-    fun logoutUser() {
-        auth.signOut()
-        _userLiveData.value = null
-    }
+
 
     sealed class LoginState {
         object SUCCESS : LoginState()
