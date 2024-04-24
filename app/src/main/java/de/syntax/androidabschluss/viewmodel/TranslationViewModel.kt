@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import de.syntax.androidabschluss.data.Request.DeeplRequest
+import de.syntax.androidabschluss.data.model.open.Request.DeeplRequest
+import de.syntax.androidabschluss.data.model.open.response.DeeplResponse
 import de.syntax.androidabschluss.data.remote.ApiClientDeepL
 import de.syntax.androidabschluss.data.repositorys.TranslationRepository
-import de.syntax.androidabschluss.response.DeeplResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

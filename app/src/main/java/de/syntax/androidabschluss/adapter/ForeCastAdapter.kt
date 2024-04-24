@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
+import de.syntax.androidabschluss.data.model.open.response.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.ForecastViewholderBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar

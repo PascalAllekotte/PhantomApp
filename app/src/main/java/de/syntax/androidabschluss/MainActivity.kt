@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
 
 
-
     private val networkConnectivityObserver: NetworkConnectivityObserver by lazy {
         NetworkConnectivityObserver(this)
     }

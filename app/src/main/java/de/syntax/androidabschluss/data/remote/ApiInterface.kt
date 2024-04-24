@@ -1,14 +1,14 @@
 package de.syntax.androidabschluss.data.remote
 
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
-import de.syntax.androidabschluss.data.Request.DeeplRequest
-import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
-import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
-import de.syntax.androidabschluss.response.ChatRequest
-import de.syntax.androidabschluss.response.ChatResponse
-import de.syntax.androidabschluss.response.CreateImageRequest
-import de.syntax.androidabschluss.response.DeeplResponse
-import de.syntax.androidabschluss.response.ImageResponse
+import de.syntax.androidabschluss.data.model.open.Request.DeeplRequest
+import de.syntax.androidabschluss.data.model.open.response.CurrentResponseApi
+import de.syntax.androidabschluss.data.model.open.response.ForecastResponseApi
+import de.syntax.androidabschluss.data.model.open.Request.ChatRequest
+import de.syntax.androidabschluss.data.model.open.response.ChatResponse
+import de.syntax.androidabschluss.data.model.open.Request.CreateImageRequest
+import de.syntax.androidabschluss.data.model.open.response.DeeplResponse
+import de.syntax.androidabschluss.data.model.open.response.ImageResponse
 import de.syntax.androidabschluss.utils.DEEPL_AUTH_KEY
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

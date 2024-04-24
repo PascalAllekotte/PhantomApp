@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.data.model.open
+package de.syntax.androidabschluss.data.model.open.response
 
 
 import com.google.gson.annotations.SerializedName

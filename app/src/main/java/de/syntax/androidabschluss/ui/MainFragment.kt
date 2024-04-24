@@ -20,8 +20,8 @@ import de.syntax.androidabschluss.adapter.ForeCastAdapter
 import de.syntax.androidabschluss.adapter.NoteAdapter
 import de.syntax.androidabschluss.adapter.TermAdapter
 import de.syntax.androidabschluss.adapter.VocableAdapter
-import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
-import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
+import de.syntax.androidabschluss.data.model.open.response.CurrentResponseApi
+import de.syntax.androidabschluss.data.model.open.response.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.FragmentMainBinding
 import de.syntax.androidabschluss.viewmodel.NoteViewModel
 import de.syntax.androidabschluss.viewmodel.SharedViewModel

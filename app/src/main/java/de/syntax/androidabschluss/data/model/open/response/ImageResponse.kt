@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.response
+package de.syntax.androidabschluss.data.model.open.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

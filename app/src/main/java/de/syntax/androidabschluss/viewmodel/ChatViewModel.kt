@@ -2,8 +2,8 @@ package de.syntax.androidabschluss.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import de.syntax.androidabschluss.data.model.open.Request.CreateImageRequest
 import de.syntax.androidabschluss.data.repositorys.ChatRepository
-import de.syntax.androidabschluss.response.CreateImageRequest
 import java.io.File
 
 

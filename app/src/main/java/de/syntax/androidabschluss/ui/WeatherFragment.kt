@@ -18,8 +18,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import de.syntax.androidabschluss.adapter.ForeCastAdapter
-import de.syntax.androidabschluss.data.model.open.CurrentResponseApi
-import de.syntax.androidabschluss.data.model.open.ForecastResponseApi
+import de.syntax.androidabschluss.data.model.open.response.CurrentResponseApi
+import de.syntax.androidabschluss.data.model.open.response.ForecastResponseApi
 import de.syntax.androidabschluss.databinding.FragmentWeatherBinding
 import de.syntax.androidabschluss.viewmodel.WeatherViewModel
 import eightbitlab.com.blurview.RenderScriptBlur

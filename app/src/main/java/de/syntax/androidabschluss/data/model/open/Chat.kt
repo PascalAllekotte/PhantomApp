@@ -5,7 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import de.syntax.androidabschluss.response.Message
+import de.syntax.androidabschluss.data.model.open.response.Message
 import java.util.Date
 
 @Entity(

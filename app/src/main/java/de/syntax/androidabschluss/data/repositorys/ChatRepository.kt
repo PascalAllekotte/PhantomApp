@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import de.syntax.androidabschluss.BuildConfig.OPENAI_API_KEY
+import de.syntax.androidabschluss.data.model.open.Request.ChatRequest
+import de.syntax.androidabschluss.data.model.open.Request.CreateImageRequest
 import de.syntax.androidabschluss.data.local.ChatGPTDatabase
 import de.syntax.androidabschluss.data.local.Resource
 import de.syntax.androidabschluss.data.local.getDatabasePicture
@@ -11,11 +13,9 @@ import de.syntax.androidabschluss.data.model.open.Chat
 import de.syntax.androidabschluss.data.model.open.Data
 import de.syntax.androidabschluss.data.model.open.PictureItem
 import de.syntax.androidabschluss.data.remote.ApiClient
-import de.syntax.androidabschluss.response.ChatRequest
-import de.syntax.androidabschluss.response.ChatResponse
-import de.syntax.androidabschluss.response.CreateImageRequest
-import de.syntax.androidabschluss.response.ImageResponse
-import de.syntax.androidabschluss.response.Message
+import de.syntax.androidabschluss.data.model.open.response.ChatResponse
+import de.syntax.androidabschluss.data.model.open.response.ImageResponse
+import de.syntax.androidabschluss.data.model.open.response.Message
 import de.syntax.androidabschluss.utils.CHATGPT_MODEL
 import de.syntax.androidabschluss.utils.longToastShow
 import kotlinx.coroutines.CoroutineScope

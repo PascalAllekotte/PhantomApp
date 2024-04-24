@@ -25,7 +25,7 @@ import com.bumptech.glide.Glide
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.ImageAdapter
 import de.syntax.androidabschluss.databinding.FragmentPictureGeneratorBinding
-import de.syntax.androidabschluss.response.CreateImageRequest
+import de.syntax.androidabschluss.data.model.open.Request.CreateImageRequest
 import de.syntax.androidabschluss.utils.Status
 import de.syntax.androidabschluss.utils.appSettingOpen
 import de.syntax.androidabschluss.utils.hideKeyBoard

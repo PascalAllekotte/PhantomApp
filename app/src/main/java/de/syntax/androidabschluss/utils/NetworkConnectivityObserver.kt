@@ -9,6 +9,12 @@ import android.os.Build
 import android.telephony.TelephonyManager
 import androidx.lifecycle.LiveData
 
+
+//Diese Klasse erweitert LiveData um die Netzwerkverfügbarkeit auf Android-Geräten zu überwachen,
+//indem sie ConnectivityManager und TelephonyManager verwendet,
+//um Netzwerkänderungen zu registrieren und den Status entweder als verfügbar oder nicht verfügbar zu posten,
+//abhängig von der Verfügbarkeit der SIM-Karte und der Netzwerkverbindung.
+
 class NetworkConnectivityObserver(context: Context) : LiveData<NetworkStatus>() {
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
             as ConnectivityManager
@@ -42,7 +48,6 @@ class NetworkConnectivityObserver(context: Context) : LiveData<NetworkStatus>() 
 
     override fun onActive() {
         super.onActive()
-        // here sim card available or not
         if (TelephonyManager.SIM_STATE_ABSENT != telephonyManager.simState){
             postValue(NetworkStatus.Available)
         }else{
