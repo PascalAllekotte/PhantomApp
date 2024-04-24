@@ -52,48 +52,41 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setzt den Listener für Chart-Interaktionen
         binding.chart.setOnChartValueSelectedListener(this)
 
+        // Setzt den Zurück-Button im Toolbar-Layout
         binding.toolbarLayout2.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
+        // Setzt den Titel der Toolbar
         binding.toolbarLayout2.titletext.setText("Weather")
-
 
         binding.apply {
             var lat = 51.43
             var lon = 6.88
             var name = "Mülheim an der Ruhr"
 
-            // current temperature
+            // Initialisiert UI Elemente mit aktuellen Wetterdaten
             cityTxt.text = name
             progressBar.visibility = View.VISIBLE
-            weatherViewModel.loadCurrentWeather(lat, lon, "metric").enqueue(object :
-            retrofit2.Callback<CurrentResponseApi> {
+            weatherViewModel.loadCurrentWeather(lat, lon, "metric")?.enqueue(object :
+                retrofit2.Callback<CurrentResponseApi> {
                 override fun onResponse(
                     call: Call<CurrentResponseApi>,
                     response: Response<CurrentResponseApi>
                 ) {
-
                     if(response.isSuccessful){
-                        val data=response.body()
-                        progressBar.visibility=View.GONE
-                        linearLayout.visibility=View.VISIBLE
+                        val data = response.body()
+                        progressBar.visibility = View.GONE
+                        linearLayout.visibility = View.VISIBLE
                         data?.let {
-                            statustxt.text=
-                                it.weather?.get(0)?.main ?: "-"
-                            humiditytxt.text=it.main?.humidity?.toString()+"%"
-                            windTxt.text =
-                                it.wind?.speed?.let { Math.round(it).toString() }+"km"
-                            currentTempTxt.text=
-                                it.main?.temp?.let { Math.round(it).toString() }+"°"
-                            maxTempTxt.text=
-                                it.main?.tempMax?.let { Math.round(it).toString() }+"°"
-                            minTempTxt.text=
-                                it.main?.tempMin?.let { Math.round(it).toString() }+"°"
-
-
-                           // val drawable=if(isNightNow())
+                            statustxt.text = it.weather?.get(0)?.main ?: "-"
+                            humiditytxt.text = it.main?.humidity?.toString() + "%"
+                            windTxt.text = it.wind?.speed?.let { Math.round(it).toString() } + "km"
+                            currentTempTxt.text = it.main?.temp?.let { Math.round(it).toString() } + "°"
+                            maxTempTxt.text = it.main?.tempMax?.let { Math.round(it).toString() } + "°"
+                            minTempTxt.text = it.main?.tempMin?.let { Math.round(it).toString() } + "°"
                         }
                     }
                 }
@@ -101,60 +94,60 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
                 override fun onFailure(call: Call<CurrentResponseApi>, t: Throwable) {
                     Toast.makeText(requireContext(), t.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             })
 
-
-            //Setting Blue View
-            var radius=10f
+            // Setzt den Blur-Effekt für den Hintergrund
+            var radius = 10f
             val decorView = requireActivity().window.decorView
-            val rootView=(decorView.findViewById(android.R.id.content) as ViewGroup?)
-            val windowBACKGROUND=decorView.background
+            val rootView = (decorView.findViewById(android.R.id.content) as ViewGroup?)
+            val windowBACKGROUND = decorView.background
 
             rootView?.let {
-                blueView.setupWith(it,RenderScriptBlur(requireContext())) // eventuell fehler
+                blueView.setupWith(it, RenderScriptBlur(requireContext()))
                     .setFrameClearDrawable(windowBACKGROUND)
                     .setBlurRadius(radius)
                 blueView.outlineProvider = ViewOutlineProvider.BACKGROUND
                 blueView.clipToOutline = true
             }
 
-        // forecast temp
-            weatherViewModel.loadForeCastWeather(lat, lon,  "metric")
-            .enqueue(object : retrofit2.Callback<ForecastResponseApi> {
-            override fun onResponse(
-                call: Call<ForecastResponseApi>,
-                response: Response<ForecastResponseApi>
-            ) {
-                if (response.isSuccessful) {
-                    val data = response.body()
-                    blueView.visibility = View.VISIBLE
+            // Lädt die Wettervorhersage für die angegebenen Koordinaten und Einheiten
+            weatherViewModel.loadForeCastWeather(lat, lon, "metric")
+                ?.enqueue(object : retrofit2.Callback<ForecastResponseApi> {
+                    // Callback-Methode, die bei Erhalt der HTTP-Antwort aufgerufen wird
+                    override fun onResponse(
+                        call: Call<ForecastResponseApi>,
+                        response: Response<ForecastResponseApi>
+                    ) {
+                        // Überprüft, ob die Serverantwort erfolgreich war
+                        if (response.isSuccessful) {
+                            val data = response.body() // Extrahiert den Antwortkörper
+                            blueView.visibility = View.VISIBLE // Macht das BlueView sichtbar
 
-                    data?.let {
-                        forecastAdapter.differ.submitList(it.list)
-                        forcastView.apply {
-                            layoutManager = LinearLayoutManager(
-                                requireContext(),
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                            )
-                            adapter = forecastAdapter
+                            // Verarbeitet die erhaltenen Daten, wenn sie nicht null sind
+                            data?.let {
+                                forecastAdapter.differ.submitList(it.list) // Aktualisiert die Liste im Adapter
+                                forcastView.apply {
+                                    layoutManager = LinearLayoutManager( // Setzt den LayoutManager
+                                        requireContext(),
+                                        LinearLayoutManager.HORIZONTAL,
+                                        false
+                                    )
+                                    adapter = forecastAdapter // Verknüpft den Adapter mit der RecyclerView
+                                }
+                                setChartData() // Aktualisiert die Chart-Daten basierend auf der neuen Vorhersage
+                            }
                         }
-                        setChartData()
                     }
-                }
-            }
 
-                override fun onFailure(call: Call<ForecastResponseApi>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
-
-
+                    override fun onFailure(call: Call<ForecastResponseApi>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
         }
-
     }
+
+
     override fun onValueSelected(e: Entry?, h: Highlight?) {
         e?.let {
             val index = it.x.toInt()
@@ -164,7 +157,7 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
                 // Anpassen des Formats, um Datum und Uhrzeit zu inkludieren
                 val dateTime = SimpleDateFormat("EEEE, d MMM yyyy, HH:mm 'Uhr'", Locale.GERMANY).format(Date(dateMillis))
                 val displayText = "Temperatur: $temperature°C am $dateTime"
-                binding.detailTextView.text = displayText  // Angenommen, `detailTextView` ist Ihr Textfeld
+                binding.detailTextView.text = displayText
             }
         }
     }
@@ -190,8 +183,8 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
 
         val dataSet = LineDataSet(entries, "Temperatur")
         dataSet.fillAlpha = 110
-        dataSet.color = Color.MAGENTA
-        dataSet.valueTextColor = Color.YELLOW
+        dataSet.color = Color.WHITE
+        dataSet.valueTextColor = Color.MAGENTA
         dataSet.valueTextSize = 12f
         binding.chart.xAxis.textColor = Color.WHITE
         binding.chart.axisLeft.textColor = Color.WHITE
@@ -208,7 +201,6 @@ class WeatherFragment : Fragment(), OnChartValueSelectedListener {
 
         binding.chart.invalidate() // Aktualisiert das Diagramm
     }
-
 
 
 

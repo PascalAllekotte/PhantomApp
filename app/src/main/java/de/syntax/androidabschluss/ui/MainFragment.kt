@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
             // current temperature
             cityTxt.text = name
             progressBar.visibility = View.VISIBLE
-            weatherViewModel.loadCurrentWeather(lat, lon, "metric").enqueue(object :
+            weatherViewModel.loadCurrentWeather(lat, lon, "metric")?.enqueue(object :
                 retrofit2.Callback<CurrentResponseApi> {
                 override fun onResponse(
                     call: Call<CurrentResponseApi>,
@@ -100,7 +100,6 @@ class MainFragment : Fragment() {
                                 it.main?.tempMin?.let { Math.round(it).toString() }+"°"
 
 
-
                         }
                     }
                 }
@@ -116,7 +115,7 @@ class MainFragment : Fragment() {
 
             // forecast temp
             weatherViewModel.loadForeCastWeather(lat, lon,  "metric")
-                .enqueue(object : retrofit2.Callback<ForecastResponseApi> {
+                ?.enqueue(object : retrofit2.Callback<ForecastResponseApi> {
                     override fun onResponse(
                         call: Call<ForecastResponseApi>,
                         response: Response<ForecastResponseApi>
