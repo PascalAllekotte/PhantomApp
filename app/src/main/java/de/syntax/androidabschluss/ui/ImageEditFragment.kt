@@ -59,37 +59,41 @@ class ImageEditFragment : Fragment() {
     }
 
 
+    // Späte Initialisierung von URIs für das Original- und das maskierte Bild
     private lateinit var originalImageUri: Uri
     private lateinit var maskedImageUri: Uri
+
+    // ActivityResultLauncher zur Auswahl eines Bildes aus der Galerie oder anderen Quellen
     private val singlePhotoPickerLauncher =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             try {
                 uri?.let {
+                    // Lädt das Bild aus der URI in einen Bitmap
+                    val savedBitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, it)
 
-                    val savedBitmap =
-                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, it)
-
+                    // Setzt das ausgewählte Bild in einer benutzerdefinierten ImageView
                     binding.image.setInitialBitmap(savedBitmap)
 
+                    // Zeigt das Bild in einer weiteren ImageView an
                     binding.imagetra.setImageBitmap(savedBitmap)
                     binding.imagetra.visibility = View.VISIBLE
                     binding.imagefilter.visibility = View.VISIBLE
 
-                    binding.imagetra.visibility = View.VISIBLE
+                    // Erstellt ein Bitmap aus der Custom View (zur weiteren Bearbeitung oder Speicherung)
+                    val bitmap = getBitmapFromView(binding.image, binding.image.myHeight, binding.image.myWidth)
 
-                    val bitmap = getBitmapFromView(binding.image,binding.image.myHeight,binding.image.myWidth)
-
+                    // Speichert das erstellte Bitmap lokal in einer Datei
                     val maskedFile = File(requireContext().filesDir, "photos.png")
                     FileOutputStream(maskedFile).use { out ->
                         bitmap.compress(Bitmap.CompressFormat.PNG, 70, out)
                     }
-
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
 
+    // Hilfsfunktion zur Erstellung einer URI für ein Bild, basierend auf einem Dateinamen
     private fun Context.createImageUri(fileName: String): Uri {
         val image = File(filesDir, fileName)
         return FileProvider.getUriForFile(
@@ -103,20 +107,18 @@ class ImageEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
+        // Rückgängig-Button, der die letzte Aktion im Zeichnungsbereich rückgängig macht
         binding.undo.setOnClickListener {
             binding.image.undo()
         }
 
+        // SeekBar-Listener, der auf Änderungen der Strichstärke reagiert
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // Update die Strichstärke basierend auf dem Wert des SeekBars
-                val strokeWidth = progress.toFloat() // Convert progress to float
+                // Aktualisiert die Strichstärke im Zeichenbereich
+                val strokeWidth = progress.toFloat() // Umwandlung des Fortschritts in Float
                 binding.image.updateStrokeWidth(strokeWidth)
-                binding.masksize.text = strokeWidth.toString()
-
-
+                binding.masksize.text = strokeWidth.toString() // Zeigt den aktuellen Wert an
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -126,29 +128,33 @@ class ImageEditFragment : Fragment() {
             }
         })
 
+        // Rückkehr-Button in der Toolbar, führt zurück zur vorherigen Ansicht
         binding.toolbarLayout.backbutton.setOnClickListener {
             findNavController().popBackStack()
         }
-//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.mouse)
-//        binding.image.setBitmap(bitmap)
+
+        // Initialisiert URIs für originale und maskierte Bilder
         originalImageUri = view.context.createImageUri("photos.png")
         maskedImageUri = view.context.createImageUri("photos-masked.png")
+
+        // Button zum Auswählen eines Bildes aus der Galerie
         binding.btnSelect.setOnClickListener {
             singlePhotoPickerLauncher.launch(
                 PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-
             )
-
-
-
         }
+
+        // Button zum Starten der Bildbearbeitung mit vom Nutzer eingegebenem Text
         binding.btnedit.setOnClickListener {
             if (binding.edPrompt.text.toString().trim().isNotEmpty()) {
-                val bitmap = getBitmapFromView(binding.image,binding.image.myHeight,binding.image.myWidth)
+                // Erstellt ein Bitmap von der aktuellen Zeichenansicht
+                val bitmap = getBitmapFromView(binding.image, binding.image.myHeight, binding.image.myWidth)
+                // Speichert das bearbeitete Bild lokal
                 val maskedFile = File(requireContext().filesDir, "photos-masked.png")
                 FileOutputStream(maskedFile).use { out ->
                     bitmap.compress(Bitmap.CompressFormat.PNG, 70, out)
                 }
+                // Startet den Bildbearbeitungsprozess über das ViewModel
                 chatViewModel.createImageEdit(
                     binding.edPrompt.text.toString().trim(),
                     File(requireContext().filesDir,"photos.png"),
@@ -156,14 +162,14 @@ class ImageEditFragment : Fragment() {
                     2,
                     "1024x1024"
                 )
-
             } else {
+                // Zeigt eine Fehlermeldung an, wenn kein Text eingegeben wurde
                 view.context.longToastShow("Message is Required")
             }
         }
 
 
-        val loadImagein = viewImageDialog.findViewById<ImageView>(R.id.loadImage3)
+    val loadImagein = viewImageDialog.findViewById<ImageView>(R.id.loadImage3)
         val cancelBtn = viewImageDialog.findViewById<Button>(R.id.cancelBtn)
         val downloadBtn = viewImageDialog.findViewById<Button>(R.id.downloadBtn)
 
@@ -171,58 +177,59 @@ class ImageEditFragment : Fragment() {
             viewImageDialog.dismiss()
         }
 
+        // Initialisiert einen Bildadapter, der auf Klick ein Dialogfenster zeigt und das Bild lädt
         val imageEditAdapter = ImageAdapter { position, data ->
             viewImageDialog.show()
             Glide.with(loadImagein)
-                .load(data.url)
-                .placeholder(R.drawable.ic_placeholder)
+                .load(data.url)  // Lädt das Bild über URL
+                .placeholder(R.drawable.ic_placeholder)  // Zeigt ein Platzhalterbild während des Ladens
                 .into(loadImagein)
 
+            // Hier könnte Code zum Herunterladen des Bildes implementiert werden
             downloadBtn.setOnClickListener {
 
             }
         }
+
         binding.imageRv.adapter = imageEditAdapter
 
+        // Nutzt Coroutines, um Bildlisten asynchron zu verarbeiten und UI-Aktualisierungen zu handhaben
         CoroutineScope(Dispatchers.IO).launch {
             chatViewModel.imageStateFlow.collect {
-                when(it.status){
+                when(it.status) {
                     Status.LOADING -> {
+                        // Zeigt Ladeanimation im Hauptthread
                         withContext(Dispatchers.Main) {
                             binding.loadingPB.visibility = View.VISIBLE
                         }
                     }
                     Status.SUCCESS -> {
+                        // Versteckt Ladeanimation und aktualisiert die Bildliste im Hauptthread
                         withContext(Dispatchers.Main) {
                             binding.loadingPB.visibility = View.GONE
-//
-                            imageEditAdapter.submitList(
-                                it.data?.data
-                            )
-
-
-                            Log.d("imageList",it.data?.data.toString())
-
+                            imageEditAdapter.submitList(it.data?.data)
+                            Log.d("imageList", it.data?.data.toString())
                         }
                     }
                     Status.ERROR -> {
-                        withContext(Dispatchers.Main){
+                        // Versteckt Ladeanimation und zeigt Fehlermeldung im Hauptthread
+                        withContext(Dispatchers.Main) {
                             binding.loadingPB.visibility = View.GONE
-                            it.message?.let { it1 -> view.context.longToastShow(it1) }
+                            it.message?.let { message -> view.context.longToastShow(message) }
                         }
-
                     }
                 }
             }
         }
     }
+    // Erzeugt ein Bitmap aus einer View, indem es deren visuellen Inhalt aufzeichnet
     fun getBitmapFromView(view: View, myHeight: Int, myWidth: Int): Bitmap {
-        val bitmap = Bitmap.createBitmap(
-            myWidth, myHeight, Bitmap.Config.ARGB_8888
-        )
+        val bitmap = Bitmap.createBitmap(myWidth, myHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
     }
 }
 
+//A striking 3D render of Bart Simpson in a full-body shot, wearing his iconic yellow shirt, blue shorts, and red sneakers. He dons a pair of cool black shaded sunglasses, accentuating his rebellious persona. The background is a cinematic, high-contrast urban setting, with graffiti-covered walls and a neon sign. The overall atmosphere is edgy and fashionable, capturing the essence of Bart's unique style., cinematic, illustration, 3d render, fashion bart Simpson, full body shot, wearing typical outfit, wearing black shaded sunglasses, 3/4 angle shot, illustration, 3d render, cinematic, fashion
+//A breathtaking cinematic illustration of a dreamlike, dark fantasy world inspired by the surrealism of Salvador Dali and René Magritte. A tiny man-hatter the size of an ant in a top hat sits on a floating clock drinking tea, a rabbit and a mouse, a Cheshire cat in a top hat and a melting spoon drips into a cup. Microscopic details such as intricate gears and fine filigree create a sense of depth and complexity. The entire composition is filled with bright colors, inviting viewers to plunge into a whimsical, fairy-tale landscape and explore its mysterious secrets. This versatile 3D render can be adapted to a variety of formats, including magazine covers, posters and cinematic photography, making it a truly exciting and creative piece of art. 3D rendering, cinematic, illustration, dark fantasy., 3d render, illustration, cinematic, vibrant, conceptual art, architecture
