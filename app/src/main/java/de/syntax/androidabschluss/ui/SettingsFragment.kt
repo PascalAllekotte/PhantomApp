@@ -50,6 +50,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.weatherBtn.setOnClickListener {
+            findNavController().navigate(R.id.weatherFragment)
+        }
+
         // Beobachtet Änderungen der E-Mail-Adresse des Benutzers
         viewmodel.userEmail.observe(viewLifecycleOwner) { email ->
             binding.theMail.text = email ?: "Keine E-Mail verfügbar"

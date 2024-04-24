@@ -36,24 +36,24 @@ class LearningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        // Stroke color über viewmodel ändern
+        // Beobachtet die Farbeinstellung und aktualisiert den Adapter entsprechend
         sharedViewModel.strokecolor.observe(viewLifecycleOwner) { color ->
             learningAdapter.updateStrokeColor(color)
-
         }
 
+        // Initialisiert Adapter und Datenbank und richtet RecyclerView ein
         initializeAdapter()
-        initializeDatabase()
         setupRecyclerView()
         loadVocabulariesIntoAdapter()
 
+        // Setzt den Titel der Toolbar und fügt den Zurück-Button hinzu
         binding.toolbarLayout2.titletext.setText("Blocks")
         binding.toolbarLayout2.backbutton.setOnClickListener{
             findNavController().popBackStack()
         }
     }
 
+    // Initialisiert den Adapter mit einem leeren Listen- und Klickverhalten
     private fun initializeAdapter() {
         learningAdapter = LearningAdapter(mutableListOf(), viewLifecycleOwner) { blockName ->
             val action = LearningFragmentDirections.actionLearningFragmentToLearningDetailFragment(blockName)
@@ -62,20 +62,14 @@ class LearningFragment : Fragment() {
         binding.blockRecyclerView.adapter = learningAdapter
     }
 
-
-
-
+    // Lädt eindeutige Datenblöcke in den Adapter
     private fun loadVocabulariesIntoAdapter() {
         viewModel.uniqueBlockList.observe(viewLifecycleOwner) { uniqueBlocks ->
             learningAdapter.updateList(uniqueBlocks)
         }
     }
 
-
-    private fun initializeDatabase() {
-        // Diese Methode scheint in deinem aktuellen Code redundant zu sein, da die Datenbankinitialisierung bereits in `initializeAdapter` erfolgt.
-    }
-
+    // Richtet das RecyclerView mit einem LinearLayoutManager und einem SnapHelper ein
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.blockRecyclerView.layoutManager = layoutManager
